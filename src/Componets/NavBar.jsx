@@ -62,7 +62,7 @@ const NavBar = () => {
  
 </div>
  <div onClick={()=>setToggle(!toggle)} className={`w-50 h-20 ${toggle? 'block':'hidden'} flex flex-col card bg-base-100 card-xs shadow-sm  absolute left-6/7 `}>
-  <NavLink className='btn border-[#2563EB] text-[#2563EB] mb-2 font-semibold text-xl'>Profile</NavLink>
+  <NavLink to='/Profile' className='btn border-[#2563EB] text-[#2563EB] mb-2 font-semibold text-xl'>Profile</NavLink>
   <button type="button" onClick={userSignout} className="btn border-[#2563EB] text-[#2563EB]">Log Out</button>
        
   </div>

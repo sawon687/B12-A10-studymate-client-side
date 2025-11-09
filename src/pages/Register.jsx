@@ -1,8 +1,9 @@
 import React, { use } from 'react';
 import AuthContex from '../Contex/AuthContex';
 
+
 const Register = () => {
-    const {createUser,googleLoginandRegister}=use(AuthContex)
+    const {createUser,googleLoginandRegister,updateUsers}=use(AuthContex)
 
     const handleRegister=(e)=>{
         e.preventDefault()
@@ -16,8 +17,18 @@ const Register = () => {
           Email,
           PhotoURl,
          }
+
      console.log(userInformation)
-          createUser(Email,Password).then(res=> console.log(res)).catch(error=>
+     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+     if(!passwordRegex.test(Password))
+     {
+         return alert('❌ Password must have: \n• At least 1 uppercase letter\n• At least 1 lowercase letter\n• Minimum 6 characters')
+     }
+          createUser(Email,Password).then(res=> {
+                updateUsers({displayName:Name,photoURL:PhotoURl})
+                
+                console.log(res)
+          }).catch(error=>
           {
              console.log(error)
           }
@@ -47,6 +58,8 @@ const Register = () => {
 
 
          <fieldset className="fieldset">
+            <h1 className='text-2xl font-bold text-center'>Create Your Account! Register</h1>
+            <h3 className='text-center text-sm text-gray-600'>Join StudyMate and start learning with the right partner.</h3>
             {/* name */}
             <label className="label">Name</label>
           <input type="text" className="input" placeholder="User Name" name='name' />
