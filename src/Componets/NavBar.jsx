@@ -25,7 +25,7 @@ const NavBar = () => {
             user && <>
             <li><NavLink to='/createPartnerProfile'>Create Partner Profile </NavLink></li>
           <li><NavLink to='/myConnection'>MyConnection</NavLink></li>
-          <li><NavLink to='/Register'></NavLink></li>
+        
             </>
           }
         </>

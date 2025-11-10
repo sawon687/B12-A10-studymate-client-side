@@ -40,7 +40,10 @@ const router=createBrowserRouter([
             {
                path:'/Profile',
                Component:Profile,
-            }
+            },
+
+          
+
         ]
     }
 ])
