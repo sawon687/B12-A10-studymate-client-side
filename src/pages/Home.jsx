@@ -1,9 +1,11 @@
-import React from 'react';
+
+import TopstudyPartners from '../Componets/TopstudyPartners';
 
 const Home = () => {
     return (
         <div>
-            this home
+            <TopstudyPartners></TopstudyPartners>
+            
         </div>
     );
 };

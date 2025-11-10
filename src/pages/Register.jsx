@@ -1,6 +1,6 @@
 import React, { use, useState } from 'react';
 import AuthContex from '../Contex/AuthContex';
-import { IoIosEyeOff, IoMdEye } from 'react-icons/io';
+import { IoIosEyeOff } from 'react-icons/io';
 
 
 const Register = () => {
@@ -17,6 +17,7 @@ const [showPassword,setShowPassword]=useState(false)
           Name,
           Email,
           PhotoURl,
+          
          }
 
      console.log(userInformation)
