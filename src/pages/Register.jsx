@@ -1,10 +1,11 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import AuthContex from '../Contex/AuthContex';
+import { IoIosEyeOff, IoMdEye } from 'react-icons/io';
 
 
 const Register = () => {
     const {createUser,googleLoginandRegister,updateUsers}=use(AuthContex)
-
+const [showPassword,setShowPassword]=useState(false)
     const handleRegister=(e)=>{
         e.preventDefault()
         console.log('click handle register')
@@ -72,8 +73,11 @@ const Register = () => {
           <input type="text" className="input" placeholder="PhotoURL" name='photoURL'  />
         
           {/* password */}
-          <label className="label">Password</label>
-          <input type="password" className="input" placeholder="Password" name='password' />
+         <div className=' relative'>
+                      <label className="label">Password</label>
+                   <input type={`${showPassword?'text':'password'}`} className="input" placeholder="Password" name='password' />
+                    <button type='button' className=' absolute right-6 top-7' onClick={()=> setShowPassword(!showPassword) }>{showPassword?<IoMdEye size={20} />:<IoIosEyeOff size={20}/>}</button>
+                   </div>
           <div><a className="link link-hover">Forgot password?</a></div>
           <button type='submit' className="btn btn-neutral mt-4">Register</button>
               <p className='text-center font-bold text-gray-800 text-[15px]'>-Or-</p>

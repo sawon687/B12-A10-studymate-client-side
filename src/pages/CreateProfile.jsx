@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
+import AuthContex from '../Contex/AuthContex';
 
 const CreateProfile = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
   const [study,setStudy]=useState('')
   const [exprement,setExprement]=useState('')
+  const {user}=useContext(AuthContex)
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Rating:", rating);
@@ -37,18 +39,18 @@ const CreateProfile = () => {
             {/* name */}
             <div className='w-full'>
                 <label className="label">Name</label>
-          <input type="text" className="input w-full " placeholder="User Name" name='name' />
+          <input type="text" className="input w-full " required defaultValue={user?.displayName} placeholder="User Name" name='name' />
             </div>
                 <div className='w-full'>
                         {/* Email */}
             <label className="label">Email</label>
-          <input type="Email" className="input  w-full" placeholder="Email" name='email' />
+          <input type="Email" className="input  w-full" required placeholder="Email" readOnly defaultValue={user?.email} name='email' />
                 </div>
           </div>
 
             {/* Photo URL */}
           <label className="label">Photo URL</label>
-          <input type="text" className="input  w-full" placeholder="photoURL" name='photoURL'  />
+          <input type="text" className="input  w-full" require placeholder="photoURL" defaultValue={user?.photoURL} name='photoURL'  />
                <div>
                 <label className="label">Study Mode</label>
              <div  className='flex gap-5'>
@@ -73,7 +75,7 @@ const CreateProfile = () => {
                     <div>
                       {/* Partner Count */}
                        <label className="label">Partner Count</label>
-                        <input type="text" className="input" placeholder="Password" defaultValue={0} name='partnercount' />
+                        <input type="text" className="input" placeholder="Number of study partners connected" defaultValue={0} name='partnercount' />
                     </div>
                     </div>
              
@@ -92,6 +94,7 @@ const CreateProfile = () => {
 
       {[1, 2, 3, 4, 5].map((value) => (
         <FaStar
+        required
           key={value}
           size={30}
           className="cursor-pointer transition-all"
@@ -106,7 +109,7 @@ const CreateProfile = () => {
          
               {/* Location */}
           <label className="label">Location</label>
-          <input type="text" className="input w-full" placeholder="City, area, or preferred location."  name='password' />
+          <input type="text" className="input w-full" required placeholder="City, area, or preferred location."  name='password' />
        
           <button type='submit' className="btn btn-neutral mt-4">submit</button>
              

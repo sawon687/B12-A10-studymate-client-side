@@ -1,9 +1,11 @@
-import  { use, useRef } from 'react';
+import  { use, useRef, useState } from 'react';
 import AuthContex from '../Contex/AuthContex';
+import {  IoIosEyeOff, IoMdEye } from 'react-icons/io';
 
 const Login = () => {
     const { googleLoginandRegister,signInuser,resetPassword}=use(AuthContex);
     const emailref=useRef()
+    const [showPassword,setShowPassword]=useState(false)
  const userLogin=(e)=>{
      e.preventDefault()
      const Email=e.target.email.value;
@@ -34,6 +36,7 @@ const Login = () => {
 
          )
       }
+       
     return (
         <>
      <div className="hero bg-base-200 min-h-screen">
@@ -50,8 +53,11 @@ const Login = () => {
           <label className="label">Email</label>
           <input type="email" className="input" placeholder="Email" name='email' ref={emailref} />
           {/* password */}
-          <label className="label">Password</label>
-          <input type="password" className="input" placeholder="Password" name='password' />
+          <div className=' relative'>
+             <label className="label">Password</label>
+          <input type={`${showPassword?'text':'password'}`} className="input" placeholder="Password" name='password' />
+           <button type='button' className=' absolute right-6 top-7' onClick={()=> setShowPassword(!showPassword) }>{showPassword?<IoMdEye size={20} />:<IoIosEyeOff size={20}/>}</button>
+          </div>
           <div><a onClick={handleresetPassword} className="link link-hover">Forgot password?</a></div>
           <button type='submit' className="btn btn-neutral mt-4">Login</button>
             <p   className='text-center font-bold text-gray-800 text-[15px]'>-Or-</p>
