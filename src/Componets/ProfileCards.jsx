@@ -1,13 +1,14 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
+import { Link } from 'react-router';
 
 const ProfileCards = ({data}) => {
           const {profileimage, name,subject,rating}=data
     return (
         <div>
              
-                    <div className="card bg-base-100 w-96 shadow-sm">
-  <figure className='bg-gray-300 py-10'>
+                    <div className="card  z-40 bg-base-100 w-96 shadow-sm">
+  <figure className='bg-gray-300  py-10'>
     <img className=' rounded-full'
       src={profileimage}
       alt="Shoes" />
@@ -23,7 +24,7 @@ const ProfileCards = ({data}) => {
       <div className="badge ">{rating}<FaStar/></div>
     </div>
 
-    <button className='btn w-full bg-[#2563EB] text-white'>View Profile</button>
+    <Link to={`/PartnerDetails/${data._id}`} className='btn w-full bg-[#2563EB] text-white'>View Profile</Link>
   </div>
 </div> 
         

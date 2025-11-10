@@ -7,6 +7,8 @@ import Register from "../pages/Register";
 import CreateProfile from "../pages/CreateProfile";
 import MyConnections from "../pages/MyConnections";
 import Profile from "../pages/Profile";
+import PartnerDetails from "../pages/PartnerDetails";
+import axios from "axios";
 
 const router=createBrowserRouter([
     {
@@ -28,6 +30,12 @@ const router=createBrowserRouter([
             {
                 path:'/Register',
                 Component:Register
+            },
+            {
+                   path:`/PartnerDetails/:_id`,
+                   loader:({params})=> axios(`http://localhost:9000/partner/${params._id}`),
+                   Component:PartnerDetails,
+
             },
             {
                 path:'/createPartnerProfile',

@@ -1,29 +1,48 @@
 import React, { useContext, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import AuthContex from '../Contex/AuthContex';
+import axios from 'axios';
 
 const CreateProfile = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
-  const [study,setStudy]=useState('')
-  const [exprement,setExprement]=useState('')
+  const [studyMode,setStudyMode]=useState('')
+  const [experienceLevel,setExprement]=useState('')
+  const [subject,setSubject]=useState('')
   const {user}=useContext(AuthContex)
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Rating:", rating);
-    const  UserName=e.target.name.value;
+    const  name=e.target.name.value;
     const  Email=e.target.email.value;
 
-    const  PhotoURL=e.target.photoURL.value;
-    const  AvailabalTime=e.target.availabilityTime.value;
-    const  Parnercount=e.target.partnercount.value;
-   console.log(UserName,Email,PhotoURL,AvailabalTime,Parnercount,study,exprement)
+    const  profileimage=e.target.photoURL.value;
+    const  availabilityTime=e.target.availabilityTime.value;
+    const  patnerCount=e.target.partnercount.value;
+    const location=e.target.location.value
+   console.log(name,Email,
+availabilityTime,patnerCount,studyMode, profileimage, experienceLevel,location,rating,subject)
+   const profileCreate={
+     name,
+    profileimage,
+    subject,
+    studyMode,
+     availabilityTime,
+      location,
+     experienceLevel,
+     rating,
+     patnerCount,
+       Email, 
 
+   }
+      
+     axios.post('http://localhost:9000/createProfile',profileCreate)
+     .then(res=> console.log(res.data))
   };
 
   const handleStudyMode=(e)=>{
     e.preventDefault()
-      setStudy(e.target.value)
+      setStudyMode(e.target.value)
   }
   return (
     <div>
@@ -109,7 +128,22 @@ const CreateProfile = () => {
          
               {/* Location */}
           <label className="label">Location</label>
-          <input type="text" className="input w-full" required placeholder="City, area, or preferred location."  name='password' />
+          <input type="text" className="input w-full" required placeholder="City, area, or preferred location."  name='location' />
+           <label className="label">Subject</label>
+          
+  <label for="Subject" class="block mb-2 font-medium text-gray-700">Subject</label>
+       <select onChange={(e)=>setSubject(e.target.value)} name="subject" class="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+           <option value="Online">Bangle</option>
+        <option value="Math">Math</option>
+        <option value="Programming">Programming</option>
+        <option value="History">History</option>
+        <option value="Accounting">Accounting</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="English">English</option>
+
+           </select>
+
+  
        
           <button type='submit' className="btn btn-neutral mt-4">submit</button>
              

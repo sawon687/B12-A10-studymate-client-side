@@ -38,7 +38,7 @@ const FindPartners = () => {
      
     return (
         <>
-         <div className=''>
+         <div className='z-30'>
          <form onSubmit={handleSearch}>
            <div className=' relative flex justify-center items-center pt-20'>
           
@@ -49,11 +49,10 @@ const FindPartners = () => {
            </div>
              </form>
              </div>
-        <div className='flex justify-center   py-10 '>
+        <div className='flex justify-center z-40   py-10 '>
 
-            
-
-        <div  className='grid grid-cols-3   gap-10  '>
+    
+        <div  className='grid grid-cols-3  z-40  gap-10  '>
             {
                 userProfile.map(data=><ProfileCards data={data} key={data._id}></ProfileCards>)
             }
