@@ -14,13 +14,13 @@ const CreateProfile = () => {
     e.preventDefault();
     console.log("Rating:", rating);
     const  name=e.target.name.value;
-    const  Email=e.target.email.value;
+    const  email=e.target.email.value;
 
     const  profileimage=e.target.photoURL.value;
     const  availabilityTime=e.target.availabilityTime.value;
-    const  patnerCount=e.target.partnercount.value;
+    const  patnerCount=Number(e.target.partnercount.value);
     const location=e.target.location.value
-   console.log(name,Email,
+   console.log(name,email,
 availabilityTime,patnerCount,studyMode, profileimage, experienceLevel,location,rating,subject)
    const profileCreate={
      name,
@@ -32,7 +32,7 @@ availabilityTime,patnerCount,studyMode, profileimage, experienceLevel,location,r
      experienceLevel,
      rating,
      patnerCount,
-       Email, 
+       email, 
 
    }
       
