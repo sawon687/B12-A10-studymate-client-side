@@ -1,41 +1,68 @@
-import  { use, useRef, useState } from 'react';
+import  {  useContext, useRef, useState } from 'react';
 import AuthContex from '../Contex/AuthContex';
 import {  IoIosEyeOff, IoMdEye } from 'react-icons/io';
+import { useLocation, useNavigate } from 'react-router';
+import Swal from 'sweetalert2';
 
 const Login = () => {
-    const { googleLoginandRegister,signInuser,resetPassword}=use(AuthContex);
+    const {  googleLoginandRegister,signInuser}=useContext(AuthContex);
     const emailref=useRef()
     const [showPassword,setShowPassword]=useState(false)
+    const location=useLocation()
+    const  navigate=useNavigate()
+    console.log(location?.state?.from?.pathname)
+    const from=location?.state?.from?.pathname || '/'
  const userLogin=(e)=>{
-     e.preventDefault()
+      e.preventDefault()
      const Email=e.target.email.value;
      const  Password=e.target.password.value;
-     signInuser(Email,Password).then(res=> console.log(res)).catch(error=>console.log(error))
+     console.log(Email,Password)
+     signInuser(Email,Password).then(res=>{
+      console.log(res)
+      alert(' Login, successfully')
+       Swal.fire({
+                        title: "User Login, successfully",
+                        icon: "success",
+                             draggable: true
+                                      });
+      navigate(from)
+     }).catch(error=>{console.log(error)
+                           Swal.fire({
+                        title: `${error.message}`,
+                        icon: "success",
+                             draggable: true
+                                      }); 
+   })
+      
+   
  }
+
+
       const googleLoginHandle=()=>{
         console.log('click')
-
          googleLoginandRegister().then(res=>
-         {
-            console.log(res)
-         }
+         {   
+            console.log(res.user.email)
+             
+                   Swal.fire({
+                        title: "User Login, successfully",
+                        icon: "success",
+                             draggable: true
+                                      });
+                  console.log('login successfully')
+                  navigate(from)  }
          ).catch(error=>{
             console.log(error)
+             Swal.fire({
+                        title: `${error.message}`,
+                        icon: "success",
+                             draggable: true
+                                      });
+
          })
       }
 
-      const handleresetPassword=(e)=>{
-         e.preventDefault()
-         console.log('click')
-          const Email=emailref.current.value
-          console.log(Email)
-         resetPassword(Email).then(res=>{
-            console.log(res)
-            alert('pleace check your email')
-         }).catch(error=> console.log(error)
-
-         )
-      }
+    
        
     return (
         <>
@@ -58,7 +85,7 @@ const Login = () => {
           <input type={`${showPassword?'text':'password'}`} className="input" placeholder="Password" name='password' />
            <button type='button' className=' absolute right-6 top-7' onClick={()=> setShowPassword(!showPassword) }>{showPassword?<IoMdEye size={20} />:<IoIosEyeOff size={20}/>}</button>
           </div>
-          <div><a onClick={handleresetPassword} className="link link-hover">Forgot password?</a></div>
+          <div><a  className="link link-hover">Forgot password?</a></div>
           <button type='submit' className="btn btn-neutral mt-4">Login</button>
             <p   className='text-center font-bold text-gray-800 text-[15px]'>-Or-</p>
           {/* Google */}

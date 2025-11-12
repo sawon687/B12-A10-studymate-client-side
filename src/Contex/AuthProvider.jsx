@@ -12,7 +12,7 @@ const AuthProvider = ({children}) => {
         return createUserWithEmailAndPassword(auth,Name,Email,PhotoURl,Password)
     }
     const signInuser=(email,password)=>{
-        signInWithEmailAndPassword(auth,email,password)
+        return signInWithEmailAndPassword(auth,email,password)
     }
     const googleLoginandRegister=()=>{
         return signInWithPopup(auth,googleprovider)

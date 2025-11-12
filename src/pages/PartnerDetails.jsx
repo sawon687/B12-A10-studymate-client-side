@@ -1,26 +1,40 @@
 import axios from 'axios';
-import React, { useContext, useState, } from 'react';
-import { useLoaderData } from 'react-router';
+import  { useContext, useEffect, useState, } from 'react';
 import AuthContex from '../Contex/AuthContex';
+import { useParams } from 'react-router';
+
 
 const PartnerDetails = () => {
   const {user}=useContext(AuthContex)
+  const [partner,setPartner]=useState({})
+  const [refresh,setRefresh]=useState(false)
+const {id}=useParams()
+  console.log(id)
  console.log(user)
-    const userdetails=useLoaderData()
-    console.log(userdetails)
-    const partner=userdetails.data
+   
+   
     const {_id,...restPartnerData}=partner
     console.log(partner)
-         const [partnerCount,setPartnerCount]=useState(partner?.patnerCount)
+         
      
+         
+useEffect(()=>{
+axios(`http://localhost:9000/partner/${id}`).then(res=>{
+  console.log(res.data)
+ setPartner(res.data)
+})
+},[id,refresh])
+
+
     const handleRequest=()=>{
+     
       axios.post('http://localhost:9000/myConnection',{...restPartnerData,request_Email:user?.email
 ,partnerId:partner._id})
       .then(res=>{console.log(res.data)
-         
+           setRefresh(!refresh)
            if(res.data.success)
            {
-            setPartnerCount(prev=> prev+1)
+            
             alert(res.data.message)
            }
            else{
@@ -53,7 +67,8 @@ const PartnerDetails = () => {
           <p className="text-gray-600 mb-2"><span className="font-semibold">Location:</span> {partner?.location}</p>
           <p className="text-gray-600 mb-2"><span className="font-semibold">Experience Level:</span> {partner?.experienceLevel}</p>
           <p className="text-gray-600 mb-2"><span className="font-semibold">Rating:</span> {partner?.rating} ⭐</p>
-          <p className="text-gray-600 mb-4"><span className="font-semibold">PartnerCount:</span> {partnerCount}</p>
+          <p className="text-gray-600 mb-4"><span className="font-semibold">PartnerCount:</span> {partner?.patnerCount
+}</p>
 
           {/* Action Button */}
           <button onClick={handleRequest}  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">

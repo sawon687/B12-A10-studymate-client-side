@@ -4,11 +4,11 @@ import Home from "../pages/Home";
 import FindPartners from "../pages/FindPartners";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Profile from "../pages/Profile";
+import PrivateRoute from "../Contex/PrivateRoute";
+import PartnerDetails from "../pages/PartnerDetails";
 import CreateProfile from "../pages/CreateProfile";
 import MyConnections from "../pages/MyConnections";
-import Profile from "../pages/Profile";
-import PartnerDetails from "../pages/PartnerDetails";
-import axios from "axios";
 
 const router=createBrowserRouter([
     {
@@ -32,22 +32,21 @@ const router=createBrowserRouter([
                 Component:Register
             },
             {
-                   path:`/PartnerDetails/:_id`,
-                   loader:({params})=> axios(`http://localhost:9000/partner/${params._id}`),
-                   Component:PartnerDetails,
+                   path:'/PartnerDetails/:id',
+                   element:<PrivateRoute><PartnerDetails/></PrivateRoute>
 
             },
             {
                 path:'/createPartnerProfile',
-                Component:CreateProfile,
+                 element:<PrivateRoute><CreateProfile/></PrivateRoute>
             },
             {
                 path:'/myConnection',
-                Component:MyConnections,
+                 element:<PrivateRoute><MyConnections/></PrivateRoute>
             },
             {
                path:'/Profile',
-               Component:Profile,
+               element:<PrivateRoute><Profile/></PrivateRoute>
             },
 
           

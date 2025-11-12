@@ -1,9 +1,11 @@
-import React from 'react';
+
 import { FaStar } from 'react-icons/fa';
 import { Link } from 'react-router';
 
+
 const ProfileCards = ({data}) => {
-          const {profileimage, name,subject,rating}=data
+          const {_id,profileimage, name,subject,rating}=data
+          console.log(_id)
     return (
         <div>
              
@@ -24,7 +26,7 @@ const ProfileCards = ({data}) => {
       <div className="badge ">{rating}<FaStar/></div>
     </div>
 
-    <Link to={`/PartnerDetails/${data._id}`} className='btn w-full bg-[#2563EB] text-white'>View Profile</Link>
+    <Link to={`/PartnerDetails/${_id}`}  className='btn w-full bg-[#2563EB] text-white'>View Profile</Link>
   </div>
 </div> 
         
