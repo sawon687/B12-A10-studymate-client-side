@@ -9,47 +9,49 @@ import PrivateRoute from "../Contex/PrivateRoute";
 import PartnerDetails from "../pages/PartnerDetails";
 import CreateProfile from "../pages/CreateProfile";
 import MyConnections from "../pages/MyConnections";
+import NotFound from "../pages/NotFound";
 
-const router=createBrowserRouter([
+const router = createBrowserRouter([
     {
-        path:'/',
-        Component:MainLayout,
-        children:[
+        path: '/',
+        Component: MainLayout,
+        errorElement: <NotFound />,
+        children: [
             {
-                path:'/',
-                Component:Home,
+                path: '/',
+                Component: Home,
             },
             {
-                path:'/FindPartners',
-                Component:FindPartners,
+                path: '/FindPartners',
+                Component: FindPartners,
             },
             {
-                path:'/Login',
-                Component:Login,
+                path: '/Login',
+                Component: Login,
             },
             {
-                path:'/Register',
-                Component:Register
+                path: '/Register',
+                Component: Register
             },
             {
-                   path:'/PartnerDetails/:id',
-                   element:<PrivateRoute><PartnerDetails/></PrivateRoute>
+                path: '/PartnerDetails/:id',
+                element: <PrivateRoute><PartnerDetails /></PrivateRoute>
 
             },
             {
-                path:'/createPartnerProfile',
-                 element:<PrivateRoute><CreateProfile/></PrivateRoute>
+                path: '/createPartnerProfile',
+                element: <PrivateRoute><CreateProfile /></PrivateRoute>
             },
             {
-                path:'/myConnection',
-                 element:<PrivateRoute><MyConnections/></PrivateRoute>
+                path: '/myConnection',
+                element: <PrivateRoute><MyConnections /></PrivateRoute>
             },
             {
-               path:'/Profile',
-               element:<PrivateRoute><Profile/></PrivateRoute>
+                path: '/Profile',
+                element: <PrivateRoute><Profile /></PrivateRoute>
             },
 
-          
+
 
         ]
     }

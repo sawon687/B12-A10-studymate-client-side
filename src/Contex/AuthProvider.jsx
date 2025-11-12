@@ -6,45 +6,53 @@ import { useEffect, useState } from 'react';
 const googleprovider = new GoogleAuthProvider();
 
 
-const AuthProvider = ({children}) => {
-    const [user,setUser]=useState({})
-    const createUser=(Name,Email,PhotoURl,Password)=>{
-        return createUserWithEmailAndPassword(auth,Name,Email,PhotoURl,Password)
+const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState({})
+    const [loading, setLoading] = useState(false)
+    const createUser = (Name, Email, PhotoURl, Password) => {
+        setLoading(false)
+        return createUserWithEmailAndPassword(auth, Name, Email, PhotoURl, Password)
+
+
     }
-    const signInuser=(email,password)=>{
-        return signInWithEmailAndPassword(auth,email,password)
+    const signInuser = (email, password) => {
+        setLoading(false)
+        return signInWithEmailAndPassword(auth, email, password)
     }
-    const googleLoginandRegister=()=>{
-        return signInWithPopup(auth,googleprovider)
+    const googleLoginandRegister = () => {
+        setLoading(false)
+        return signInWithPopup(auth, googleprovider)
     }
-    const updateUsers=async(userDetals)=>{
-        return await updateProfile(auth.currentUser,userDetals).then(()=>{
-            setUser({...auth.currentUser})
+    const updateUsers = async (userDetals) => {
+        setLoading(false)
+        return await updateProfile(auth.currentUser, userDetals).then(() => {
+            setUser({ ...auth.currentUser })
+            setLoading(true)
         })
     }
-    const resetPassword=(email)=>{
-        return sendPasswordResetEmail(auth,email)
+
+    const signoutUser = () => {
+        return signOut(auth)
     }
- const signoutUser=()=>{
-    return signOut(auth)
- }
- 
-    useEffect(()=> {
-         const unsubscribe=onAuthStateChanged(auth, currentUser=>{
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
-         })
-         return()=>{
+            setLoading(true)
+        })
+        return () => {
             unsubscribe()
-         }
-    },[])
-     const  userInfo={
+        }
+    }, [])
+    const userInfo = {
         createUser,
         googleLoginandRegister,
         user,
         signoutUser,
         signInuser,
         updateUsers,
-        resetPassword,
+        loading,
+
     }
     return (
         <div>

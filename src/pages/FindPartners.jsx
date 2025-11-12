@@ -1,12 +1,14 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 import ProfileCards from '../Componets/ProfileCards';
 import { FaSearch } from 'react-icons/fa';
-import { MdOutlineArrowDropDown } from 'react-icons/md';
+import Loading from './Loading';
+import AuthContex from '../Contex/AuthContex';
+import { useContext, useEffect, useState } from 'react';
 
 const FindPartners = () => {
-  const [Profile, setProfile] = useState([]);
- 
+  const { loading } = useContext(AuthContex)
+ const [Profile, setProfile] = useState([]);
+  
 
   useEffect(() => {
     axios('http://localhost:9000/userProfile').then(res => {
@@ -24,37 +26,42 @@ const FindPartners = () => {
     });
   };
 
- const handleSortByExperience = (level) => {
-  axios(`http://localhost:9000/userProfile?experienceSort=${level}`)
-    .then(res => setProfile(res.data))
-    .catch(err => console.log(err));
-};
+  const handleSortByExperience = (level) => {
+    axios(`http://localhost:9000/userProfile?experienceSort=${level}`)
+      .then(res => setProfile(res.data))
+      .catch(err => console.log(err));
+  };
+    
 
+  if (!loading) {
+    return <Loading></Loading>
+  }
+ 
 
   return (
     <div className='max-w-[1200px] mx-auto'>
       <div className='flex  pt-20  justify-between items-center'>
         <div className="dropdown z-100">
 
-      
-  <button className="btn" onClick={() => handleSortByExperience("Beginner")}>
-    Beginner First
-  </button>
-  <button className="btn" onClick={() => handleSortByExperience("Intermediate")}>
-    Intermediate First
-  </button>
-  <button className="btn" onClick={() => handleSortByExperience("Expert")}>
-    Expart First
-  </button>
-  <button className="btn" onClick={() => {
-    // Default DB order
-    axios("http://localhost:9000/userProfile")
-      .then(res => setProfile(res.data))
-  }}>
-    Default
-  </button>
- 
-    </div>
+
+          <button className="btn" onClick={() => handleSortByExperience("Beginner")}>
+            Beginner First
+          </button>
+          <button className="btn" onClick={() => handleSortByExperience("Intermediate")}>
+            Intermediate First
+          </button>
+          <button className="btn" onClick={() => handleSortByExperience("Expert")}>
+            Expart First
+          </button>
+          <button className="btn" onClick={() => {
+            // Default DB order
+            axios("http://localhost:9000/userProfile")
+              .then(res => setProfile(res.data))
+          }}>
+            Default
+          </button>
+
+        </div>
         <form onSubmit={handleSearch} >
           <div className="relative flex justify-center items-center ">
             <input
