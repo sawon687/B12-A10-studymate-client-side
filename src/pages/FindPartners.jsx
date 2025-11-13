@@ -40,8 +40,9 @@ const FindPartners = () => {
 
   return (
     <div className='max-w-[1200px] mx-auto'>
-      <div className='flex  pt-20  justify-between items-center'>
-        <div className="dropdown z-100">
+      <div className='flex flex-col md:flex-row  pt-20  justify-between items-center'>
+      
+          <div className="dropdown z-100 flex flex-wrap ">
 
 
           <button className="btn" onClick={() => handleSortByExperience("Beginner")}>
@@ -62,7 +63,7 @@ const FindPartners = () => {
           </button>
 
         </div>
-        <form onSubmit={handleSearch} >
+        <form onSubmit={handleSearch} className='mt-10 md:mt-0' >
           <div className="relative flex justify-center items-center ">
             <input
               type="search"
@@ -79,10 +80,11 @@ const FindPartners = () => {
           </div>
         </form>
       </div>
+        
 
       <div className="flex justify-center pt-16 z-20 items-center py-10">
         {Profile.length > 0 ? (
-          <div className="grid grid-cols-3 gap-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-10">
             {Profile.map((data) => (
               <ProfileCards data={data} key={data._id}></ProfileCards>
             ))}

@@ -17,7 +17,7 @@ const TopstudyPartners = () => {
     console.log(topProfile)
     return (
         <div className='flex justify-center py-10 '>
-        <div className='grid grid-cols-3   gap-10  '>
+        <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-10  '>
             {
                 topProfile.map(data=><ProfileCards data={data} key={data._id} ></ProfileCards >)
             }

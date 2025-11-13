@@ -35,10 +35,11 @@ const HeroSection = () => {
         effect="fade"
         loop={true}
         autoplay={{
-          delay: 4000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
+          delay: 4000,       // 4 seconds per slide
+          disableOnInteraction: false, // keep autoplay even after user interaction
+          pauseOnMouseEnter: false,    // don't pause on hover
         }}
+        speed={1000} // smooth transition duration
         className="h-[500px]"
       >
         {slides.map((s, i) => (
