@@ -1,49 +1,6 @@
-@import "tailwindcss/preflight";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
 
-/* DaisyUI plugin import */
-@import "daisyui";
-
-/* Custom CSS variables for colors (light theme) */
-:root {
-  --color-primary: #4f46e5;      /* Indigo 600 */
-  --color-secondary: #7c3aed;    /* Purple 500 */
-  --color-accent: #ec4899;       /* Pink 500 */
-  --color-base-100: #ffffff;     /* Card / Section background */
-  --color-neutral: #f3f4f6;      /* Page background */
-  --color-text-primary: #111827; /* Headings / Paragraphs */
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Primary colors (slightly lighter for contrast) */
-    --color-primary: #6366f1;       /* Indigo 500 */
-    --color-secondary: #8b5cf6;     /* Purple 400 */
-    --color-accent: #f472b6;        /* Pink 400 */
-
-    /* Background */
-    --color-base-100: #1f2937;      /* Card / Section background */
-    --color-neutral: #111827;       /* Page background */
-
-    /* Text */
-    --color-text-primary: #f9fafb;  /* Light text for headings */
-    --color-text-secondary: #d1d5db; /* Light gray for body text */
-  }
-}
-
-
-/* Optional: Button overrides using the variables */
-.btn-primary {
-  @apply bg-[var(--color-primary)] text-white;
-}
-
-.btn-secondary {
-  @apply bg-[var(--color-secondary)] text-white;
-}
-
-.text-primary {
-  color: var(--color-text-primary);
-}
-
-.bg-base {
-  background-color: var(--color-base-100);
-}
+ @plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+  themes: light --default;
+ }

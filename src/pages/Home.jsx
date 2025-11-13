@@ -4,6 +4,8 @@ import TopstudyPartners from '../Componets/TopstudyPartners';
 import Loading from './Loading';
 import AuthContex from '../Contex/AuthContex';
 import HeroSection from '../Componets/HeroSection';
+import HowitWork from '../Componets/HowitWork';
+import Testimonials from '../Componets/Testimonials';
 
 const Home = () => {
     const { loading } = useContext(AuthContex)
@@ -13,6 +15,8 @@ const Home = () => {
     return (
         <div> <HeroSection></HeroSection>
             <TopstudyPartners></TopstudyPartners>
+            <HowitWork></HowitWork>
+            <Testimonials></Testimonials>
 
         </div>
     );

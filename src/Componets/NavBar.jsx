@@ -20,7 +20,9 @@ const NavBar = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            isActive ? "text-indigo-600 font-semibold" : "text-white font-semibold"
+            isActive
+              ? "text-indigo-600 font-semibold"
+              : "text-gray-800 dark:text-white font-semibold"
           }
         >
           Home
@@ -30,7 +32,9 @@ const NavBar = () => {
         <NavLink
           to="/FindPartners"
           className={({ isActive }) =>
-            isActive ? "text-indigo-600 font-semibold" : "text-white font-semibold"
+            isActive
+              ? "text-indigo-600 font-semibold"
+              : "text-gray-800 dark:text-white font-semibold"
           }
         >
           Find Partners
@@ -42,7 +46,9 @@ const NavBar = () => {
             <NavLink
               to="/createPartnerProfile"
               className={({ isActive }) =>
-                isActive ? "text-indigo-600 font-semibold" : "text-white font-semibold"
+                isActive
+                  ? "text-indigo-600 font-semibold"
+                  : "text-gray-800 dark:text-white font-semibold"
               }
             >
               Create Partner Profile
@@ -52,7 +58,9 @@ const NavBar = () => {
             <NavLink
               to="/myConnection"
               className={({ isActive }) =>
-                isActive ? "text-indigo-600 font-semibold" : "text-white font-semibold"
+                isActive
+                  ? "text-indigo-600 font-semibold"
+                  : "text-gray-800 dark:text-white font-semibold"
               }
             >
               MyConnection
@@ -113,19 +121,17 @@ const NavBar = () => {
         {/* Navbar End */}
         <div className="navbar-end flex items-center gap-4">
           {user ? (
-            <>
-              <motion.figure
-                onClick={() => setToggle(!toggle)}
-                whileTap={{ scale: 0.95 }}
-                className="cursor-pointer"
-              >
-                <img
-                  className="w-14 h-14 rounded-full border-2 border-indigo-500"
-                  src={user?.photoURL}
-                  alt="Profile"
-                />
-              </motion.figure>
-            </>
+            <motion.figure
+              onClick={() => setToggle(!toggle)}
+              whileTap={{ scale: 0.95 }}
+              className="cursor-pointer"
+            >
+              <img
+                className="w-14 h-14 rounded-full border-2 border-indigo-500"
+                src={user?.photoURL}
+                alt="Profile"
+              />
+            </motion.figure>
           ) : (
             <>
               <Link to="/Login" className="btn btn-outline btn-primary">
@@ -133,7 +139,7 @@ const NavBar = () => {
               </Link>
               <Link
                 to="/Register"
-                className="btn bg-gradient-to-br from-indigo-500 to-purple-600 text-white"
+                className="btn bg-gradient-to-br from-indigo-500 to-purple-600  text-white"
               >
                 Register
               </Link>
@@ -142,31 +148,43 @@ const NavBar = () => {
         </div>
       </div>
 
-      {/* Profile Dropdown */}
+      {/* Profile Dropdown with Backdrop */}
       <AnimatePresence>
         {toggle && user && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute right-6 top-20 w-52 flex flex-col bg-white dark:bg-gray-800 rounded-xl shadow-xl z-50 p-4 gap-2"
-          >
-            <Link
-              to="/Profile"
-              className="btn btn-outline btn-primary w-full text-left font-semibold"
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
               onClick={() => setToggle(false)}
+              className="fixed inset-0 bg-black z-40 backdrop-blur-sm"
+            ></motion.div>
+
+            {/* Dropdown Card */}
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="absolute right-6 top-20 w-56 flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl z-50 p-4 gap-3"
             >
-              Profile
-            </Link>
-            <button
-              type="button"
-              onClick={userSignout}
-              className="btn btn-outline btn-primary w-full"
-            >
-              Log Out
-            </button>
-          </motion.div>
+              <Link
+                to="/Profile"
+                className="btn btn-outline btn-primary w-full text-left font-semibold hover:bg-indigo-50 dark:hover:bg-gray-700"
+                onClick={() => setToggle(false)}
+              >
+                Profile
+              </Link>
+              <button
+                type="button"
+                onClick={userSignout}
+                className="btn btn-outline btn-primary w-full hover:bg-indigo-50 dark:hover:bg-gray-700"
+              >
+                Log Out
+              </button>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </div>

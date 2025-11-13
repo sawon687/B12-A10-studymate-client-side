@@ -58,11 +58,12 @@ const HeroSection = () => {
                 transition={{ duration: 0.8 }}
                 className="relative z-10 text-center max-w-2xl px-6"
               >
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                  {s.title}
-                </h2>
+               <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-br from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+              {s.title}
+       </h2>
+
                 <p className="mb-6 text-lg md:text-xl">{s.desc}</p>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
+                <button className="bg-gradient-to-br from-indigo-500 to-purple-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
                   {s.btn}
                 </button>
               </motion.div>

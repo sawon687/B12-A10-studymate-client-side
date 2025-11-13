@@ -39,7 +39,7 @@ const ProfileCards = ({data}) => {
  {/* View Profile Button */}
           <Link
             to={`/PartnerDetails/${_id}`}
-            className="inline-block w-full text-center py-2.5 rounded-xl font-semibold bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+            className="inline-block w-full text-center py-2.5 rounded-xl font-semibold bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
           >
             View Profile
           </Link>
