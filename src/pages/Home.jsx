@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import TopstudyPartners from '../Componets/TopstudyPartners';
 import Loading from './Loading';
 import AuthContex from '../Contex/AuthContex';
+import HeroSection from '../Componets/HeroSection';
 
 const Home = () => {
     const { loading } = useContext(AuthContex)
@@ -10,7 +11,7 @@ const Home = () => {
         return <Loading></Loading>
     }
     return (
-        <div>
+        <div> <HeroSection></HeroSection>
             <TopstudyPartners></TopstudyPartners>
 
         </div>

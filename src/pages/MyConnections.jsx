@@ -9,11 +9,7 @@ const MyConnections = () => {
     const [dataupdate, setDataUpdate] = useState({});
     const updateRef = useRef();
     const [refresh, setRefresh] = useState(false)
-    
-    if(!loading)
-    {
-        return <Loading></Loading>
-    }
+  
 
 
    useEffect(()=>{
@@ -78,6 +74,12 @@ const MyConnections = () => {
     const subjectHandle = (e) => {
 
         setDataUpdate({ ...dataupdate, subject: e.target.value });
+    }
+
+      
+    if(!loading)
+    {
+        return <Loading></Loading>
     }
 
     return (
