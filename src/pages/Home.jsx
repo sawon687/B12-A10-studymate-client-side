@@ -13,7 +13,7 @@ const Home = () => {
         return <Loading></Loading>
     }
     return (
-        <div> <HeroSection></HeroSection>
+        <div className=''> <HeroSection></HeroSection>
             <TopstudyPartners></TopstudyPartners>
             <HowitWork></HowitWork>
             <Testimonials></Testimonials>

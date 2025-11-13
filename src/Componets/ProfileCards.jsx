@@ -9,10 +9,10 @@ const ProfileCards = ({data}) => {
     return (
         <div className="flex justify-center">
              
-       <div className="group relative bg-white/80 backdrop-blur-md border border-blue-100 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 w-80 sm:w-96 overflow-hidden">
+       <div className="group relative   border border-blue-100 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 w-80 sm:w-96 overflow-hidden">
      
         {/* Profile Image */}
-        <div className="flex flex-col items-center py-8 bg-gradient-to-b from-blue-100 via-white to-white">
+        <div className="flex flex-col items-center py-8 ">
           <div className="w-28 h-28 rounded-full border-4 border-blue-500 overflow-hidden shadow-md group-hover:scale-105 transition-transform duration-300">
             <img
               src={profileimage}
@@ -24,7 +24,7 @@ const ProfileCards = ({data}) => {
   <div className="card-body">
     {/* Card Body */}
         <div className="px-6 pb-6 text-center">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-1">{name}</h2>
+          <h2 className="text-2xl font-semibold  mb-1">{name}</h2>
           <p className="text-blue-600 font-medium mb-3">{subject}</p>
 
           {/* Rating */}

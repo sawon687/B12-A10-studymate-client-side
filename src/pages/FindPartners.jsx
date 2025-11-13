@@ -73,7 +73,7 @@ const FindPartners = () => {
         <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
           {titleText}
         </h1>
-        <h3 className="text-xl md:text-2xl mt-2 text-gray-700">
+        <h3 className="text-xl md:text-2xl mt-2 ">
           Find Your Perfect Study Partner
         </h3>
       </motion.div>

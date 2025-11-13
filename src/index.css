@@ -1,6 +1,35 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
- @plugin "daisyui" {
-  themes: light --default, dark --prefersdark;
-  themes: light --default;
- }
+/* 🌈 DaisyUI Theme Config (optional) */
+@layer base {
+  :root {
+    --theme-gradient-light: linear-gradient(
+      to bottom right,
+      #e0f7fa,
+      #e3f2fd,
+      #ede7f6,
+      #fff3e0
+    ); /* pastel AI look */
+    --theme-gradient-dark: linear-gradient(
+      to bottom right,
+      #0f2027,
+      #203a43,
+      #2c5364
+    ); /* elegant dark gradient */
+  }
+}
+
+/* 🌙 Custom dark variant for data-theme */
+@custom-variant dark (&[data-theme="dark"] &);
+
+/* 🎨 Global Gradient Background */
+body {
+  @apply min-h-screen transition-colors duration-500;
+  background-image: var(--theme-gradient-light);
+}
+
+[data-theme="dark"] body {
+  background-image: var(--theme-gradient-dark);
+}
+

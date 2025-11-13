@@ -1,16 +1,31 @@
 import { FaBookOpen } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 import AuthContex from "../Contex/AuthContex";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Moon, Sun, User, LogOut } from "lucide-react";
 
 const NavBar = () => {
   const { user, signoutUser } = useContext(AuthContex);
   const [toggle, setToggle] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  // ✅ Dark/Light theme toggle setup
+  useEffect(() => {
+    const html = document.querySelector("html");
+    if (theme === "dark") {
+      html.classList.add("dark");
+      html.setAttribute("data-theme", "dark");
+    } else {
+      html.classList.remove("dark");
+      html.setAttribute("data-theme", "light");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const userSignout = () => {
     signoutUser()
-      .then((res) => console.log(res))
+      .then(() => console.log("User signed out"))
       .catch((error) => console.log(error));
   };
 
@@ -20,9 +35,11 @@ const NavBar = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            isActive
-              ? "text-indigo-600 font-semibold"
-              : "text-gray-800 dark:text-white font-semibold"
+            `font-semibold transition-colors duration-200 ${
+              isActive
+                ? "text-indigo-500"
+                : " hover:text-indigo-600 dark:hover:text-indigo-400"
+            }`
           }
         >
           Home
@@ -32,9 +49,11 @@ const NavBar = () => {
         <NavLink
           to="/FindPartners"
           className={({ isActive }) =>
-            isActive
-              ? "text-indigo-600 font-semibold"
-              : "text-gray-800 dark:text-white font-semibold"
+            `font-semibold transition-colors duration-200 ${
+              isActive
+                ? "text-indigo-500"
+                : " hover:text-indigo-600 dark:hover:text-indigo-400"
+            }`
           }
         >
           Find Partners
@@ -46,9 +65,11 @@ const NavBar = () => {
             <NavLink
               to="/createPartnerProfile"
               className={({ isActive }) =>
-                isActive
-                  ? "text-indigo-600 font-semibold"
-                  : "text-gray-800 dark:text-white font-semibold"
+                `font-semibold transition-colors duration-200 ${
+                  isActive
+                    ? "text-indigo-500"
+                    : "hover:text-indigo-600 dark:hover:text-indigo-400"
+                }`
               }
             >
               Create Partner Profile
@@ -58,9 +79,11 @@ const NavBar = () => {
             <NavLink
               to="/myConnection"
               className={({ isActive }) =>
-                isActive
-                  ? "text-indigo-600 font-semibold"
-                  : "text-gray-800 dark:text-white font-semibold"
+                `font-semibold transition-colors duration-200 ${
+                  isActive
+                    ? "text-indigo-500"
+                    : " hover:text-indigo-600 dark:hover:text-indigo-400"
+                }`
               }
             >
               MyConnection
@@ -73,14 +96,15 @@ const NavBar = () => {
 
   return (
     <div className="relative">
-      <div className="navbar lg:px-20 bg-white dark:bg-gray-900 shadow-md">
-        {/* Navbar Start */}
+      {/* 🔹 Navbar Main */}
+      <div className="navbar lg:px-20  dark:bg-gray-900 shadow-md transition-colors duration-500">
         <div className="navbar-start">
+          {/* Mobile Dropdown */}
           <div className="dropdown">
             <div tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-5 w-5 text-gray-800 dark:text-gray-100"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -95,7 +119,7 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={-1}
-              className="menu menu-sm dropdown-content bg-white dark:bg-gray-800 rounded-box z-50 mt-3 w-52 p-2 shadow-lg"
+              className="menu menu-sm dropdown-content bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-box z-50 mt-3 w-52 p-2 shadow-lg"
             >
               {links}
             </ul>
@@ -104,12 +128,14 @@ const NavBar = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 text-xl font-bold text-gray-800 dark:text-white"
+            className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white"
           >
-            <div className="w-12 h-12 bg-indigo-600 flex justify-center items-center rounded-xl">
+            <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 flex justify-center items-center rounded-xl">
               <FaBookOpen className="text-white text-2xl" />
             </div>
-            StudyMate
+            <span className="bg-gradient-to-br from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+              StudyMate
+            </span>
           </Link>
         </div>
 
@@ -120,6 +146,20 @@ const NavBar = () => {
 
         {/* Navbar End */}
         <div className="navbar-end flex items-center gap-4">
+          {/* Theme Toggle */}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="btn btn-ghost btn-circle"
+          >
+            {theme === "dark" ? (
+               <Moon className="text-indigo-600" size={22} />
+           
+            ) : (
+                    <Sun className="text-yellow-400" size={22} />
+            )}
+          </button>
+
+          {/* User Section */}
           {user ? (
             <motion.figure
               onClick={() => setToggle(!toggle)}
@@ -127,19 +167,22 @@ const NavBar = () => {
               className="cursor-pointer"
             >
               <img
-                className="w-14 h-14 rounded-full border-2 border-indigo-500"
+                className="w-12 h-12 rounded-full border-2 border-indigo-500"
                 src={user?.photoURL}
                 alt="Profile"
               />
             </motion.figure>
           ) : (
             <>
-              <Link to="/Login" className="btn btn-outline btn-primary">
+              <Link
+                to="/Login"
+                className="btn btn-outline btn-primary text-gray-800 dark:text-gray-100"
+              >
                 Login
               </Link>
               <Link
                 to="/Register"
-                className="btn bg-gradient-to-br from-indigo-500 to-purple-600  text-white"
+                className="btn bg-gradient-to-br from-indigo-500 to-purple-600 text-white"
               >
                 Register
               </Link>
@@ -148,11 +191,10 @@ const NavBar = () => {
         </div>
       </div>
 
-      {/* Profile Dropdown with Backdrop */}
+      {/* 🔹 Profile Dropdown */}
       <AnimatePresence>
         {toggle && user && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.5 }}
@@ -161,27 +203,27 @@ const NavBar = () => {
               className="fixed inset-0 bg-black z-40 backdrop-blur-sm"
             ></motion.div>
 
-            {/* Dropdown Card */}
             <motion.div
-              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className="absolute right-6 top-20 w-56 flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl z-50 p-4 gap-3"
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              transition={{ duration: 0.25 }}
+              className="absolute right-6 top-20 w-60 flex flex-col bg-white dark:bg-gray-900 rounded-2xl shadow-2xl z-50 p-4 gap-3 border border-gray-200 dark:border-gray-700 backdrop-blur-lg"
             >
               <Link
                 to="/Profile"
-                className="btn btn-outline btn-primary w-full text-left font-semibold hover:bg-indigo-50 dark:hover:bg-gray-700"
+                className="flex items-center gap-3 px-4 py-2 rounded-lg font-semibold text-gray-800 dark:text-gray-100 hover:bg-gradient-to-r hover:from-indigo-100 hover:to-purple-100 dark:hover:from-indigo-900 dark:hover:to-purple-900 transition-all duration-200"
                 onClick={() => setToggle(false)}
               >
-                Profile
+                <User className="text-indigo-500" size={18} /> Profile
               </Link>
+
               <button
                 type="button"
                 onClick={userSignout}
-                className="btn btn-outline btn-primary w-full hover:bg-indigo-50 dark:hover:bg-gray-700"
+                className="flex items-center gap-3 px-4 py-2 rounded-lg font-semibold text-gray-800 dark:text-gray-100 hover:bg-gradient-to-r hover:from-red-100 hover:to-pink-100 dark:hover:from-red-900 dark:hover:to-pink-900 transition-all duration-200"
               >
-                Log Out
+                <LogOut className="text-red-500" size={18} /> Log Out
               </button>
             </motion.div>
           </>

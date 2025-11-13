@@ -1,30 +1,45 @@
 import React from 'react';
-import { BiBookOpen } from 'react-icons/bi';
 import { FaBookOpen, FaFacebook, FaLinkedin } from 'react-icons/fa';
 import { FaSquareInstagram, FaSquareXTwitter } from 'react-icons/fa6';
+import { Link } from 'react-router';
 
 const Footer = () => {
-    return (
-        <div className='footer bg-[#113376] flex flex-col py-10 justify-center items-center'>
-            <div className='flex flex-col justify-center items-center'>
-                <h1 className='text-white text-center text-4xl font-bold flex items-center justify-center'><FaBookOpen/>StudyMate</h1>
-                <p className='text-gray-300 text-center text-xl '>Connecting learners to study smarter.<br/>grow together and achieves more</p>
+  return (
+    <footer className="bg-gradient-to-r from-indigo-900 via-blue-900 to-indigo-800 text-gray-300 py-12 flex flex-col items-center gap-6">
+      
+      {/* Logo & Tagline */}
+      <div className="flex flex-col items-center gap-2 text-center">
+       <Link
+            to="/"
+            className="flex items-center gap-2 text-xl font-bold text-gray-800 dark:text-white"
+          >
+            <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 flex justify-center items-center rounded-xl">
+              <FaBookOpen className="text-white text-2xl" />
             </div>
-            <div>
-                <ul className='flex gap-5'>
-                    <li><FaFacebook size={30} className='text-white' /></li>
-                    <li><FaSquareXTwitter size={30} className='text-white'  /></li>
-                    <li><FaLinkedin size={30} className='text-white' /></li>
-                    <li><FaSquareInstagram size={30} className='text-white' /></li>
-                    
-                  
-                </ul>
-            </div>
+             <span className="bg-gradient-to-br from-indigo-500 to-purple-600  bg-clip-text text-transparent text-4xl">StudyMate</span>
+          </Link>
+           
+        <p className="text-gray-300 text-lg md:text-xl max-w-md">
+          Connecting learners to study smarter.<br />
+          Grow together and achieve more.
+        </p>
+      </div>
 
-              <p className='text-gray-300'>© 2025 Md Al Jihad Sawon. All rights reserved.
-                    </p>
-        </div>
-    );
+      {/* Social Icons */}
+      <ul className="flex gap-6 mt-4">
+        {[FaFacebook, FaSquareXTwitter, FaLinkedin, FaSquareInstagram].map((Icon, index) => (
+          <li key={index} className="transition-transform transform hover:scale-110 hover:text-blue-400">
+            <Icon size={30} className="text-white" />
+          </li>
+        ))}
+      </ul>
+
+      {/* Copyright */}
+      <p className="text-gray-400 mt-6 text-sm md:text-base">
+        © 2025 Md Al Jihad Sawon. All rights reserved.
+      </p>
+    </footer>
+  );
 };
 
 export default Footer;
