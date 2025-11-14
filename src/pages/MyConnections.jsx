@@ -224,7 +224,7 @@ const MyConnections = () => {
                 <p className="text-sm mb-2">
                   <strong>Study Mode:</strong>{' '}
                   <span
-                    className={`${
+                    className={`btn ${
                       data.studyMode === 'Online'
                         ? 'text-green-600 dark:text-green-100'
                         : 'text-orange-600 dark:text-orange-100'
@@ -258,13 +258,13 @@ const MyConnections = () => {
       <AnimatePresence>
         <motion.dialog
           ref={updateRef}
-          className="modal modal-bottom sm:modal-middle dark:bg-gray-800 dark:text-gray-100"
+          className="modal modal-bottom sm:modal-middle "
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
         >
           <div className="modal-box">
-            <h3 className="font-bold text-xl text-center mb-3 text-blue-600 dark:text-blue-400">
+            <h3 className="font-bold text-2xl text-center mb-3 bg-gradient-to-br from-indigo-500 to-purple-600 text-transparent bg-clip-text ">
               Update Partner Info
             </h3>
             <form onSubmit={handleUpdate} className="space-y-4">
@@ -296,10 +296,10 @@ const MyConnections = () => {
                       key={mode}
                       type="button"
                       onClick={() => studyModeHandle(mode)}
-                      className={`btn flex-1 ${
+                      className={`btn  flex-1 ${
                         dataUpdate.studyMode === mode
-                          ? 'btn-primary text-white'
-                          : 'btn-outline'
+                          ? ' bg-gradient-to-br from-indigo-500 to-purple-600 '
+                          : 'btn-outline  bg-purple-300  text-gray-700'
                       }`}
                     >
                       {mode}
@@ -335,7 +335,7 @@ const MyConnections = () => {
                 >
                   Close
                 </button>
-                <button type="submit" className="btn btn-primary text-white">
+                <button type="submit" className="btn bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
                   Save Changes
                 </button>
               </div>

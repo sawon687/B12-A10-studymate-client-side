@@ -4,7 +4,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-/* 🌈 Light & Dark Gradient Variables */
+/* Light & Dark Gradient Variables */
 @layer base {
   :root {
     --theme-gradient-light: linear-gradient(
