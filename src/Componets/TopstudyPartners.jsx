@@ -8,7 +8,7 @@ const TopstudyPartners = () => {
     const [topProfile,setTopProfile]=useState([])
 
     useEffect(() => {
-         axios('http://localhost:9000/topStudyProfile').then(res => {
+         axios('https://studymate-api-server-pi.vercel.app/topStudyProfile').then(res => {
              console.log(res.data);
              setTopProfile(res.data)
          });

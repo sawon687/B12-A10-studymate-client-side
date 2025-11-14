@@ -13,6 +13,9 @@ const Login = () => {
   const from = location?.state?.from?.pathname || '/';
 
   const userLogin = (e) => {
+
+
+    
     e.preventDefault();
     const Email = e.target.email.value;
     const Password = e.target.password.value;
@@ -58,6 +61,8 @@ const Login = () => {
   };
 
   return (
+    <>
+    <title>Create Profile</title> 
     <div className="flex items-center justify-center min-h-screen ">
       <motion.div
         className="flex flex-col lg:flex-row bg-white rounded-3xl shadow-2xl overflow-hidden max-w-6xl w-full"
@@ -98,7 +103,7 @@ const Login = () => {
               type="email"
               name="email"
               required
-              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="w-full border input border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400"
               placeholder="Enter your email"
             />
 
@@ -108,7 +113,7 @@ const Login = () => {
                 type={showPassword ? 'text' : 'password'}
                 name="password"
                 required
-                className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className="w-full input border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                 placeholder="Enter your password"
               />
               <button
@@ -145,6 +150,7 @@ const Login = () => {
         </motion.div>
       </motion.div>
     </div>
+    </>
   );
 };
 

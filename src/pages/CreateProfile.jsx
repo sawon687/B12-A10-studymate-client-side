@@ -35,7 +35,7 @@ const CreateProfile = () => {
     };
 
     axios
-      .post('http://localhost:9000/createProfile', profileCreate)
+      .post('https://studymate-api-server-pi.vercel.app/createProfile', profileCreate)
       .then(() => {
         Swal.fire({
           title: '✅ Profile Created Successfully!',
@@ -54,6 +54,8 @@ const CreateProfile = () => {
   };
 
   return (
+    <> 
+    <title>Create Profile</title> 
     <div className="min-h-screen flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-3xl bg-white/10 backdrop-blur-lg shadow-2xl rounded-3xl border border-blue-100 p-8 sm:p-10">
         <h1 className="text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-br from-indigo-500 to-purple-600  bg-clip-text text-transparent mb-2">
@@ -103,23 +105,27 @@ const CreateProfile = () => {
           {/* Study Mode */}
           <div>
             <label className="label-text font-semibold">Study Mode</label>
-            <div className="flex flex-wrap gap-3 mt-2">
+      
+                  <div className="flex flex-wrap gap-3 mt-2">
               {['Online', 'Offline'].map((mode) => (
                 <button
                   key={mode}
                   type="button"
+                 
                   onClick={() => setStudyMode(mode)}
-                  className={`px-4 py-2 hover:bg-gradient-to-br from-indigo-500 to-purple-600   rounded-lg font-medium border transition-all flex-1 ${
+                  className={`px-4 py-2 rounded-lg font-medium border flex-1 transition-all ${
                     studyMode === mode
-                      ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-md'
-                      : ' text-gray-600 border-gray-300 hover:bg-blue-50'
+                      ? 'bg-gradient-to-br from-indigo-500 to-purple-600  hover:bg-gradient-to-br from-indigo-500 to-purple-600 text-white   shadow'
+                      : ' border-gray-300 hover:bg-purple-600 hover:text-white'
                   }`}
                 >
                   {mode}
                 </button>
               ))}
             </div>
-          </div>
+          
+            </div>
+         
 
           {/* Availability & Partner Count */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -154,11 +160,12 @@ const CreateProfile = () => {
                 <button
                   key={level}
                   type="button"
+                 
                   onClick={() => setExperience(level)}
                   className={`px-4 py-2 rounded-lg font-medium border flex-1 transition-all ${
                     experienceLevel === level
-                      ? 'bg-gradient-to-br from-indigo-500 to-purple-600  hover:bg-gradient-to-br from-indigo-500 to-purple-600  text-white shadow'
-                      : ' border-gray-300 hover:bg-blue-50'
+                      ? 'bg-gradient-to-br from-indigo-500 to-purple-600  hover:bg-gradient-to-br from-indigo-500 to-purple-600 text-white   shadow'
+                      : ' border-gray-300 hover:bg-purple-600 hover:text-white'
                   }`}
                 >
                   {level}
@@ -223,7 +230,7 @@ const CreateProfile = () => {
           <div className="pt-4">
             <button
               type="submit"
-              className="btn bg-gradient-to-br from-indigo-500 to-purple-600  hover:bg-blue-700 text-white w-full text-lg font-semibold transition-all shadow-md"
+              className="btn border-0 bg-gradient-to-br from-indigo-500 to-purple-600  hover:bg-blue-700 text-white w-full text-lg font-semibold transition-all shadow-md"
             >
               Create Profile
             </button>
@@ -231,6 +238,7 @@ const CreateProfile = () => {
         </form>
       </div>
     </div>
+    </> 
   );
 };
 

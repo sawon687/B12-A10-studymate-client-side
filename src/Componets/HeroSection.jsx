@@ -4,6 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 import { motion } from "framer-motion";
+import { Link } from "react-router";
 
 const HeroSection = () => {
   const slides = [
@@ -35,9 +36,10 @@ const HeroSection = () => {
         effect="fade"
         loop={true}
         autoplay={{
-          delay: 4000,       // 4 seconds per slide
+          delay: 2000,       // 4 seconds per slide
           disableOnInteraction: false, // keep autoplay even after user interaction
-          pauseOnMouseEnter: false,    // don't pause on hover
+          pauseOnMouseEnter: false,   // don't pause on hover
+          Autoplay:true,
         }}
         speed={1000} // smooth transition duration
         className="h-[500px]"
@@ -63,9 +65,9 @@ const HeroSection = () => {
        </h2>
 
                 <p className="mb-6 text-lg md:text-xl">{s.desc}</p>
-                <button className="bg-gradient-to-br from-indigo-500 to-purple-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
+                <Link to='/FindPartners' className="bg-gradient-to-br from-indigo-500 to-purple-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
                   {s.btn}
-                </button>
+                </Link>
               </motion.div>
             </div>
           </SwiperSlide>

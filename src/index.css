@@ -1,7 +1,10 @@
+
+
+/* Tailwind & DaisyUI */
 @import "tailwindcss";
 @plugin "daisyui";
 
-/* 🌈 DaisyUI Theme Config (optional) */
+/* 🌈 Light & Dark Gradient Variables */
 @layer base {
   :root {
     --theme-gradient-light: linear-gradient(
@@ -10,26 +13,29 @@
       #e3f2fd,
       #ede7f6,
       #fff3e0
-    ); /* pastel AI look */
+    );
+
     --theme-gradient-dark: linear-gradient(
       to bottom right,
       #0f2027,
       #203a43,
       #2c5364
-    ); /* elegant dark gradient */
+    );
   }
 }
 
-/* 🌙 Custom dark variant for data-theme */
-@custom-variant dark (&[data-theme="dark"] &);
+/* ❌ Removed: Custom dark variant (It was breaking Tailwind dark mode) */
+/* @custom-variant dark (&[data-theme="dark"] &); */
 
-/* 🎨 Global Gradient Background */
+/* 🎨 Global Light Mode Background */
 body {
   @apply min-h-screen transition-colors duration-500;
   background-image: var(--theme-gradient-light);
 }
 
-[data-theme="dark"] body {
+/* 🌙 Dark Mode (DaisyUI + Tailwind Compatible) */
+html.dark body,
+:root[data-theme="dark"] body {
   background-image: var(--theme-gradient-dark);
+  @apply text-gray-100;
 }
-

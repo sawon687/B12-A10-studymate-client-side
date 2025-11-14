@@ -13,7 +13,9 @@ const Home = () => {
         return <Loading></Loading>
     }
     return (
-        <div className=''> <HeroSection></HeroSection>
+        <div className=''>
+            <title>Home</title>
+             <HeroSection></HeroSection>
             <TopstudyPartners></TopstudyPartners>
             <HowitWork></HowitWork>
             <Testimonials></Testimonials>

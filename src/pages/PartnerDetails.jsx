@@ -9,36 +9,38 @@ const PartnerDetails = () => {
   const [partner, setPartner] = useState({});
   const [refresh, setRefresh] = useState(false);
   const { id } = useParams();
-
+        console.log(partner)
   const { _id, ...restPartnerData } = partner;
 
   useEffect(() => {
-    axios(`http://localhost:9000/partner/${id}`).then((res) => {
+    axios(`https://studymate-api-server-pi.vercel.app/partner/${id}`).then((res) => {
       setPartner(res.data);
     });
   }, [id, refresh]);
 
   const handleRequest = () => {
     axios
-      .post("http://localhost:9000/myConnection", {
+      .post("https://studymate-api-server-pi.vercel.app/myConnection", {
         ...restPartnerData,
         request_Email: user?.email,
         partnerId: partner._id,
       })
       .then((res) => {
-        setRefresh(!refresh);
+         setRefresh(!refresh);
         Swal.fire({
           title: `${res.data.message}`,
           icon: "success",
           timer: 1500,
           showConfirmButton: false,
         });
+       
       })
       .catch((error) => console.log(error.data.message));
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-10  dark:from-gray-900 dark:via-gray-950 dark:to-black transition-colors duration-500">
+       <title>PartnerDetails</title>
       <div className="max-w-4xl w-full p-8 backdrop-blur-xl  dark:bg-gray-800/70 shadow-2xl rounded-2xl border border-gray-200 dark:border-gray-700 transition-all duration-500">
         {/* Header */}
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
@@ -50,13 +52,13 @@ const PartnerDetails = () => {
           />
 
           {/* Info Section */}
-          <div className="flex-1">
+          <div className="flex-1 ">
             <h1 className="text-3xl font-bold bg-gradient-to-br from-indigo-500 to-purple-600 bg-clip-text text-transparent mb-3">
               {partner?.name}
             </h1>
             <div className="space-y-2 text-gray-700 dark:text-gray-200">
               <p>
-                <span className="font-semibold">Subject:</span>{" "}
+                <span className="font-semibold ">Subject:</span>{" "}
                 {partner?.subject}
               </p>
               <p>

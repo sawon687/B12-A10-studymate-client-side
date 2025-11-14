@@ -4,12 +4,12 @@ import { BlinkBlur } from 'react-loading-indicators';
 
 const Loading = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen ">
       <div className="flex flex-col items-center gap-4">
         {/* Spinner */}
         
         {/* Loading Text */}
-        <h1 className="text-5xl text-center text-5xl font-semibold animate-pulse">
+        <h1 className="text-5xl text-center mb-2 text-5xl font-semibold animate-pulse">
           Loading...
         </h1>
 

@@ -3,9 +3,11 @@ import AuthContex from '../Contex/AuthContex';
 
 const Profile = () => {
   const { user } = useContext(AuthContex);
+  
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+    <div className="flex justify-center items-center min-h-screen  p-4">
+         <title>Profile</title>
       <div className="w-80 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center p-6 gap-4">
         
         {/* Profile Image */}

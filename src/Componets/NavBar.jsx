@@ -68,7 +68,7 @@ const NavBar = () => {
                 `font-semibold transition-colors duration-200 ${
                   isActive
                     ? "text-indigo-500"
-                    : "hover:text-indigo-600 dark:hover:text-indigo-400"
+                    : " hover:text-indigo-600 dark:hover:text-indigo-400"
                 }`
               }
             >
@@ -97,14 +97,14 @@ const NavBar = () => {
   return (
     <div className="relative">
       {/* 🔹 Navbar Main */}
-      <div className="navbar lg:px-20  dark:bg-gray-900 shadow-md transition-colors duration-500">
+      <div className="navbar lg:px-20  shadow-md transition-colors duration-500">
         <div className="navbar-start">
           {/* Mobile Dropdown */}
           <div className="dropdown">
-            <div tabIndex={0} className="btn btn-ghost lg:hidden">
+            <div tabIndex={0} className="btn btn-ghost  lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-gray-800 dark:text-gray-100"
+                className="h-5 w-5 "
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -119,7 +119,7 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={-1}
-              className="menu menu-sm dropdown-content bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-box z-50 mt-3 w-52 p-2 shadow-lg"
+              className="menu menu-sm dropdown-content  rounded-box z-50 mt-3 w-52 p-2 shadow-lg"
             >
               {links}
             </ul>
@@ -128,7 +128,7 @@ const NavBar = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white"
+            className="flex items-center gap-2 text-xl font-bold "
           >
             <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 flex justify-center items-center rounded-xl">
               <FaBookOpen className="text-white text-2xl" />
@@ -152,10 +152,10 @@ const NavBar = () => {
             className="btn btn-ghost btn-circle"
           >
             {theme === "dark" ? (
-               <Moon className="text-indigo-600" size={22} />
-           
+              <Moon className="text-indigo-600" size={22} />
+             
             ) : (
-                    <Sun className="text-yellow-400" size={22} />
+               <Sun className="text-yellow-400" size={22} />
             )}
           </button>
 
@@ -176,7 +176,7 @@ const NavBar = () => {
             <>
               <Link
                 to="/Login"
-                className="btn btn-outline btn-primary text-gray-800 dark:text-gray-100"
+                className="btn btn-outline btn-primary"
               >
                 Login
               </Link>

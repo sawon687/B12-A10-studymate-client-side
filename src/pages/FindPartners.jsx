@@ -27,7 +27,7 @@ const FindPartners = () => {
   // Fetch initial data
   useEffect(() => {
     setActive("Default");
-    axios('http://localhost:9000/userProfile')
+    axios('https://studymate-api-server-pi.vercel.app/userProfile')
       .then(res => setProfile(res.data))
       .catch(err => console.log(err));
   }, []);
@@ -36,7 +36,7 @@ const FindPartners = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     const searchItem = e.target.searchitem.value;
-    axios(`http://localhost:9000/search?search=${searchItem}`)
+    axios(`https://studymate-api-server-pi.vercel.app/search?search=${searchItem}`)
       .then(res => setProfile(res.data))
       .catch(err => console.log(err));
   };
@@ -44,7 +44,7 @@ const FindPartners = () => {
   // Sort function
   const handleSortByExperience = (level) => {
     setActive(level); // set active button
-    axios(`http://localhost:9000/userProfile?experienceSort=${level}`)
+    axios(`https://studymate-api-server-pi.vercel.app/userProfile?experienceSort=${level}`)
       .then(res => setProfile(res.data))
       .catch(err => console.log(err));
   };
@@ -52,7 +52,7 @@ const FindPartners = () => {
   // Default button
   const handleDefault = () => {
     setActive("Default");
-    axios("http://localhost:9000/userProfile")
+    axios("https://studymate-api-server-pi.vercel.app/userProfile")
       .then(res => setProfile(res.data))
       .catch(err => console.log(err));
   };
@@ -62,6 +62,9 @@ const FindPartners = () => {
   }
 
   return (
+    <>
+    <title>FindPartner</title>
+  
     <div className='max-w-[1200px] mx-auto px-4'>
       {/* Animated Heading */}
       <motion.div
@@ -80,7 +83,7 @@ const FindPartners = () => {
 
       {/* Sort Buttons & Search */}
       <div className='flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 pb-10'>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap justify-center gap-2">
           <button
             className={`btn px-6 py-2 rounded-full ${active === "Beginner" ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white" : "bg-base-100"}`}
             onClick={() => handleSortByExperience("Beginner")}
@@ -156,6 +159,7 @@ const FindPartners = () => {
       </div>
       </div>
     </div>
+      </>
   );
 };
 

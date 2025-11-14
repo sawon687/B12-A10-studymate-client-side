@@ -47,8 +47,9 @@ const Register = () => {
 
   return (
     <div className="hero  min-h-screen flex items-center justify-center p-4">
+       <title>Register</title>
       <motion.div 
-        className="card w-full max-w-4xl shadow-2xl flex flex-col md:flex-row rounded-3xl overflow-hidden"
+        className="card w-full max-w-4xl  bg-white shadow-2xl flex flex-col md:flex-row rounded-3xl overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -82,7 +83,7 @@ const Register = () => {
 
             <motion.button 
               type="submit" 
-              className="btn w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white mb-3"
+              className="btn border-0 w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white mb-3"
               whileTap={{ scale: 0.95 }}
             >
               Register
