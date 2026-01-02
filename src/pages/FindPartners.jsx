@@ -65,7 +65,7 @@ const FindPartners = () => {
     <>
     <title>FindPartner</title>
   
-    <div className='max-w-[1200px] mx-auto px-4'>
+    <div className='max-w-[1200px] mt-16 mx-auto px-4'>
       {/* Animated Heading */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
