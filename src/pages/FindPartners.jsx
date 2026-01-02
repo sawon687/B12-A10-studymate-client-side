@@ -65,7 +65,7 @@ const FindPartners = () => {
     <>
     <title>FindPartner</title>
   
-    <div className='max-w-[1200px] mt-16 mx-auto px-4'>
+    <div className='max-w-[1370px] mb-10 mt-16 mx-auto '>
       {/* Animated Heading */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -144,7 +144,7 @@ const FindPartners = () => {
         Total Profiles Available: <span className="font-semibold text-indigo-600">{Profile.length}</span>
       </p>
     </motion.div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-20">
+      <div className="grid md:grid-cols-3 rounded-2xl shadow-md lg:grid-cols-4 w-full px-5 gap-3 py-10 bg-[#ffff] dark:bg-base-100  ">
         {Profile.length > 0 ? (
           Profile.map((data) => (
             <ProfileCards data={data} key={data._id} />

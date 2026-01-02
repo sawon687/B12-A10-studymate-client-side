@@ -97,7 +97,7 @@ const NavBar = () => {
   return (
     <div className="relative">
       {/* 🔹 Navbar Main  section*/}
-      <div className="navbar  fixed z-50 top-0 bg-white/10  backdrop-blur-lg    lg:px-20 px-4  shadow-md transition-colors duration-500">
+      <div className="navbar  fixed z-50 top-0  backdrop-blur-lg    lg:px-20 px-4  shadow-md transition-colors duration-500">
         <div className="navbar-start">
           {/* Mobile Dropdown */}
           <div className="dropdown">
