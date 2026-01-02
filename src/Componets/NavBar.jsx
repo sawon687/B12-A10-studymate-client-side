@@ -96,7 +96,7 @@ const NavBar = () => {
 
   return (
     <div className="relative">
-      {/* 🔹 Navbar Main */}
+      {/* 🔹 Navbar Main  section*/}
       <div className="navbar  sticky top-0 buttom   lg:px-20 px-4  shadow-md transition-colors duration-500">
         <div className="navbar-start">
           {/* Mobile Dropdown */}
