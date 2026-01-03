@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router";
 import AuthContex from "../Contex/AuthContex";
 import { useContext, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Moon, Sun, User, LogOut } from "lucide-react";
+import { Moon, Sun, User, LogOut, LayoutDashboard } from "lucide-react";
 
 const NavBar = () => {
   const { user, signoutUser } = useContext(AuthContex);
@@ -14,11 +14,15 @@ const NavBar = () => {
   useEffect(() => {
     const html = document.querySelector("html");
     if (theme === "dark") {
-      html.classList.add("dark");
-      html.setAttribute("data-theme", "dark");
+       html.classList.remove('light')
+      html.classList.add("dark"); 
+      html.setAttribute('data-theme','dark') 
+     
+ 
     } else {
       html.classList.remove("dark");
-           html.setAttribute("data-theme", "light");
+        html.classList.add('light')
+          html.setAttribute('data-theme','light') 
      
     }
     localStorage.setItem("theme", theme);
@@ -190,7 +194,7 @@ const NavBar = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.25 }}
-              className="absolute right-6 top-20 w-60 flex flex-col bg-white dark:bg-gray-900 rounded-2xl shadow-2xl z-50 p-4 gap-3 border border-gray-200 dark:border-gray-700 backdrop-blur-lg"
+              className="fixed right-6 top-20 w-60 flex flex-col bg-white dark:bg-gray-900 rounded-2xl shadow-2xl z-50 p-4 gap-3 border border-gray-200 dark:border-gray-700 backdrop-blur-lg"
             >
               <Link
                 to="/Profile"
@@ -205,7 +209,7 @@ const NavBar = () => {
                 className="flex items-center gap-3 px-4 py-2 rounded-lg font-semibold text-gray-800 dark:text-gray-100 hover:bg-gradient-to-r hover:from-indigo-100 hover:to-purple-100 dark:hover:from-indigo-900 dark:hover:to-purple-900 transition-all duration-200"
                 onClick={() => setToggle(false)}
               >
-                <User className="text-indigo-500" size={18} /> Profile
+                <LayoutDashboard className="text-indigo-500" size={18} /> Dashboard
               </Link>
 
               <button

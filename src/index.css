@@ -1,14 +1,13 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" ;
 
-/* Custom gradients + profile card variable */
 @layer base {
   :root {
     --theme-gradient-light: linear-gradient(to bottom right, #e0f7fa, #e3f2fd, #ede7f6, #fff3e0);
     --theme-gradient-dark: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
   }
 
-  body {
+ .light body {
     min-height: 100vh;
     background-image: var(--theme-gradient-light);
     transition: background-image 0.5s ease;

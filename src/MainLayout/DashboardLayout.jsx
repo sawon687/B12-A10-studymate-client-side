@@ -7,7 +7,7 @@ import {
   Settings,
   Menu,
 } from "lucide-react";
-import { FaUserFriends } from "react-icons/fa";
+import { FaUserFriends, FaUserPlus } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router";
 
 const DashboardLayout = () => {
@@ -60,21 +60,21 @@ const DashboardLayout = () => {
         <aside className="w-64 min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex flex-col">
           {/* Logo */}
           <div className="px-6 py-4 text-2xl font-bold border-b border-purple-500">
-            Flyon AI
+            <Link to='/'>StudyMate</Link>
           </div>
 
           {/* Menu */}
           <ul className="menu p-4 text-sm flex-1 space-y-4">
         
              
-            <SidebarItem icon={<LayoutDashboard size={18} />} text="Dashboard" active />
+            <SidebarItem icon={<LayoutDashboard size={18} />} text="Dashboard" active  />
             <NavLink to='/Dashboard/createPartnerProfile'  className={({ isActive }) =>
                 `font-semibold transition-colors duration-200  ${
                   isActive
                     ? "bg-white rounded-2xl text-gray-600 "
                     : " hover:text-indigo-600 dark:hover:text-indigo-400"
                 }`
-              } ><SidebarItem icon={<Cpu size={18} />} text="CreateProfile" badge="2" /></NavLink>
+              } ><SidebarItem icon={<FaUserPlus size={18} />} text="CreateProfile" badge="2" /></NavLink>
                <NavLink to='/Dashboard/myConnection'  className={({ isActive }) =>
                 `font-semibold transition-colors duration-200  ${
                   isActive

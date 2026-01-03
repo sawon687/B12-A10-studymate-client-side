@@ -29,18 +29,18 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-16 bg-base-200">
+    <section className="py-5 max-w-[1370px] mx-auto rounded-2xl bg-base-200">
       <div className="container mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl text-center mt-10 font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 mb-12"
+          className="text-4xl text-center mt-5 font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 mb-12"
         >
           What Our Users Say
         </motion.h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 px-5 gap-8">
           {testimonials.map((item, index) => (
             <motion.div
               key={index}
@@ -50,11 +50,12 @@ const Testimonials = () => {
               viewport={{ once: true, amount: 0.3 }}
               variants={cardVariants}
             >
-              <p className="mb-4">{item.text}</p>
-              <div className="flex items-center justify-center gap-4">
+              
+              <div className="flex flex-col items-center justify-center gap-4">
                 <img src={item.img} alt={item.name} className="w-12 h-12 rounded-full" />
                 <span className="font-semibold">{item.name}</span>
               </div>
+              <p className="mb-4">{item.text}</p>
             </motion.div>
           ))}
         </div>

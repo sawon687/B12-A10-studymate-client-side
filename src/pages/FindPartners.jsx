@@ -144,7 +144,7 @@ const FindPartners = () => {
         Total Profiles Available: <span className="font-semibold text-indigo-600">{Profile.length}</span>
       </p>
     </motion.div>
-      <div className="grid md:grid-cols-3 rounded-2xl shadow-md lg:grid-cols-4 w-full px-5 gap-3 py-10 bg-[#ffff] dark:bg-base-100  ">
+      <div className="grid md:grid-cols-3 rounded-2xl shadow-md lg:grid-cols-4 w-full px-5 gap-3 py-10  bg-base-200 ">
         {Profile.length > 0 ? (
           Profile.map((data) => (
             <ProfileCards data={data} key={data._id} />
@@ -155,7 +155,7 @@ const FindPartners = () => {
               No Result Found
             </h1>
           </div>
-        )}
+        )} 
       </div>
       </div>
     </div>
