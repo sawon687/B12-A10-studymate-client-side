@@ -1,10 +1,49 @@
-
-
-/* Tailwind & DaisyUI */
 @import "tailwindcss";
 @plugin "daisyui";
 
-/* Light & Dark Gradient Variables */
+/* Custom gradients + profile card variable */
+@layer base {
+  :root {
+    --theme-gradient-light: linear-gradient(to bottom right, #e0f7fa, #e3f2fd, #ede7f6, #fff3e0);
+    --theme-gradient-dark: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+  }
+
+  body {
+    min-height: 100vh;
+    background-image: var(--theme-gradient-light);
+    transition: background-image 0.5s ease;
+  }
+
+  .dark body {
+    background-image: var(--theme-gradient-dark);
+  }
+
+  /* Profile Card background handled by DaisyUI theme */
+  .profile-card {
+    background-color: var(--base-100); /* light mode */
+  }
+
+  .dark .profile-card {
+    background-color: var(--base-200); /* dark mode */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* 
+
+
+@import "tailwindcss";
+@plugin "daisyui";
+
+
 @layer base {
   :root {
     --theme-gradient-light: linear-gradient(
@@ -24,18 +63,14 @@
   }
 }
 
-/* ❌ Removed: Custom dark variant (It was breaking Tailwind dark mode) */
-/* @custom-variant dark (&[data-theme="dark"] &); */
 
-/* 🎨 Global Light Mode Background */
+
 body {
-  @apply min-h-screen transition-colors duration-500;
+  @apply min-h-screen transition-colors duration-500 bg-white text-gray-900;
   background-image: var(--theme-gradient-light);
 }
 
-/* 🌙 Dark Mode (DaisyUI + Tailwind Compatible) */
-html.dark body,
-:root[data-theme="dark"] body {
+.dark body {
+  @apply bg-[#020617] text-gray-100;
   background-image: var(--theme-gradient-dark);
-  @apply text-gray-100;
-}
+} */

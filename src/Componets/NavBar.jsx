@@ -18,7 +18,8 @@ const NavBar = () => {
       html.setAttribute("data-theme", "dark");
     } else {
       html.classList.remove("dark");
-      html.setAttribute("data-theme", "light");
+           html.setAttribute("data-theme", "light");
+     
     }
     localStorage.setItem("theme", theme);
   }, [theme]);
@@ -59,38 +60,7 @@ const NavBar = () => {
           Find Partners
         </NavLink>
       </li>
-      {user && (
-        <>
-          <li>
-            <NavLink
-              to="/createPartnerProfile"
-              className={({ isActive }) =>
-                `font-semibold transition-colors duration-200  ${
-                  isActive
-                    ? "text-indigo-500"
-                    : " hover:text-indigo-600 dark:hover:text-indigo-400"
-                }`
-              }
-            >
-              Create Partner Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/myConnection"
-              className={({ isActive }) =>
-                `font-semibold transition-colors duration-200 ${
-                  isActive
-                    ? "text-indigo-500"
-                    : " hover:text-indigo-600 dark:hover:text-indigo-400"
-                }`
-              }
-            >
-              MyConnection
-            </NavLink>
-          </li>
-        </>
-      )}
+     
     </>
   );
 
@@ -224,6 +194,14 @@ const NavBar = () => {
             >
               <Link
                 to="/Profile"
+                className="flex items-center gap-3 px-4 py-2 rounded-lg font-semibold text-gray-800 dark:text-gray-100 hover:bg-gradient-to-r hover:from-indigo-100 hover:to-purple-100 dark:hover:from-indigo-900 dark:hover:to-purple-900 transition-all duration-200"
+                onClick={() => setToggle(false)}
+              >
+                <User className="text-indigo-500" size={18} /> Profile
+              </Link>
+
+               <Link
+                to="/Dashboard"
                 className="flex items-center gap-3 px-4 py-2 rounded-lg font-semibold text-gray-800 dark:text-gray-100 hover:bg-gradient-to-r hover:from-indigo-100 hover:to-purple-100 dark:hover:from-indigo-900 dark:hover:to-purple-900 transition-all duration-200"
                 onClick={() => setToggle(false)}
               >
