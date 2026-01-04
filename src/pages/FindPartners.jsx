@@ -49,26 +49,10 @@ console.log('skip',skip)
     e.preventDefault();
     const searchItem = e.target.searchitem.value;
     setSearchText(searchItem)
-    // axiosSequre(`/userProfile?search=${searchItem}?experienceSort=${level}`)
-    //   .then(res => setProfile(res.data))
-    //   .catch(err => console.log(err));
+   
   };
 
-  // // Sort function
-  // const handleSortByExperience = (level) => {
-  //   setActive(level); // set active button
-  //   axiosSequre(`/userProfile?experienceSort=${level}`)
-  //     .then(res => setProfile(res.data))
-  //     .catch(err => console.log(err));
-  // };
-
-  // // Default button
-  // const handleDefault = () => {
-  //   setActive("Default");
-  //   axiosSequre("/userProfile")
-  //     .then(res => setProfile(res.data))
-  //     .catch(err => console.log(err));
-  // };
+ 
 
   if (!loading) {
     return <Loading />;
@@ -180,7 +164,7 @@ console.log('skip',skip)
                    {
                     
 
-                    [...Array(page).keys()].map((i)=><button onClick={()=> setCurrentPage(i)} className={`${i==currentPage&& 'btn-primary'} btn shadow-md  rounded-full`}>{i+1}</button>)
+                    [...Array(Number(page)).keys()].map((i)=><button onClick={()=> setCurrentPage(i)} className={`${i==currentPage&& 'btn-primary'} btn shadow-md  rounded-full`}>{i+1}</button>)
                   }
 
 

@@ -4,9 +4,10 @@ import { IoIosEyeOff, IoMdEye } from 'react-icons/io';
 import { useLocation, useNavigate, Link } from 'react-router';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
+import GoogleLogin from '../Componets/GoogleLogin';
 
 const Login = () => {
-  const { googleLoginandRegister, signInuser } = useContext(AuthContex);
+  const {  signInuser } = useContext(AuthContex);
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -39,28 +40,7 @@ const Login = () => {
       });
   };
 
-  const googleLoginHandle = () => {
-    googleLoginandRegister()
-      .then(res => {
-        // sweet alrt 2
-        Swal.fire({
-          title: "Login successful!",
-          icon: "success",
-          timer: 1500,
-          showConfirmButton: false,
-        });
-        navigate(from);
-        
-      })
-      .catch(error => {
-        Swal.fire({
-          title: "Login failed",
-          text: error.message,
-          icon: "error",
-        });
-      });
-  };
-
+ 
   return (
     <>
     <title>Create Profile</title> 
@@ -138,15 +118,7 @@ const Login = () => {
               <span>- Or -</span>
             </div>
 
-            <motion.button
-              type="button"
-              onClick={googleLoginHandle}
-              className="flex items-center text-black justify-center gap-2 w-full border border-gray-300 rounded-lg py-3 hover:bg-gray-100 transition-colors font-medium"
-              whileTap={{ scale: 0.95 }}
-            >
-              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
-              Login with Google
-            </motion.button>
+           <GoogleLogin></GoogleLogin>
           </form>
         </motion.div>
       </motion.div>
