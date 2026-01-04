@@ -11,6 +11,7 @@ import DashboardLayout from "../MainLayout/DashBoardLayout";
 import MainLayout from "../MainLayout/MainLayout";
 import CreateProfile from "../pages/CreateProfile";
 import PartnerDetails from "../pages/PartnerDetails";
+import ManageProfiles from "../pages/ManageProfiles";
 
 
 const router = createBrowserRouter([
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
     
     {
         path:'/Dashboard',
-        Component:DashboardLayout,
+        element:<PrivateRoute><DashboardLayout/></PrivateRoute>,
         children:[
 
                {
@@ -66,7 +67,11 @@ const router = createBrowserRouter([
                {
                 path: '/Dashboard/myConnection',
                 element: <PrivateRoute><MyConnections /></PrivateRoute>
-            },
+              },
+              {
+                path:'/Dashboard/manageProfiles',
+                Component:ManageProfiles
+              }
 
         ]
     },

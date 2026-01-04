@@ -4,29 +4,12 @@ import AuthContex from "../Contex/AuthContex";
 import { useContext, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Moon, Sun, User, LogOut, LayoutDashboard } from "lucide-react";
+import DarkToggle from "./DarkToggle";
 
 const NavBar = () => {
   const { user, signoutUser } = useContext(AuthContex);
   const [toggle, setToggle] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
-  // ✅ Dark/Light theme toggle setup
-  useEffect(() => {
-    const html = document.querySelector("html");
-    if (theme === "dark") {
-       html.classList.remove('light')
-      html.classList.add("dark"); 
-      html.setAttribute('data-theme','dark') 
-     
- 
-    } else {
-      html.classList.remove("dark");
-        html.classList.add('light')
-          html.setAttribute('data-theme','light') 
-     
-    }
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  
 
   const userSignout = () => {
     signoutUser()
@@ -132,18 +115,8 @@ const NavBar = () => {
 
         {/* Navbar End */}
         <div className="navbar-end flex items-center gap-4">
-          {/* Theme Toggle */}
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="btn btn-ghost btn-circle"
-          >
-            {theme === "dark" ? (
-              <Moon className="text-indigo-600" size={22} />
-             
-            ) : (
-               <Sun className="text-yellow-400" size={22} />
-            )}
-          </button>
+          <DarkToggle></DarkToggle>
+         
 
           {/* User Section */}
           {user ? (

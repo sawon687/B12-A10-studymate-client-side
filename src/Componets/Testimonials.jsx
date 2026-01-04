@@ -29,7 +29,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-5 max-w-[1370px] mx-auto rounded-2xl bg-base-200">
+    <section className="py-5 max-w-[1370px] mx-auto rounded-2xl bg-base-100">
       <div className="container mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -44,7 +44,7 @@ const Testimonials = () => {
           {testimonials.map((item, index) => (
             <motion.div
               key={index}
-              className="p-6 bg-base-100 rounded-xl shadow-lg"
+              className="p-6 bg-base-300 rounded-xl shadow-lg"
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}

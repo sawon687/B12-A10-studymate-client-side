@@ -18,21 +18,21 @@ const Home = () => {
     <TopstudyPartners></TopstudyPartners>
 
       {/* 4️⃣ How it Works with staggered animation */}
-      <section className="bg-base-200 max-w-[1370px] shadow-2xl rounded-2xl mx-auto py-20 transition-colors duration-500">
+      <section className="bg-base-100 max-w-[1370px] shadow-2xl rounded-2xl mx-auto py-20 transition-colors duration-500">
         <h2 className="text-3xl font-bold mb-12 text-center">How It Works</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 container mx-auto px-4">
           {["Sign Up", "Choose Course", "Start Learning"].map((step, i) => (
             <motion.div 
               key={i} 
-              className="p-6 rounded-lg shadow bg-base-100 dark:bg-gray-800 text-center"
+              className="p-6 rounded-lg shadow bg-base-300 text-center"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i*0.2, duration: 0.5 }}
             >
-              <div className="text-4xl mb-2 font-bold text-gray-900 dark:text-white">{i+1}</div>
-              <h3 className="font-bold mb-2 text-gray-900 dark:text-white">{step}</h3>
-              <p className="text-gray-600 dark:text-gray-300">Lorem ipsum dolor sit amet.</p>
+              <div className="text-4xl mb-2 font-bold ">{i+1}</div>
+              <h3 className="font-bold mb-2  ">{step}</h3>
+              <p className="">Lorem ipsum dolor sit amet.</p>
             </motion.div>
           ))}
         </div>

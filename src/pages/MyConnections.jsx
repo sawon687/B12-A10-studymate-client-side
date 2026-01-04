@@ -107,7 +107,7 @@ const MyConnections = () => {
   if (!loading) return <Loading />;
 
   return (
-    <div className="px-4 md:px-16 py-10  dark:text-gray-100 transition-colors duration-500">
+    <div className="py-10 w-7xl   transition-colors duration-500">
       <title>MyConnection</title>
       <h1 className="text-3xl font-bold text-center mb-8 flex justify-center items-center gap-2">
         <FaUserGraduate className="text-indigo-500" />
@@ -117,7 +117,7 @@ const MyConnections = () => {
       </h1>
 
       {/* Desktop Table View */}
-      <div className="hidden md:block overflow-x-auto shadow-lg rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+      <div className="hidden md:block overflow-x-auto shadow-lg rounded-2xl border dark:border-gray-800 bg-base-300">
         <table className="table w-full">
           <thead className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-lg">
             <tr>
@@ -131,7 +131,7 @@ const MyConnections = () => {
           <tbody>
             {requestUser.length === 0 ? (
               <tr>
-                <td colSpan="5" className="text-center py-6 text-gray-500 dark:text-gray-300">
+                <td colSpan="5" className="text-center py-6">
                   No connections found.
                 </td>
               </tr>
@@ -140,7 +140,7 @@ const MyConnections = () => {
                 {requestUser?.map((data) => (
                   <motion.tr
                     key={data?._id}
-                    className="hover:bg-blue-50 dark:hover:bg-gray-700 transition-all duration-300"
+                    className="hover:bg-blue-50 transition-all duration-300"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
@@ -159,8 +159,8 @@ const MyConnections = () => {
                       </div>
                     </td>
 
-                    <td className="font-semibold text-gray-700 dark:text-gray-200">{data?.name}</td>
-                    <td className="dark:text-gray-200">{data?.subject}</td>
+                    <td className=" ">{data?.name}</td>
+                    <td className="">{data?.subject}</td>
                     <td>
                       <span
                         className={`px-3 py-1 rounded-full text-sm font-medium ${

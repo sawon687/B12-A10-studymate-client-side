@@ -13,7 +13,7 @@ const Fastar = ({ rating }) => {
       stars.push(<FaRegStar key={i} className="text-yellow-400" />);
     }
   })
- console.log('star',stars)
+
   return <div className="flex items-center gap-1">{stars}</div>;
 };
 

@@ -1,14 +1,18 @@
 import {
   LayoutDashboard,
-  Cpu,
+
   FileText,
   ShieldCheck,
   Users,
   Settings,
   Menu,
 } from "lucide-react";
-import { FaUserFriends, FaUserPlus } from "react-icons/fa";
+import { FaUserFriends, FaUserPlus} from "react-icons/fa";
+import { MdManageAccounts } from "react-icons/md";
+
 import { Link, NavLink, Outlet } from "react-router";
+import DarkToggle from "../Componets/DarkToggle";
+import SidebarItem from "../Componets/Sidebaritem";
 
 const DashboardLayout = () => {
   return (
@@ -18,7 +22,7 @@ const DashboardLayout = () => {
       {/* ================= Main Content ================= */}
       <div className="drawer-content flex flex-col">
         {/* Top Navbar */}
-        <div className="navbar fixed z-50  bg-base-100 shadow px-4">
+        <div className="navbar fixed     z-50  bg-base-100 shadow px-4">
           <div className="flex-none lg:hidden">
             <label
               htmlFor="dashboard-drawer"
@@ -27,22 +31,22 @@ const DashboardLayout = () => {
               <Menu />
             </label>
           </div>
-          <div className="flex-1">
+          <div className="flex w-[1200px] justify-between  items-center">
             <h1 className="text-xl font-bold">Dashboard</h1>
-          </div>
-          <div className="flex-none">
-            <div className="avatar">
+             <div className="avatar gap-2">
+              <DarkToggle></DarkToggle>
               <div className="w-9 rounded-full">
                 <img src="https://i.pravatar.cc/100" />
               </div>
             </div>
           </div>
+          
         </div>
 
         {/* Page Content */}
         <div className="p-4 md:p-6 space-y-6">
           {/* Cards */}
-          <div className=" flex justify-center items- w-full">
+          <div className=" flex justify-center mt-10 items- w-full">
            <Outlet></Outlet>
           </div>
 
@@ -68,25 +72,14 @@ const DashboardLayout = () => {
         
              
             <SidebarItem icon={<LayoutDashboard size={18} />} text="Dashboard" active  />
-            <NavLink to='/Dashboard/createPartnerProfile'  className={({ isActive }) =>
-                `font-semibold transition-colors duration-200  ${
-                  isActive
-                    ? "bg-white rounded-2xl text-gray-600 "
-                    : " hover:text-indigo-600 dark:hover:text-indigo-400"
-                }`
-              } ><SidebarItem icon={<FaUserPlus size={18} />} text="CreateProfile" badge="2" /></NavLink>
-               <NavLink to='/Dashboard/myConnection'  className={({ isActive }) =>
-                `font-semibold transition-colors duration-200  ${
-                  isActive
-                    ? "bg-white rounded-2xl text-gray-600 "
-                    : " hover:text-indigo-600 dark:hover:text-indigo-400"
-                }`
-              } ><SidebarItem icon={<FaUserFriends size={18} />} text="CreateProfile" badge="2" /></NavLink>
-            <SidebarItem icon={<FileText size={18} />} text="Prediction Logs" />
+          <SidebarItem to='/Dashboard/createPartnerProfile'  icon={<FaUserPlus size={18} />} text="CreateProfile" badge="2" />
+               <SidebarItem to='/Dashboard/myConnection' icon={<FaUserFriends size={18} />} text="MyConnections" badge="2" />
+            <SidebarItem to='/Dashboard/manageProfiles' icon={<MdManageAccounts size={18} />} text="Manage Profiles" />
             <SidebarItem icon={<ShieldCheck size={18} />} text="Explainability" />
             <SidebarItem icon={<Users size={18} />} text="User Management" />
             <SidebarItem icon={<Settings size={18} />} text="Settings" />
           </ul>
+
 
           {/* Footer */}
           <div className="p-4 border-t border-purple-500">
@@ -110,20 +103,7 @@ const DashboardLayout = () => {
   );
 };
 
-const SidebarItem = ({ icon, text, badge, active }) => {
-  return (
-    <li>
-      <a
-        className={`flex items-center gap-3 rounded-lg
-        ${active ? "bg-white/20" : "hover:bg-white/10"}`}
-      >
-        {icon}
-        <span className="flex-1">{text}</span>
-        {badge && <span className="badge badge-error badge-sm">{badge}</span>}
-      </a>
-    </li>
-  );
-};
+
 
 
 

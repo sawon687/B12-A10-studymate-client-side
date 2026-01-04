@@ -16,7 +16,7 @@ const TopstudyPartners = () => {
 
     console.log(topProfile)
     return (
-        <div className='w-[1500px] mx-auto flex  items-center flex-col justify-center'>
+        <div className='w-[1500px] mx-auto flex   items-center flex-col justify-center'>
          <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ const TopstudyPartners = () => {
 
         <div className='flex w-[1370px]  justify-center items-center  '>
            
-        <div className=' grid w-full  lg:grid-cols-4 shadow-md rounded-2xl md:grid-cols-3  px-5 py-10 mx-auto bg-base-100   grid-cols-1  gap-3  '>
+        <div className=' grid w-full   lg:grid-cols-4 shadow-md rounded-2xl md:grid-cols-3  px-5 py-10 mx-auto bg-base-100   grid-cols-1  gap-3  '>
             {
                 topProfile.map(data=><ProfileCards data={data} key={data._id} ></ProfileCards >)
             }

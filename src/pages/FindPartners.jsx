@@ -1,17 +1,22 @@
-import axios from 'axios';
 import ProfileCards from '../Componets/ProfileCards';
 import { FaSearch } from 'react-icons/fa';
 import Loading from './Loading';
 import AuthContex from '../Contex/AuthContex';
 import { useContext, useEffect, useState } from 'react';
 import { motion } from "framer-motion";
+import UseAxiosSequre from '../Hook/UseAxiosSequre';
 
 const FindPartners = () => {
   const { loading } = useContext(AuthContex);
   const [Profile, setProfile] = useState([]);
   const [active, setActive] = useState("");
   const [titleText, SetTitleText] = useState("");
-
+  const [searchText,setSearchText]=useState()
+  const [exprience,setExperience]=useState()
+  const [profileCount,setProfileCount]=useState()
+   const axiosSequre=UseAxiosSequre()
+   const [currentPage,setCurrentPage]=useState(0)
+   
   // Typewriter effect
   const fullText = 'Welcome to StudyMate';
   useEffect(() => {
@@ -23,39 +28,47 @@ const FindPartners = () => {
     }, 100);
     return () => clearInterval(interval);
   }, []);
-
+const limit=8;
+const TotalPage=profileCount/8
+const skip=limit*Number(currentPage)
+const page=Math.ceil(TotalPage)
+console.log('skip',skip)
   // Fetch initial data
   useEffect(() => {
-    setActive("Default");
-    axios('https://studymate-api-server-pi.vercel.app/userProfile')
-      .then(res => setProfile(res.data))
+    axiosSequre(`/userProfile?limit=${limit}&search=${searchText|| ''}&skip=${skip}&experienceSort=${exprience||''}`)
+      .then(res =>{ setProfile(res.data.result)
+            setProfileCount(res.data.Totalcount)
+      })
       .catch(err => console.log(err));
-  }, []);
+  }, [searchText,exprience,limit,currentPage]);
+
+  console.log('profile',Profile)
 
   // Search function
-  const handleSearch = (e) => {
+  const handleSearchText= (e) => {
     e.preventDefault();
     const searchItem = e.target.searchitem.value;
-    axios(`https://studymate-api-server-pi.vercel.app/search?search=${searchItem}`)
-      .then(res => setProfile(res.data))
-      .catch(err => console.log(err));
+    setSearchText(searchItem)
+    // axiosSequre(`/userProfile?search=${searchItem}?experienceSort=${level}`)
+    //   .then(res => setProfile(res.data))
+    //   .catch(err => console.log(err));
   };
 
-  // Sort function
-  const handleSortByExperience = (level) => {
-    setActive(level); // set active button
-    axios(`https://studymate-api-server-pi.vercel.app/userProfile?experienceSort=${level}`)
-      .then(res => setProfile(res.data))
-      .catch(err => console.log(err));
-  };
+  // // Sort function
+  // const handleSortByExperience = (level) => {
+  //   setActive(level); // set active button
+  //   axiosSequre(`/userProfile?experienceSort=${level}`)
+  //     .then(res => setProfile(res.data))
+  //     .catch(err => console.log(err));
+  // };
 
-  // Default button
-  const handleDefault = () => {
-    setActive("Default");
-    axios("https://studymate-api-server-pi.vercel.app/userProfile")
-      .then(res => setProfile(res.data))
-      .catch(err => console.log(err));
-  };
+  // // Default button
+  // const handleDefault = () => {
+  //   setActive("Default");
+  //   axiosSequre("/userProfile")
+  //     .then(res => setProfile(res.data))
+  //     .catch(err => console.log(err));
+  // };
 
   if (!loading) {
     return <Loading />;
@@ -86,32 +99,32 @@ const FindPartners = () => {
         <div className="flex flex-wrap justify-center gap-2">
           <button
             className={`btn px-6 py-2 rounded-full ${active === "Beginner" ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white" : "bg-base-100"}`}
-            onClick={() => handleSortByExperience("Beginner")}
+            onClick={() => setExperience("Beginner")}
           >
             Beginner First
           </button>
           <button
             className={`btn px-6 py-2 rounded-full ${active === "Intermediate" ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white" : "bg-base-100"}`}
-            onClick={() => handleSortByExperience("Intermediate")}
+            onClick={() => setExperience("Intermediate")}
           >
             Intermediate First
           </button>
           <button
             className={`btn px-6 py-2 rounded-full ${active === "Expert" ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white" : "bg-base-100"}`}
-            onClick={() => handleSortByExperience("Expert")}
+            onClick={() => setExperience("Expert")}
           >
             Expert First
           </button>
           <button
             className={`btn px-6 py-2 rounded-full ${active === "Default" ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white" : "bg-base-100"}`}
-            onClick={handleDefault}
+            onClick={()=> setActive('Defult')}
           >
             Default
           </button>
         </div>
 
         {/* Search */}
-        <form onSubmit={handleSearch} className='mt-4 md:mt-0'>
+        <form onSubmit={handleSearchText} className='mt-4 md:mt-0'>
           <div className="relative flex items-center">
             <input
               type="search"
@@ -144,7 +157,7 @@ const FindPartners = () => {
         Total Profiles Available: <span className="font-semibold text-indigo-600">{Profile.length}</span>
       </p>
     </motion.div>
-      <div className="grid md:grid-cols-3 rounded-2xl shadow-md lg:grid-cols-4 w-full px-5 gap-3 py-10  bg-base-200 ">
+      <div className="grid md:grid-cols-3 rounded-2xl shadow-md lg:grid-cols-4 w-full px-5 gap-5 py-10  bg-base-200 ">
         {Profile.length > 0 ? (
           Profile.map((data) => (
             <ProfileCards data={data} key={data._id} />
@@ -158,6 +171,23 @@ const FindPartners = () => {
         )} 
       </div>
       </div>
+
+           <div className='my-7 gap-5 w-full flex justify-center items-center'>
+            {
+              currentPage > 0 && <button onClick={()=> setCurrentPage(currentPage - 1)} className='btn h-10 w-10 rounded-full shadow-md hover:btn-primary'>prev</button>
+            }
+           
+                   {
+                    
+
+                    [...Array(page).keys()].map((i)=><button onClick={()=> setCurrentPage(i)} className={`${i==currentPage&& 'btn-primary'} btn shadow-md  rounded-full`}>{i+1}</button>)
+                  }
+
+
+                  {
+                      page > currentPage + 1 && <button onClick={()=> setCurrentPage(currentPage + 1)} className='btn h-10 w-10 rounded-full shadow-md hover:btn-primary'>Next</button>
+                  }
+           </div>
     </div>
       </>
   );

@@ -56,8 +56,8 @@ const CreateProfile = () => {
   return (
     <> 
     <title>Create Profile</title> 
-    <div className="min-h-screen flex items-center justify-center px-4 py-10">
-      <div className="w-full max-w-3xl bg-white/10 backdrop-blur-lg shadow-2xl rounded-3xl border border-blue-100 p-8 sm:p-10">
+    <div className="my-10 w-7xl flex items-center justify-center px-4 py-10">
+      <div className="w-full  bg-white/10 backdrop-blur-lg shadow-2xl rounded-3xl border border-blue-100 p-8 sm:p-10">
         <h1 className="text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-br from-indigo-500 to-purple-600  bg-clip-text text-transparent mb-2">
           Create Your StudyMate Profile
         </h1>
@@ -67,7 +67,7 @@ const CreateProfile = () => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name & Email */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div>
               <label className="label-text font-semibold">Name</label>
               <input
@@ -88,19 +88,31 @@ const CreateProfile = () => {
                 className="input input-bordered w-full  cursor-not-allowed"
               />
             </div>
+
+
+             <div>
+            <label className="label-text font-semibold">Subject</label>
+            <select
+              onChange={(e) => setSubject(e.target.value)}
+              className="select select-bordered w-full focus:ring-2 focus:ring-blue-400"
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Choose a subject
+              </option>
+              <option value="Bangla">Bangla</option>
+              <option value="Math">Math</option>
+              <option value="Programming">Programming</option>
+              <option value="History">History</option>
+              <option value="Accounting">Accounting</option>
+              <option value="Chemistry">Chemistry</option>
+              <option value="English">English</option>
+              <option value="ICT">ICT</option>
+            </select>
+          </div>
           </div>
 
-          {/* Photo URL */}
-          <div>
-            <label className="label-text font-semibold">Photo URL</label>
-            <input
-              type="text"
-              name="photoURL"
-              defaultValue={user?.photoURL}
-              placeholder="https://example.com/photo.jpg"
-              className="input input-bordered w-full focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
+         
 
           {/* Study Mode */}
           <div>
@@ -192,7 +204,8 @@ const CreateProfile = () => {
             </div>
           </div>
 
-          {/* Location */}
+         <div className='grid grid-cols-2 gap-3 '>
+           {/* Location */}
           <div>
             <label className="label-text font-semibold">Location</label>
             <input
@@ -204,27 +217,21 @@ const CreateProfile = () => {
             />
           </div>
 
-          {/* Subject */}
+           {/* Photo URL */}
           <div>
-            <label className="label-text font-semibold">Subject</label>
-            <select
-              onChange={(e) => setSubject(e.target.value)}
-              className="select select-bordered w-full focus:ring-2 focus:ring-blue-400"
-              defaultValue=""
-            >
-              <option value="" disabled>
-                Choose a subject
-              </option>
-              <option value="Bangla">Bangla</option>
-              <option value="Math">Math</option>
-              <option value="Programming">Programming</option>
-              <option value="History">History</option>
-              <option value="Accounting">Accounting</option>
-              <option value="Chemistry">Chemistry</option>
-              <option value="English">English</option>
-              <option value="ICT">ICT</option>
-            </select>
+            <label className="label-text font-semibold">Photo URL</label>
+            <input
+              type="text"
+              name="photoURL"
+              defaultValue={user?.photoURL}
+              placeholder="https://example.com/photo.jpg"
+              className="input input-bordered w-full focus:ring-2 focus:ring-blue-400"
+            />
           </div>
+         </div>
+
+          {/* Subject */}
+         
 
           {/* Submit */}
           <div className="pt-4">
