@@ -7,11 +7,18 @@ import Profile from "../pages/Profile";
 import PrivateRoute from "../Contex/PrivateRoute";
 import MyConnections from "../pages/MyConnections";
 import NotFound from "../pages/NotFound";
-import DashboardLayout from "../MainLayout/DashBoardLayout";
+
 import MainLayout from "../MainLayout/MainLayout";
 import CreateProfile from "../pages/CreateProfile";
-import PartnerDetails from "../pages/PartnerDetails";
 import ManageProfiles from "../pages/ManageProfiles";
+import DashboardLayout from "../MainLayout/DashboardLayout";
+import PartnerDetails from "../pages/PartnerDetails";
+import Blog from "../pages/Blog";
+import Contact from "../pages/Contact";
+import DashboardOverview from "../pages/DashboardOverview ";
+
+
+
 
 
 const router = createBrowserRouter([
@@ -32,16 +39,21 @@ const router = createBrowserRouter([
                 path: '/Login',
                 Component: Login,
             },
+             {
+                path: '/blog',
+                Component: Blog,
+            },
+             {
+                path: '/contact',
+                Component:Contact,
+            },
             {
                 path: '/Register',
                 Component: Register
             },
             {
-                path: '/PartnerDetails/:id',
-                element: <PrivateRoute>
-                    <PartnerDetails></PartnerDetails>
-                </PrivateRoute>
-
+                path:'PartnerDetails/:id',
+                element:<PartnerDetails></PartnerDetails>
             },
          
             
@@ -71,8 +83,13 @@ const router = createBrowserRouter([
               {
                 path:'/Dashboard/manageProfiles',
                 Component:ManageProfiles
+              },
+             
+                {
+                path:'/Dashboard/DashboardOverview',
+                Component:DashboardOverview
               }
-
+          
         ]
     },
 

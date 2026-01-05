@@ -3,7 +3,7 @@ import React from 'react';
 
 const UseAxiosSequre = () => {
     const axiosSequre = axios.create({
-  baseURL: 'http://localhost:9000/',
+  baseURL: 'http://localhost:9000',
  
 });
     return axiosSequre 

@@ -29,7 +29,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <div className="relative mt-17 backdrop-blur-3xl">
+    <div className="relative top-15 w-[90%] hover:shadow-lg shadow-emerald-400 hover:scale-[10px] bg-linear-to-r  from-green-400 via-cyan-400 to-blue-500 p-[1px]  rounded-2xl mt-10  mx-auto rounded-2xl    backdrop-blur-3xl">
       <Swiper
         modules={[Navigation, Autoplay, EffectFade]}
         navigation={true}
@@ -42,7 +42,7 @@ const HeroSection = () => {
           Autoplay:true,
         }}
         speed={1000} // smooth transition duration
-        className="h-[500px]"
+        className="h-[500px]  rounded-2xl"
       >
         {slides.map((s, i) => (
           <SwiperSlide key={i}>

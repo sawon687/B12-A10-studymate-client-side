@@ -1,42 +1,54 @@
-import axios from 'axios';
-import  { useEffect, useState } from 'react';
-import ProfileCards from './ProfileCards';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import ProfileCards from "./ProfileCards";
 import { motion } from "framer-motion";
+import UseAxiosSequre from "../Hook/UseAxiosSequre";
 
+const TopStudyPartners = () => {
+  const [topProfile, setTopProfile] = useState([]);
+  const axiosSecure = UseAxiosSequre();
 
-const TopstudyPartners = () => {
-    const [topProfile,setTopProfile]=useState([])
+  useEffect(() => {
+    axiosSecure.get("/topStudyProfile").then((res) => {
+      setTopProfile(res.data);
+    });
+  }, []);
 
-    useEffect(() => {
-         axios('https://studymate-api-server-pi.vercel.app/topStudyProfile').then(res => {
-             console.log(res.data);
-             setTopProfile(res.data)
-         });
-    }, [])
-
-    console.log(topProfile)
-    return (
-        <div className='w-[1500px] mx-auto flex   items-center flex-col justify-center'>
-         <motion.h2
+  return (
+    <section className=" transition-colors">
+      <div className="max-w-[1370px] py-10  duration-500 bg-base-200 rounded-2xl mx-auto px-5 flex flex-col items-center">
+        {/* Section Heading */}
+        <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl text-center  font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 mb-12"
+          className="text-3xl md:text-4xl font-extrabold text-center text-primary mb-12"
         >
-          Top Study Partner
+          Top Study Partners
         </motion.h2>
 
-        <div className='flex w-[1370px]  justify-center items-center  '>
-           
-        <div className=' grid w-full   lg:grid-cols-4 shadow-md rounded-2xl md:grid-cols-3  px-5 py-10 mx-auto bg-base-100   grid-cols-1  gap-3  '>
-            {
-                topProfile.map(data=><ProfileCards data={data} key={data._id} ></ProfileCards >)
-            }
+        {/* Profiles Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
+          {topProfile.map((data) => (
+            <motion.div
+              key={data._id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
+              className="rounded-2xl border border-base-300 shadow-lg hover:shadow-xl transition-all"
+            >
+              {/* DaisyUI card style */}
+              <div className="card bg-base-100 shadow-md p-4 rounded-2xl">
+                <ProfileCards data={data} />
+              </div>
+            </motion.div>
+          ))}
         </div>
-        
-        </div>
-        </div>
-    );
+      </div>
+    </section>
+  );
 };
 
-export default TopstudyPartners;
+export default TopStudyPartners;

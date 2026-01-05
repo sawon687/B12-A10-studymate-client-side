@@ -1,26 +1,26 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import AuthContex from "../Contex/AuthContex";
 import { useParams } from "react-router";
 import Swal from "sweetalert2";
+import UseAxiosSequre from "../Hook/UseAxiosSequre";
 
 const PartnerDetails = () => {
   const { user } = useContext(AuthContex);
   const [partner, setPartner] = useState({});
   const [refresh, setRefresh] = useState(false);
+  const axiosSequre=UseAxiosSequre()
   const { id } = useParams();
         console.log(partner)
   const { _id, ...restPartnerData } = partner;
 
   useEffect(() => {
-    axios(`https://studymate-api-server-pi.vercel.app/partner/${id}`).then((res) => {
+    axiosSequre.get(`/partner/${id}`).then((res) => {
       setPartner(res.data);
     });
   }, [id, refresh]);
 
   const handleRequest = () => {
-    axios
-      .post("https://studymate-api-server-pi.vercel.app/myConnection", {
+    axiosSequre.post("/myConnection", {
         ...restPartnerData,
         request_Email: user?.email,
         partnerId: partner._id,

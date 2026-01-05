@@ -3,25 +3,45 @@ import AuthContex from '../Contex/AuthContex';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router';
+import UseAxiosSequre from '../Hook/UseAxiosSequre';
 const GoogleLogin = () => {
       const {  googleLoginandRegister} = useContext(AuthContex);
       const location = useLocation();
+      const axiosSecure=UseAxiosSequre
   const navigate = useNavigate();
   const from = location?.state?.from?.pathname || '/';
-     const googleLoginHandle = () => {
-        googleLoginandRegister()
-          .then(res => {
-            Swal.fire({ title: "Login successfully!", icon: "success" });
-            navigate(from);
-          })
-          .catch(error => Swal.fire({ title: `${error.message}`, icon: "error" }));
+      const handlegoogleLogin = (e) => {
+         e.preventDefault()
+            googleLoginandRegister().then(res => {
+                 navigate(from,{replace:true})
+                const user=res.user;
+                 const userInfo={
+                     name:user.displayName,
+                     email:user.email,
+                     photo:user.photoURL
+                 }
+                  axiosSecure.post('/user',userInfo).then(res => {
+                                     console.log(res.data)
+                                     if (res.data.insertedId) {
+                                
+                                         Swal.fire({
+                                             position: "center",
+                                             icon: "success",
+                                             title: "Your ar created your account successfully",
+                                             showConfirmButton: false,
+                                             timer: 1500
+                                         });
+                                     }
+                 
+                                 })
+                             }).catch(error=>console.log('error',error))
       };
     
     return (
         <>
            <motion.button 
               type="button" 
-              onClick={googleLoginHandle} 
+              onClick={handlegoogleLogin} 
               className="btn w-full text-black btn-outline flex items-center justify-center gap-2"
               whileTap={{ scale: 0.95 }}
             >

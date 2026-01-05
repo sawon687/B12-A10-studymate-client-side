@@ -104,7 +104,7 @@ const MyConnections = () => {
     setDataUpdate({ ...dataUpdate, studyMode: mode });
   };
 
-  if (!loading) return <Loading />;
+  if (loading) return <Loading />;
 
   return (
     <div className="py-10 w-7xl   transition-colors duration-500">

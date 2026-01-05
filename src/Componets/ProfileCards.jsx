@@ -1,12 +1,16 @@
-import { FaRegStar, FaStar } from 'react-icons/fa';
-import { Link } from 'react-router';
+
+
 import { motion } from "framer-motion";
-import Fastar from './Fastar';
+
+import { Link } from "react-router";
+import Fastar from "./Fastar";
+
 const ProfileCards = ({ data }) => {
-  const { _id, profileimage, name, subject, rating } = data;
+  const { _id, profileimage, name, subject, rating } = data || {};
    
-  
+  console.log('id',_id)
   return (
+    <div>
      <motion.div 
               key={_id}
               className="relative  bg-base-300  rounded-lg shadow overflow-hidden cursor-pointer"
@@ -24,16 +28,13 @@ const ProfileCards = ({ data }) => {
                   
                      <Fastar rating={rating}></Fastar>
                   </span>
-                  <button className="btn btn-sm btn-primary">View</button>
+                  <Link to={`/PartnerDetails/${_id}`} className="btn btn-sm text-white  bg-gradient-to-br from-indigo-500 to-purple-600 flex">View</Link>
                 </div>
               </div>
-              <motion.div
-                className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-80 flex items-center justify-center text-white text-xl font-bold transition-opacity duration-300"
-                whileHover={{ opacity: 0.8 }}
-              >
-                Click to Explore
-              </motion.div>
+             
             </motion.div>
+             
+            </div>
   );
 };
 
