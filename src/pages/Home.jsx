@@ -6,6 +6,7 @@ import FesureSection from "../Componets/FesureSection";
 import TopstudyPartners from "../Componets/TopstudyPartners";
 import Testimonials from "../Componets/Testimonials";
 import Newsletter from "../Componets/Newsletter";
+import Highlights from "./Highlights";
 
 
 const Home = () => {
@@ -14,7 +15,7 @@ const Home = () => {
 
       {/* 1️⃣ Hero Section with Animated Text */}
     <HeroSection></HeroSection>
-
+    <Highlights></Highlights>
    <FesureSection></FesureSection>
 
     <TopstudyPartners></TopstudyPartners>

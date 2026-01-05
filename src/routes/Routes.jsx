@@ -16,6 +16,7 @@ import PartnerDetails from "../pages/PartnerDetails";
 import Blog from "../pages/Blog";
 import Contact from "../pages/Contact";
 import DashboardOverview from "../pages/DashboardOverview ";
+import Service from "../pages/Service";
 
 
 
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
             {
                 path: '/Register',
                 Component: Register
+            },
+             {
+                path: '/service',
+                Component:Service
             },
             {
                 path:'PartnerDetails/:id',

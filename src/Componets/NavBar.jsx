@@ -76,6 +76,21 @@ const NavBar = () => {
           Contact
         </NavLink>
       </li>
+
+      <li>
+        <NavLink
+          to="/service"
+          className={({ isActive }) =>
+            `font-semibold text-gray-100 transition-all duration-200 flex items-center ${
+              isActive
+                ? "text-indigo-500 border-b-2 border-indigo-500"
+                : "hover:text-indigo-500 dark:hover:text-indigo-400"
+            }`
+          }
+        >
+          Service
+        </NavLink>
+      </li>
     </>
   );
 
