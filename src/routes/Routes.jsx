@@ -15,8 +15,8 @@ import DashboardLayout from "../MainLayout/DashboardLayout";
 import PartnerDetails from "../pages/PartnerDetails";
 import Blog from "../pages/Blog";
 import Contact from "../pages/Contact";
-import DashboardOverview from "../pages/DashboardOverview ";
 import Service from "../pages/Service";
+import Analaysis from "../pages/Analaysis";
 
 
 
@@ -92,7 +92,7 @@ const router = createBrowserRouter([
              
                 {
                 path:'/Dashboard/DashboardOverview',
-                Component:DashboardOverview
+                Component:Analaysis,
               }
           
         ]

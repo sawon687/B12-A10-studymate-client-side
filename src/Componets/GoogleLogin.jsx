@@ -5,14 +5,14 @@ import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router';
 import UseAxiosSequre from '../Hook/UseAxiosSequre';
 const GoogleLogin = () => {
-      const {  googleLoginandRegister} = useContext(AuthContex);
+      const {  googleLoginAndRegister} = useContext(AuthContex);
       const location = useLocation();
-      const axiosSecure=UseAxiosSequre
+      const axiosSecure=UseAxiosSequre()
   const navigate = useNavigate();
   const from = location?.state?.from?.pathname || '/';
       const handlegoogleLogin = (e) => {
          e.preventDefault()
-            googleLoginandRegister().then(res => {
+           googleLoginAndRegister().then(res => {
                  navigate(from,{replace:true})
                 const user=res.user;
                  const userInfo={

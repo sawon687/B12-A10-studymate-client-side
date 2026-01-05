@@ -30,14 +30,7 @@
 .gradient-border {
   border: 1px solid;
   border-image: linear-gradient(90deg, #7c3aed, #06b6d4) 1;
-  border-radius: 16px;
- 
-}
-.gradient-border-nav {
-  border: 1px solid;
-  border-image: linear-gradient(90deg, #7c3aed, #06b6d4) 1;
-  border-radius: 16px;
-  @apply w-[1700px]
+  border-radius: 16;
  
 }
 

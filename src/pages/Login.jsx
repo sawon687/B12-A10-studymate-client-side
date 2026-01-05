@@ -46,7 +46,7 @@ const Login = () => {
     <title>Create Profile</title> 
     <div className="flex items-center justify-center min-h-screen ">
       <motion.div
-        className="flex flex-col lg:flex-row bg-white rounded-3xl shadow-2xl overflow-hidden max-w-6xl w-full"
+        className="flex flex-col my-30 lg:flex-row bg-white rounded-3xl shadow-2xl overflow-hidden max-w-6xl w-full"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}

@@ -39,7 +39,7 @@ const PartnerDetails = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-10  dark:from-gray-900 dark:via-gray-950 dark:to-black transition-colors duration-500">
+    <div className="min-h-screen  flex items-center justify-center px-4 py-25  dark:from-gray-900 dark:via-gray-950 dark:to-black transition-colors duration-500">
        <title>PartnerDetails</title>
       <div className="max-w-4xl w-full p-8 backdrop-blur-xl  dark:bg-gray-800/70 shadow-2xl rounded-2xl border border-gray-200 dark:border-gray-700 transition-all duration-500">
         {/* Header */}

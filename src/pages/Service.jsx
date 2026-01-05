@@ -32,10 +32,9 @@ const Service = () => {
   ];
 
   return (
-    <section className="relative max-w-[1370px] mx-auto px-4 py-24">
+    <section className="relative mx-auto max-w-[1370px] mx-auto px-4 py-24">
       {/* Background Effects */}
-      <div className="absolute -top-32 -left-40 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-32 -right-40 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"></div>
+     
 
       {/* Heading */}
       <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 

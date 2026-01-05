@@ -57,10 +57,10 @@ const Blog = () => {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2 rounded-full font-semibold transition-all ${
+              className={`px-5 py-2 rounded-full font-semibold shadow-lg shadow-green-600 transition-all ${
                 selectedCategory === cat
                   ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
-                  : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:scale-105"
+                  : "bg-base-100 hover:scale-105"
               }`}
             >
               {cat}

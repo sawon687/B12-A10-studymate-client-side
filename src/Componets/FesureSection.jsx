@@ -22,7 +22,7 @@ const FeatureSection = () => {
   ];
 
   return (
-    <section className="relative container max-w-[1370px] mx-auto px-4 py-20 transition-colors duration-500">
+    <section className="relative container max-w-[1370px] mx-auto px-4  transition-colors duration-500">
       {/* Background blobs */}
       <div className="absolute -top-32 -left-40 w-96 h-96 rounded-full bg-indigo-400 opacity-20 blur-3xl animate-pulse-slow"></div>
       <div className="absolute -bottom-32 -right-40 w-96 h-96 rounded-full bg-purple-400 opacity-20 blur-3xl animate-pulse-slow delay-2000"></div>

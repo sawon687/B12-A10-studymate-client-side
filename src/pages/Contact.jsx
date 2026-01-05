@@ -82,27 +82,32 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           onSubmit={handleSubmit}
-          className="w-full md:w-2/3 bg-base-100 p-10 rounded-2xl shadow-lg flex flex-col gap-6"
+          className="w-full md:w-2/3 bg-base-100/10 transition-colors p-10 rounded-2xl shadow-lg shadow-green-600 flex flex-col gap-6"
         >
-          <input
+         <div className="    bg-linear-to-r  from-green-400 via-cyan-400 to-blue-500 p-[3px] rounded-lg">
+           <input
             type="text"
             name="name"
             placeholder="Your Name"
             value={formData.name}
             onChange={handleChange}
             required
-            className="input w-full rounded-lg border border-gray-300 dark:border-gray-700 p-3 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
+            className="input animate-border-move w-full outline-none rounded-lg  p-3 bg-base-300  "
           />
-          <input
+         </div>
+         <div className="bg-linear-to-r from-green-400 via-cyan-400 to-blue-500 p-[3px] rounded-lg">
+           <input
             type="email"
             name="email"
             placeholder="Your Email"
             value={formData.email}
             onChange={handleChange}
             required
-            className="input w-full rounded-lg border border-gray-300 dark:border-gray-700 p-3 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
+            className="input w-full rounded-lg  p-3 bg-base-300  "
           />
-          <textarea
+         </div>
+          <div className="bg-linear-to-r from-green-400 via-cyan-400 to-blue-500 p-[3px] rounded-lg">
+            <textarea
             name="message"
             placeholder="Your Message"
             value={formData.message}
@@ -111,6 +116,7 @@ const Contact = () => {
             rows="6"
             className="textarea w-full rounded-lg border border-gray-300 dark:border-gray-700 p-3 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 resize-none"
           ></textarea>
+          </div>
           <button
             type="submit"
             className="px-8 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold hover:scale-105 hover:shadow-lg transition-transform self-start"

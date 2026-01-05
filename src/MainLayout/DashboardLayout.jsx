@@ -10,9 +10,15 @@ import DarkToggle from "../Componets/DarkToggle";
 import SidebarItem from "../Componets/Sidebaritem";
 import { useContext } from "react";
 import AuthContex from "../Contex/AuthContex";
+import Loading from "../pages/Loading";
 
 const DashboardLayout = () => {
-   const { user, } = useContext(AuthContex);
+   const { user, loading } = useContext(AuthContex);
+
+   if(loading)
+   {
+     return <Loading></Loading>
+   }
   return (
     <div className="drawer lg:drawer-open min-h-screen ">
       <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
@@ -46,28 +52,7 @@ const DashboardLayout = () => {
           {/* Cards */}
 
         <div className="grid grid-cols-1 mt-20 md:grid-cols-2 lg:grid-cols-3 gap-6">
- <div className="grid grid-cols-1 mt-20 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {/* Card 1: Green-Cyan-Blue Gradient */}
-  <div className="rounded-xl shadow-lg p-6 border-2 border-indigo-500 transition-all hover:shadow-2xl 
-                  bg-gradient-to-r from-green-400 via-cyan-400 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white">
-    <h2 className="text-lg font-bold">Total Connections</h2>
-    <p className="mt-2 text-white/90">12 Active</p>
-  </div>
-
-  {/* Card 2: Indigo-Purple Gradient */}
-  <div className="rounded-xl shadow-lg p-6 border-2 border-indigo-500 transition-all hover:shadow-2xl 
-                  bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-purple-600 hover:to-indigo-500 text-white">
-    <h2 className="text-lg font-bold">New Requests</h2>
-    <p className="mt-2 text-white/90">3 Pending</p>
-  </div>
-
-  {/* Card 3: Combined Accent Gradient */}
-  <div className="rounded-xl shadow-lg p-6 border-2 border-indigo-500 transition-all hover:shadow-2xl 
-                  bg-gradient-to-r from-green-400 via-cyan-400 to-blue-500 hover:from-indigo-500 hover:to-purple-600 text-white">
-    <h2 className="text-lg font-bold">Achievements</h2>
-    <p className="mt-2 text-white/90">5 Badges Earned</p>
-  </div>
-</div>
+ 
 
 </div>
 

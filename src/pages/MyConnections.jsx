@@ -5,20 +5,24 @@ import Loading from './Loading';
 import { FaTrashAlt, FaEdit, FaUserGraduate } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import Swal from 'sweetalert2';
+import UseAxiosSequre from '../Hook/UseAxiosSequre';
+import { useQuery } from '@tanstack/react-query';
+import MyConnectionsSkeleton from './MyConnectionsSkeleton';
 
 const MyConnections = () => {
-  const { user, loading } = useContext(AuthContex);
-  const [requestUser, setRequestUser] = useState([]);
+  const { user} = useContext(AuthContex);
   const [dataUpdate, setDataUpdate] = useState({});
   const updateRef = useRef();
-  const [refresh, setRefresh] = useState(false);
+  const axiosSecure=UseAxiosSequre()
+const {data:requestUser =[],refetch ,isLoading}=useQuery({
+  queryKey:['my-connection'],
+  queryFn:async ()=>{
+     const res=await axiosSecure.get(`/myConnection?email=${user?.email}`)
 
-  useEffect(() => {
-    if(!user?.email) return
-    axios(`https://studymate-api-server-pi.vercel.app/myConnection?email=${user?.email}`)
-      .then((res) => setRequestUser(res.data))
-      .catch((error) => console.log(error));
-  }, [user, refresh]);
+     return res.data
+  }
+})
+
  console.log(requestUser)
   const handleDelete = (id) => {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -41,9 +45,9 @@ const MyConnections = () => {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          axios
-            .delete(`https://studymate-api-server-pi.vercel.app/myConnection/${id}`)
-            .then(() => setRefresh(!refresh))
+          axiosSecure
+            .delete(`/myConnection/${id}`)
+            .then(() => refetch() )
             .catch((error) => console.log(error));
 
           swalWithBootstrapButtons.fire(
@@ -82,11 +86,11 @@ const MyConnections = () => {
       studyMode,
     };
 
-    axios
-      .patch(`https://studymate-api-server-pi.vercel.app/myConnection/${_id}`, updateInfo)
+    
+      axiosSecure.patch(`/myConnection/${_id}`, updateInfo)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
-          setRefresh(!refresh);
+           refetch()
           updateRef.current.close();
         }
       })
@@ -104,7 +108,7 @@ const MyConnections = () => {
     setDataUpdate({ ...dataUpdate, studyMode: mode });
   };
 
-  if (loading) return <Loading />;
+  if ( isLoading) return <MyConnectionsSkeleton />;
 
   return (
     <div className="py-10 w-7xl   transition-colors duration-500">

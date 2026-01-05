@@ -21,58 +21,53 @@ const {
   
     formState: { errors },
   } = useForm()
-  const handleRegister = (data) => {
-  const profileImage = data.photo[0];
+ const handleRegister = async (data) => {
+  try {
+    const profileImage = data.photo[0];
 
-  // 🔥 Firebase create user
-  createUser(data.email, data.password)
-    .then(() => {
-      const formData = new FormData();
-      formData.append('image', profileImage);
+    // 🔥 Firebase create user
+    await createUser(data.email, data.password);
 
-      const imageApiUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGE_API_KEY}`;
+    // 🔥 Image Upload
+    const formData = new FormData();
+    formData.append('image', profileImage);
+    const imageApiUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGE_API_KEY}`;
+    const imgRes = await axiosSecure.post(imageApiUrl, formData);
+    const photoURL = imgRes.data.data.url;
 
-      // 🔥 Image upload
-      return axiosSecure.post(imageApiUrl, formData);
-    })
-    .then((res) => {
-      const photoURL = res.data.data.url;
-
-      // 🔥 Firebase profile update
-      return updateUsers({
-        displayName: data.name,
-        photoURL,
-      }).then(() => photoURL);
-    })
-    .then((photoURL) => {
-      const userInfo = {
-        name: data.name,
-        email: data.email,
-        photo: photoURL,
-      };
-
-      // 🔥 Save user to DB
-      return axiosSecure.post('/user', userInfo);
-    })
-    .then(() => {
-      Swal.fire({
-        icon: 'success',
-        title: 'Account created successfully!',
-        timer: 1500,
-        showConfirmButton: false,
-      });
-
-      navigate(from, { replace: true });
-    })
-    .catch((error) => {
-      console.error('REGISTER ERROR:', error);
-
-      Swal.fire({
-        icon: 'error',
-        title: 'Registration Failed',
-        text: error.message, // 🔥 Firebase / Axios error দেখাবে
-      });
+    // 🔥 Update Firebase profile
+    await updateUsers({
+      displayName: data.name,
+      photoURL,
     });
+
+    // 🔥 Save user to MongoDB
+    const userInfo = {
+      name: data.name,
+      email: data.email,
+      photo: photoURL,
+    };
+
+    const dbRes = await axiosSecure.post('/user', userInfo);
+    console.log('MongoDB Response:', dbRes.data);
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Account created successfully!',
+      timer: 1500,
+      showConfirmButton: false,
+    });
+
+    navigate(from, { replace: true });
+
+  } catch (error) {
+    console.error('REGISTER ERROR:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Registration Failed',
+      text: error.message,
+    });
+  }
 };
 
  
@@ -81,7 +76,7 @@ const {
     <div className="hero  min-h-screen flex items-center justify-center p-4">
        <title>Register</title>
       <motion.div 
-        className="card w-full max-w-4xl  bg-white shadow-2xl flex flex-col md:flex-row rounded-3xl overflow-hidden"
+        className="card w-full max-w-4xl my-20 bg-white shadow-2xl flex flex-col md:flex-row rounded-3xl overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -128,7 +123,7 @@ const {
                 {showPassword ? <IoMdEye size={20} /> : <IoIosEyeOff size={20} />}
               </button>
             </div> 
-            {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
+            {errors.password && <p className="text-red-500 text-xs my-4">{errors.password.message}</p>}
 
             <motion.button 
               type="submit" 

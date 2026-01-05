@@ -16,7 +16,7 @@ const TopStudyPartners = () => {
 
   return (
     <section className=" transition-colors">
-      <div className="max-w-[1370px] py-10  duration-500 bg-base-200 rounded-2xl mx-auto px-5 flex flex-col items-center">
+      <div className=" py-10  duration-500 bg-base-200 rounded-2xl mx-auto px-5 flex flex-col items-center">
         {/* Section Heading */}
         <motion.h2
           initial={{ opacity: 0, y: -20 }}

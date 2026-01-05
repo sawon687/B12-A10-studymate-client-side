@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 const Newsletter = () => {
     return (
         <div>
-            <section className="relative w-[90%] mb-15 shadow-md rounded-2xl mx-auto overflow-hidden py-28 bg-gradient-to-r from-green-400 to-cyan-500 dark:from-gray-900 dark:to-gray-700 text-white transition-colors duration-500">
+            <section className="relative max-w-[1370px]  mb-15 shadow-md rounded-2xl mx-auto overflow-hidden py-28 bg-gradient-to-r from-green-400 to-cyan-500 dark:from-gray-900 dark:to-gray-700 text-white transition-colors duration-500">
   {/* Optional: animated background circles */}
-  <div className="absolute top-0 left-0 w-full h-full">
+  <div className="absolute max-w-[1370px] top-0 left-0 w-full h-full">
     <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-green-300 opacity-30 animate-pulse-slow"></div>
     <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-cyan-300 opacity-30 animate-pulse-slow delay-2000"></div>
   </div>

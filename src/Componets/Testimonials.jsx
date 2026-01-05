@@ -32,11 +32,11 @@ const Testimonials = () => {
   ];
 
   return (
-    <div className="relative max-w-[1370px] mx-auto  rounded-2xl overflow-hidden shadow-lg hover:shadow-green-500 ">
+    <div className="relative mx-auto  max-w-[1370px] rounded-2xl overflow-hidden shadow-lg hover:shadow-green-500 ">
       
     <section className=" max-w-[1370px] bg-white/10 shadow-lg gradient-border    backdrop-blur-2xl py-10 rounded-2xl mx-auto">
       <div className="text-center mb-14">
-       <div className="absolute top-0 left-0 w-full h-full">
+       <div className="relative max-w-[1370px]  top-0 left-0 w-full h-full">
     <div className="absolute -top-25 -left-40 w-96 h-96 rounded-full bg-green-300 opacity-30 animate-pulse-slow"></div>
     <div className="absolute -bottom-20 -right-22 w-96 h-96 rounded-full bg-cyan-300 opacity-30 animate-pulse-slow delay-2000"></div>
   </div>

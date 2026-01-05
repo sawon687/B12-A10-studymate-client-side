@@ -29,7 +29,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <div className="relative top-15 w-[90%] hover:shadow-lg shadow-emerald-400 hover:scale-[10px] bg-linear-to-r  from-green-400 via-cyan-400 to-blue-500 p-[1px]  rounded-2xl mt-10  mx-auto rounded-2xl    backdrop-blur-3xl">
+    <div className="relative top-15   max-w-[1370px] hover:shadow-lg shadow-emerald-400 hover:scale-[10px] bg-linear-to-r  from-green-400 via-cyan-400 to-blue-500 p-[1px]  rounded-2xl mt-10  mx-auto    backdrop-blur-3xl">
       <Swiper
         modules={[Navigation, Autoplay, EffectFade]}
         navigation={true}

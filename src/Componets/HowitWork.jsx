@@ -1,50 +1,59 @@
+import React from 'react';
 import { motion } from "framer-motion";
-
-const HowItWorks = () => {
-  const cardVariants = {
-    offscreen: { y: 50, opacity: 0 },
-    onscreen: { 
-      y: 0, 
-      opacity: 1,
-      transition: { type: "spring", bounce: 0.3, duration: 0.8 }
-    }
-  };
-
+const HowitWork = () => {
   return (
-    <section className="py-16 ">
-      <div className="container mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 mb-12"
-        >
-          How It Works
-        </motion.h2>
+    <div>
+         <section className="relative max-w-[1370px] mx-auto py-24 px-4">
+  {/* Background glow */}
+  <div className="absolute inset-0 -z-10 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10 blur-3xl rounded-3xl"></div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { icon: "🔍", title: "Find Partners", desc: "Search for study partners based on subjects, availability, and location." },
-            { icon: "💬", title: "Send Requests", desc: "Send partner requests to connect and start studying together easily." },
-            { icon: "📚", title: "Collaborate & Learn", desc: "Chat, schedule study sessions, and collaborate for better learning outcomes." }
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              className="p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300"
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={cardVariants}
-            >
-              <div className="text-6xl mb-4">{item.icon}</div>
-              <h3 className="text-2xl font-semibold mb-3 text-indigo-600 dark:text-indigo-400">{item.title}</h3>
-              <p className="text-gray-700 dark:text-gray-300">{item.desc}</p>
-            </motion.div>
-          ))}
+  <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 
+  bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+    How It Works
+  </h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {[
+      { title: "Sign Up", desc: "Create your account in a few seconds." },
+      { title: "Choose Course", desc: "Pick the best course that fits you." },
+      { title: "Start Learning", desc: "Begin your journey and level up." },
+    ].map((step, i) => (
+      <motion.div
+        key={i}
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: i * 0.2 }}
+        whileHover={{ y: -10, scale: 1.03 }}
+        className="group relative rounded-2xl p-[1px] 
+        bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 hover:shadow-lg shadow-emerald-200"
+      >
+        <div className="rounded-2xl p-8 h-full bg-base-100 dark:bg-base-300 
+        backdrop-blur-xl shadow-xl transition-all duration-300">
+
+          {/* Step number badge */}
+          <div className="w-12 h-12 mb-6 flex items-center justify-center 
+          rounded-full font-bold text-white 
+          bg-gradient-to-r from-indigo-500 to-purple-600 
+          group-hover:scale-110 transition">
+            {i + 1}
+          </div>
+
+          <h3 className="text-xl font-bold mb-3 group-hover:text-indigo-500 transition">
+            {step.title}
+          </h3>
+
+          <p className="text-base-content/70 leading-relaxed">
+            {step.desc}
+          </p>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    ))}
+  </div>
+</section>
+
+    </div>
   );
 };
 
-export default HowItWorks;
+export default HowitWork;

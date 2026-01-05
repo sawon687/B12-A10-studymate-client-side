@@ -7,6 +7,7 @@ import UseAxiosSequre from "../Hook/UseAxiosSequre";
 import ProfileCards from "../Componets/ProfileCards";
 import ProfileLoading from "../Componets/ProfileLoading";
 import Loading from "./Loading";
+import FIndSKelaton from "../Componets/FIndSKelaton";
 
 const FindPartners = () => {
   const { loading: authLoading } = useContext(AuthContex);
@@ -65,10 +66,10 @@ const FindPartners = () => {
     setCurrentPage(0);
   };
 
-  if (authLoading) {
+  if (authLoading || loadingProfiles) {
     return (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <Loading />
+      <div className="flex justify-center mx-auto max-w-[1370px] items-center ">
+         <FIndSKelaton></FIndSKelaton>
       </div>
     );
   }
@@ -90,7 +91,18 @@ const FindPartners = () => {
         </p>
 
         {/* Filter & Search */}
-        <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 mb-12">
+        <div className="flex flex-col  justify-between items-center w-full gap-4 mb-12">
+          <form onSubmit={handleSearchText} className="flex w-[640px] bg-linear-to-r  from-green-400 via-cyan-400 to-blue-500 p-[1px]  rounded-full  md:w-auto justify-center">
+            <input
+              type="search"
+              name="searchitem"
+              placeholder="Search Name  Subject  SudyMode.."
+              className="input input-border  outline-none rounded-l-full py-6 w-[640px] dark:bg-gray-800 dark:text-gray-200"
+            />
+            <button className="btn rounded-r-full px-9 py-6 bg-linear-to-r from-green-400 via-cyan-400 to-blue-500 text-white hover:scale-105 transition-transform">
+              <FaSearch />
+            </button>
+          </form>
           <div className="flex flex-wrap gap-2 justify-center">
             {["Beginner", "Intermediate", "Expert"].map((level) => (
               <button
@@ -100,10 +112,10 @@ const FindPartners = () => {
                   setActive(level);
                   setCurrentPage(0);
                 }}
-                className={`btn rounded-full px-6 py-2 text-sm md:text-base transition-all duration-300 ${
+                className={`btn rounded-full px-6 py-2 text-sm md:text-base shadow-md shadow-green-600 transition-all duration-300 ${
                   active === level
                     ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
-                    : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:shadow-md"
+                    : "bg-base-100 hover:shadow-md "
                 }`}
               >
                 {level}
@@ -115,7 +127,7 @@ const FindPartners = () => {
                 setActive("Default");
                 setCurrentPage(0);
               }}
-              className={`btn rounded-full px-6 py-2 text-sm md:text-base transition-all duration-300 ${
+              className={`btn rounded-full px-6 py-2 text-sm shadow-md shadow-green-600 md:text-base transition-all duration-300 ${
                 active === "Default"
                   ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
                   : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:shadow-md"
@@ -125,27 +137,12 @@ const FindPartners = () => {
             </button>
           </div>
 
-          <form onSubmit={handleSearchText} className="flex w-full md:w-auto justify-center">
-            <input
-              type="search"
-              name="searchitem"
-              placeholder="Search profiles..."
-              className="input input-bordered rounded-l-full w-[240px] dark:bg-gray-800 dark:text-gray-200"
-            />
-            <button className="btn rounded-r-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:scale-105 transition-transform">
-              <FaSearch />
-            </button>
-          </form>
+          
         </div>
 
         {/* Profiles Grid */}
-        {loadingProfiles ? (
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4 w-full bg-base-300  rounded-2xl shadow-md">
-            {Array.from({ length: limit }).map((_, i) => (
-              <ProfileLoading key={i} />
-            ))}
-          </div>
-        ) : profiles.length > 0 ? (
+        {
+          profiles.length > 0 ? (
           <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6 w-full bg-base-300  p-8 rounded-2xl shadow-md transition-all">
             {profiles.map((profile) => (
               <ProfileCards key={profile._id} data={profile} />
@@ -165,7 +162,7 @@ const FindPartners = () => {
             {currentPage > 0 && (
               <button
                 onClick={() => setCurrentPage(currentPage - 1)}
-                className="btn btn-outline rounded-full"
+                className="btn w-10 h-10 bg-base-100 hover:bg-gradient-to-r from-green-400 to-cyan-500 text-white  rounded-full"
               >
                 Prev
               </button>
@@ -177,7 +174,7 @@ const FindPartners = () => {
                 className={`btn rounded-full px-4 ${
                   i === currentPage
                     ? "bg-gradient-to-r from-green-400 to-cyan-500 text-white shadow-lg"
-                    : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:shadow-md"
+                    : "bg-white dark:bg-gray-800 text-gray-700  dark:text-gray-200 hover:shadow-md"
                 }`}
               >
                 {i + 1}
@@ -186,7 +183,7 @@ const FindPartners = () => {
             {currentPage < totalPage - 1 && (
               <button
                 onClick={() => setCurrentPage(currentPage + 1)}
-                className="btn btn-outline rounded-full"
+                className="btn w-10 h-10 bg-base-100 hover:bg-gradient-to-r from-green-400 to-cyan-500 text-white rounded-full"
               >
                 Next
               </button>
