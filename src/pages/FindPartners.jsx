@@ -86,18 +86,19 @@ const FindPartners = () => {
         >
           {titleText}
         </motion.h2>
-        <p className="text-center text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10">
+        <p className="text-center text-lg md:text-xl  mb-10">
           Browse and connect with students who match your learning style and goals
         </p>
 
         {/* Filter & Search */}
         <div className="flex flex-col  justify-between items-center w-full gap-4 mb-12">
-          <form onSubmit={handleSearchText} className="flex w-[640px] outline-none bg-linear-to-r  from-green-400 via-cyan-400 to-blue-500 p-[1px]  rounded-full  md:w-auto justify-center">
+          <form onSubmit={handleSearchText} className="flex md:w-[640px] w-[350px] outline-none bg-linear-to-r  from-green-400 via-cyan-400 to-blue-500 p-[1px]  rounded-full  md:w-auto justify-center">
             <input
               type="search"
               name="searchitem"
+               
               placeholder="Search Name  Subject  SudyMode.."
-              className="input input-border  outline-none rounded-l-full py-6 w-[640px] bg-base-100"
+              className="input input-border  outline-none rounded-l-full py-6 md:w-[640px] w-[350px] bg-base-100"
             />
             <button className="btn outline-none border-none rounded-r-full px-9 py-6 bg-linear-to-r from-green-400 via-cyan-400 to-blue-500 text-white hover:scale-105 transition-transform">
               <FaSearch />
