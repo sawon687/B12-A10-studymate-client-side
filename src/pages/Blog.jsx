@@ -1,26 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
+import BlogSkeleton from "../Componets/BlogSkeleton";
+import AuthContex from "../Contex/AuthContex";
 
 const Blog = () => {
+     const {loading}=useContext(AuthContex)
   const allBlogPosts = [
     {
       title: "Top 10 Gadgets of 2026",
       desc: "Discover the most popular and innovative gadgets you must have this year.",
-      img: "https://i.postimg.cc/7h0pJvPL/gadget.jpg",
+     img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
       date: "Jan 5, 2026",
       category: "Gadgets",
     },
     {
       title: "How to Choose the Perfect Laptop",
       desc: "A complete guide for choosing the right laptop for your needs and budget.",
-      img: "https://i.postimg.cc/fbChXb1r/laptop.jpg",
+      img: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
       date: "Jan 3, 2026",
       category: "Tech Guide",
     },
     {
       title: "Sustainable Shopping Tips",
       desc: "Learn how to shop smart and eco-friendly while staying trendy.",
-      img: "https://i.postimg.cc/3R6yfZqq/sustainable.jpg",
+      img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
       date: "Dec 28, 2025",
       category: "Eco Tips",
     },
@@ -35,8 +38,12 @@ const Blog = () => {
       ? allBlogPosts
       : allBlogPosts.filter((post) => post.category === selectedCategory);
 
+if(loading)
+{
+   return <BlogSkeleton></BlogSkeleton>
+}
   return (
-    <section className="py-20  transition-colors">
+    <section className="py-25  transition-colors">
       <div className="max-w-[1200px] mx-auto px-5 flex flex-col items-center">
         {/* Page Heading */}
         <motion.h1
@@ -47,7 +54,7 @@ const Blog = () => {
         >
           Our Blog
         </motion.h1>
-        <p className="text-center text-gray-600 dark:text-gray-300 text-lg md:text-xl mb-12 max-w-2xl">
+        <p className="text-center  text-lg md:text-xl mb-12 max-w-2xl">
           Stay updated with the latest trends, tips, and insights from SuduDay Mate.
         </p>
 

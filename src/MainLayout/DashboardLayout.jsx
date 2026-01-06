@@ -2,19 +2,39 @@ import {
   LayoutDashboard,
   Menu,
 } from "lucide-react";
-import { FaUserFriends, FaUserPlus} from "react-icons/fa";
+import { FaBookOpen, FaUserFriends, FaUserPlus} from "react-icons/fa";
 import { MdManageAccounts } from "react-icons/md";
 
-import { Link, NavLink, Outlet } from "react-router";
+import { Link, NavLink, Outlet, useNavigate } from "react-router";
 import DarkToggle from "../Componets/DarkToggle";
 import SidebarItem from "../Componets/Sidebaritem";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AuthContex from "../Contex/AuthContex";
 import Loading from "../pages/Loading";
-
+import ProfileDropdown from "../Componets/profileDropdown";
+import { useQuery } from "@tanstack/react-query";
+import UseAxiosSequre from "../Hook/UseAxiosSequre";
+;
 const DashboardLayout = () => {
    const { user, loading } = useContext(AuthContex);
+  
+  const navigate = useNavigate();
+    const axiosSecure = UseAxiosSequre();
 
+  const { data: createUser, isLoading } = useQuery({
+    queryKey: ["createProfileData", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/userProfile/${user?.email}`);
+      return res.data;
+    }
+  });
+
+  useEffect(() => {
+    if (!isLoading && !createUser) {
+      navigate("/Dashboard/createPartnerProfile");
+    }
+  }, [isLoading, createUser, navigate])
+ const showprofile=true;
    if(loading)
    {
      return <Loading></Loading>
@@ -24,10 +44,10 @@ const DashboardLayout = () => {
       <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
 
       {/* ================= Main Content ================= */}
-      <div className="drawer-content flex flex-col">
+      <div className="drawer-content  flex flex-col">
         {/* Top Navbar */}
-        <div className="navbar fixed     z-50  bg-base-100 shadow px-4">
-          <div className="flex-none lg:hidden">
+        <div className="navbar fixed  backdrop-blur-lg    z-50  bg-white/10 shadow px-4">
+          <div className="flex-none  lg:hidden">
             <label
               htmlFor="dashboard-drawer"
               className="btn btn-square btn-ghost"
@@ -35,14 +55,13 @@ const DashboardLayout = () => {
               <Menu />
             </label>
           </div>
-          <div className="flex w-[1200px] justify-between  items-center">
+          <div className="flex w-[1200px] relative justify-between  items-center">
             <h1 className="text-xl font-bold">Dashboard</h1>
-             <div className="avatar gap-2">
-              <DarkToggle></DarkToggle>
-              <div className="w-9 rounded-full">
-                <img src={user.photoURL} />
-              </div>
-            </div>
+            <div className="flex items-center gap-2 relative z-[999]">
+  <DarkToggle />
+  {user && <ProfileDropdown showprofile={showprofile} />}
+</div>
+
           </div>
           
         </div>
@@ -51,10 +70,7 @@ const DashboardLayout = () => {
         <div className="p-4 md:p-6 space-y-6">
           {/* Cards */}
 
-        <div className="grid grid-cols-1 mt-20 md:grid-cols-2 lg:grid-cols-3 gap-6">
- 
-
-</div>
+      
 
           <div className=" flex justify-center mt-10 items- w-full">
            <Outlet></Outlet>
@@ -72,14 +88,16 @@ const DashboardLayout = () => {
         <aside className="w-64 min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex flex-col">
           {/* Logo */}
           <div className="px-6 py-4 text-2xl font-bold border-b border-purple-500">
-            <Link to='/'>StudyMate</Link>
+            <Link className="flex items-center  gap-2" to='/'><div className="w-12  h-12 bg-gradient-to-br from-indigo-500 to-purple-600 flex justify-center items-center rounded-xl shadow-lg transform transition-all hover:scale-105">
+                          <FaBookOpen className="text-white text-2xl" />
+                        </div> <span>StudyMate</span></Link>
           </div>
 
           {/* Menu */}
           <ul className="menu p-4 text-sm flex-1 space-y-4">
         
              
-            <SidebarItem to='/Dashboard/DashboardOverview' icon={<LayoutDashboard size={18} />} text="Dashboard" active  />
+            <SidebarItem to='/Dashboard/DashboardOverview' icon={<LayoutDashboard size={18} />} text="Dashboard"  active  />
           <SidebarItem to='/Dashboard/createPartnerProfile'  icon={<FaUserPlus size={18} />} text="CreateProfile" badge="2" />
                <SidebarItem to='/Dashboard/myConnection' icon={<FaUserFriends size={18} />} text="MyConnections" badge="2" />
             <SidebarItem to='/Dashboard/manageProfiles' icon={<MdManageAccounts size={18} />} text="Manage Profiles" />

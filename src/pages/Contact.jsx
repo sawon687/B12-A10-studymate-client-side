@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import AuthContex from "../Contex/AuthContex";
+import ContactSkeleton from "../Componets/ContactSkeleton;";
 
 const Contact = () => {
+  const {loading}=useContext(AuthContex)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,9 +22,14 @@ const Contact = () => {
     setFormData({ name: "", email: "", message: "" });
   };
 
+  if(loading)
+  {
+     return <ContactSkeleton></ContactSkeleton>
+  }
+
   return (
-    <section className="py-20  transition-colors">
-      <div className="max-w-[1200px] mx-auto px-5 transition-colors flex flex-col items-center">
+    <section className="py-25  transition-colors">
+      <div className="max-w-[1200px] mx-auto px-5 transition-colors  flex flex-col items-center">
         {/* Heading */}
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -82,7 +90,7 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           onSubmit={handleSubmit}
-          className="w-full md:w-2/3 bg-base-100/10 transition-colors p-10 rounded-2xl shadow-lg shadow-green-600 flex flex-col gap-6"
+          className="w-full md:w-2/3 light bg-base-100/10 transition-colors p-10 rounded-2xl shadow-lg shadow-green-600 flex flex-col gap-6"
         >
          <div className="    bg-linear-to-r  from-green-400 via-cyan-400 to-blue-500 p-[3px] rounded-lg">
            <input

@@ -2,13 +2,17 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import AuthContex from "../Contex/AuthContex";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, LogOut, User } from "lucide-react";
+import { Home, LayoutDashboard, LogOut, User } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import UseAxiosSequre from "../Hook/UseAxiosSequre";
 
-const ProfileDropdown = () => {
+
+const ProfileDropdown = ({showprofile}) => {
   const { user, signOutUser } = useContext(AuthContex);
   const navigate = useNavigate();
-  const [toggle, setToggle] = useState(false);
 
+  const [toggle, setToggle] = useState(false);
+ 
   const userSignout = () => {
     signOutUser()
       .then(() => {
@@ -17,6 +21,8 @@ const ProfileDropdown = () => {
       })
       .catch(console.log);
   };
+
+
 
   return (
     <div className="relative">
@@ -53,6 +59,17 @@ const ProfileDropdown = () => {
                 flex flex-col bg-base-300
                 rounded-2xl shadow-2xl p-4 gap-2"
               >
+
+                    {
+                        showprofile && <><Link
+                  to="/Profile"
+                  onClick={() => setToggle(false)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg
+                  hover:bg-indigo-100 dark:hover:bg-indigo-900 hover:text-white"
+                >
+                  <Home size={18} /> Profile
+                </Link></>
+                    }
                 <Link
                   to="/Profile"
                   onClick={() => setToggle(false)}

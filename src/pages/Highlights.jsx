@@ -39,7 +39,7 @@ const Highlights = () => {
 
       {/* Title */}
       <h2
-        className="text-4xl md:text-5xl font-extrabold text-center mb-16
+        className="text-4xl md:text-5xl py-3 font-extrabold text-center mb-16
         bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent"
       >
         StudyMate Highlights

@@ -28,7 +28,7 @@ const FeatureSection = () => {
       <div className="absolute -bottom-32 -right-40 w-96 h-96 rounded-full bg-purple-400 opacity-20 blur-3xl animate-pulse-slow delay-2000"></div>
 
       {/* Section Title */}
-      <h2 className="text-4xl md:text-5xl font-extrabold mb-16 text-center bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+      <h2 className="text-3xl md:text-5xl font-extrabold mb-16 text-center bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
         Our Features
       </h2>
 

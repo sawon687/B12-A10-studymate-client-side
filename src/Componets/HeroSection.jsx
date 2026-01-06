@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const HeroSection = () => {
   const slides = [
@@ -65,8 +66,8 @@ const HeroSection = () => {
        </h2>
 
                 <p className="mb-6 text-lg md:text-xl">{s.desc}</p>
-                <Link to='/FindPartners' className="bg-gradient-to-br from-indigo-500 to-purple-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
-                  {s.btn}
+                <Link to='/FindPartners' className="btn outline-none border-none h-12 bg-gradient-to-br  from-indigo-500 to-purple-600 hover:bg-blue-700 text-white px-8  rounded-lg font-semibold transition duration-300">
+                  {s.btn} <FaArrowRightLong />
                 </Link>
               </motion.div>
             </div>

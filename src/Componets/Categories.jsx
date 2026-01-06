@@ -58,7 +58,7 @@ const Categories = () => {
   ];
 
   return (
-    <section className="container  mx-auto px-4 ">
+    <section className="container max-w-[1370px]  mx-auto px-4 ">
       {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: 20 }}

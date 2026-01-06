@@ -16,6 +16,9 @@ import {
 } from 'chart.js';
 import UseAxiosSequre from '../Hook/UseAxiosSequre';
 import AuthContex from '../Contex/AuthContex';
+import Loading from './Loading';
+import { useQuery } from '@tanstack/react-query';
+import { User } from 'lucide-react';
 
 ChartJS.register(
   CategoryScale,
@@ -37,8 +40,17 @@ const Analaysis = () => {
   const [connections, setConnections] = useState([]);
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {data:Users=[]}=useQuery({
+    queryKey:['users'],
+    queryFn:async()=>{
+        const res=await axiosSecure.get('/user')
+       return res.data
+
+    }
+  })
 
   useEffect(() => {
+
     const fetchStats = async () => {
       try {
         const userEmail = user?.email;
@@ -51,7 +63,8 @@ const Analaysis = () => {
         const profilesRes = await axiosSecure.get(`/userProfile?search=${userEmail}`);
         const profilesData = Array.isArray(profilesRes?.data?.result) ? profilesRes.data.result : [];
         const achievements = profilesData.filter(p => Number(p.rating) >= 4).length;
-
+        
+            
         setStats({ totalConnections, newRequests, achievements });
         setConnections(connectionsData);
         setProfiles(profilesData);
@@ -67,7 +80,7 @@ const Analaysis = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-96">
-        <p className="text-gray-500 text-lg animate-pulse">Loading Dashboard...</p>
+       <Loading></Loading>
       </div>
     );
   }
@@ -75,9 +88,10 @@ const Analaysis = () => {
   const cards = [
     { title: "Total Connections", value: stats.totalConnections, sub: "Active", icon: <FaUsers size={22} />, gradient: "from-green-400 via-cyan-400 to-blue-500" },
     { title: "New Requests", value: stats.newRequests, sub: "Pending", icon: <FaBell size={22} />, gradient: "from-indigo-500 to-purple-600" },
-    { title: "Achievements", value: stats.achievements, sub: "Badges", icon: <FaAward size={22} />, gradient: "from-yellow-400 via-orange-400 to-red-500" },
+    { title: "TotalUser", value: Users.length, sub: "User", icon: <User size={22} />, gradient: "from-yellow-400 via-orange-400 to-red-500" },
   ];
 
+  console.log('datavalue',cards.value)
   // Rounded Pie Chart Data
   const pieData = {
     labels: ["Active Connections", "Pending Requests", "Achievements"],
@@ -122,9 +136,9 @@ const Analaysis = () => {
   const lineOptions = { responsive: true, plugins: { legend: { display: true, position: 'top' }, tooltip: { backgroundColor: '#111', titleColor: '#fff', bodyColor: '#fff' } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } }, x: { grid: { display: false } } } };
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 py-15">
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 gap-6">
         {cards.map((card, i) => (
           <motion.div key={i} whileHover={{ scale: 1.05 }} className={`relative rounded-2xl p-6 text-white bg-gradient-to-r ${card.gradient} shadow-xl overflow-hidden`}>
             <div className="absolute inset-0 bg-white/10 blur-2xl"></div>

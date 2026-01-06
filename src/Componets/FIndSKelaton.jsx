@@ -9,7 +9,7 @@ const SkeletonBox = ({ className }) => (
 
 const FindSkeleton = () => {
   return (
-    <div className="w-full flex justify-center items-center">
+    <div className="w-full pt-20 flex justify-center items-center">
       <div className="w-full max-w-[1370px] mx-auto space-y-10 py-10">
         
         {/* Heading Skeleton */}

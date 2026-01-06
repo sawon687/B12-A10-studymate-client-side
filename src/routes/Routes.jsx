@@ -17,6 +17,7 @@ import Blog from "../pages/Blog";
 import Contact from "../pages/Contact";
 import Service from "../pages/Service";
 import Analaysis from "../pages/Analaysis";
+import ProfileCards from "../Componets/ProfileCards";
 
 
 
@@ -64,8 +65,9 @@ const router = createBrowserRouter([
             
             {
                 path: '/Profile',
-                element: <PrivateRoute><Profile /></PrivateRoute>
+                element: <PrivateRoute><Profile/></PrivateRoute>
             },
+          
 
 
 
@@ -76,6 +78,10 @@ const router = createBrowserRouter([
         path:'/Dashboard',
         element:<PrivateRoute><DashboardLayout/></PrivateRoute>,
         children:[
+                  {
+                path:'/Dashboard/DashboardOverview',
+                Component:Analaysis,
+               },
 
                {
                 path: '/Dashboard/createPartnerProfile',
@@ -90,10 +96,7 @@ const router = createBrowserRouter([
                 Component:ManageProfiles
               },
              
-                {
-                path:'/Dashboard/DashboardOverview',
-                Component:Analaysis,
-              }
+               
           
         ]
     },

@@ -18,7 +18,7 @@ const Home = () => {
   if (loading) return <HomeSkeleton />;
 
   return (
-    <div className="space-y-32 max-w-[1370px] px-4 md:px-0 mx-auto transition-colors overflow-hidden duration-500">
+    <div className="space-y-32  px-4 md:px-0 mx-auto transition-colors overflow-hidden duration-500">
       <HeroSection />
       <Highlights />
       <Categories />

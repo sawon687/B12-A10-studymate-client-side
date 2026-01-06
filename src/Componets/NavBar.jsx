@@ -4,13 +4,17 @@ import AuthContex from "../Contex/AuthContex";
 import { useContext } from "react";
 import DarkToggle from "./DarkToggle";
 import ProfileDropdown from "./profileDropdown";
+import Loading from "../pages/Loading";
 
 const NavBar = () => {
-  const { user } = useContext(AuthContex); // ✅ Capital U
+  const { user ,loading} = useContext(AuthContex); // ✅ Capital U
   
  
 
-
+if(loading)
+{
+   return <Loading></Loading>
+}
 
   const links = (
     <>
@@ -88,9 +92,9 @@ const NavBar = () => {
   );
 
   return (
-    <div className="flex  fixed top-0 left-0 righ-0  z-50  justify-center w-full  ">
+    <div className="flex  fixed top-0 left-0 righ-0  z-[999]  justify-center w-full  ">
       {/* Navbar */}
-      <div className="navbar relative  backdrop-blur-lg bg-gray-900/60 shadow-md transition-all duration-500 px-4 lg:px-20 py-3">
+      <div className="navbar relative   backdrop-blur-lg bg-gray-900/60 shadow-md transition-all duration-500 px-4 lg:px-20 py-3">
         <div className="navbar-start rounded-2xl">
           {/* Mobile Dropdown */}
           <div className="dropdown lg:hidden">
@@ -154,7 +158,7 @@ const NavBar = () => {
         <div className="navbar-end flex items-center gap-4">
           <DarkToggle />
 
-          {user ?<ProfileDropdown></ProfileDropdown>  : (
+          {user?<ProfileDropdown></ProfileDropdown>  : (
             <>
               <Link
                 to="/Login"

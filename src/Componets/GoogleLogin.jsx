@@ -42,7 +42,7 @@ const GoogleLogin = () => {
            <motion.button 
               type="button" 
               onClick={handlegoogleLogin} 
-              className="btn w-full text-black btn-outline flex items-center justify-center gap-2"
+              className="btn w-full text-black bg-white border-none shadow-lg btn-outline flex items-center justify-center gap-2"
               whileTap={{ scale: 0.95 }}
             >
               <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />

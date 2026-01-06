@@ -16,13 +16,13 @@ const TopStudyPartners = () => {
 
   return (
     <section className=" transition-colors">
-      <div className=" py-10  duration-500 bg-base-200 rounded-2xl mx-auto px-5 flex flex-col items-center">
+      <div className=" py-10 max-w-[1370px]  duration-500 bg-base-200 rounded-2xl mx-auto px-5 flex flex-col items-center">
         {/* Section Heading */}
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-3xl md:text-4xl font-extrabold text-center text-primary mb-12"
+          className="text-3xl md:text-5xl font-extrabold text-center bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-12"
         >
           Top Study Partners
         </motion.h2>

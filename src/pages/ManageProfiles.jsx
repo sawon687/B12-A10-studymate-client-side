@@ -3,11 +3,12 @@ import React from 'react';
 import UseAxiosSequre from '../Hook/UseAxiosSequre';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import Swal from 'sweetalert2';
+import UsersTableSkeleton from './UsersTableSkeleton';
 
 
 const ManageProfiles = () => {
   const axiosSequre = UseAxiosSequre()
-  const { data: user = [],refetch } = useQuery({
+  const { data: user = [],refetch,isLoading } = useQuery({
     queryKey: ['Manageprofiles'],
     queryFn: async () => {
 
@@ -36,6 +37,12 @@ const ManageProfiles = () => {
     }
   }
   console.log('user', user)
+
+  if(isLoading) {
+    return <UsersTableSkeleton></UsersTableSkeleton>
+  }
+    
+
   return (
     <>
       <div className="overflow-x-auto mt-10 bg-base-200 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
@@ -66,7 +73,7 @@ const ManageProfiles = () => {
             ${index % 2 === 0
                     ? 'bg-base-100'
                     : 'bg-base-300'}
-             hover:bg-gray-300 hover:text-gray-700
+              
           `}
               >
                 {/* PROFILE */}

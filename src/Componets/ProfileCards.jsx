@@ -6,19 +6,20 @@ import { Link } from "react-router";
 import Fastar from "./Fastar";
 
 const ProfileCards = ({ data }) => {
-  const { _id, profileimage, name, subject, rating } = data || {};
+  const { _id, profileImages, name, subject, rating } = data || {};
    
   console.log('id',_id)
   return (
     <div>
      <motion.div 
               key={_id}
-              className="relative  bg-base-300  rounded-lg shadow overflow-hidden cursor-pointer"
+              className="relative border-2 border-green-600   bg-base-300  rounded-lg shadow overflow-hidden cursor-pointer"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
-            >
+            > 
+             <div></div>
               <div className="h-48  rounded-t">
-                <img src={profileimage} className='w-full h-full bg-center' alt="" />
+                <img src={profileImages[0]} className='w-full h-full bg-center' alt="" />
               </div>
               <div className="p-4">
                 <h3 className="font-bold mb-1 ">{name}</h3>

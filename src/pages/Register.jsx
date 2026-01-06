@@ -76,14 +76,14 @@ const {
     <div className="hero  min-h-screen flex items-center justify-center p-4">
        <title>Register</title>
       <motion.div 
-        className="card w-full max-w-4xl my-20 bg-white shadow-2xl flex flex-col md:flex-row rounded-3xl overflow-hidden"
+        className="card w-full max-w-4xl my-20  shadow-2xl flex flex-col md:flex-row rounded-3xl overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         {/* Left Column: Form */}
         <motion.div 
-          className="card-body w-full md:w-1/2 bg-white p-10"
+          className="card-body w-full md:w-1/2 bg-base-100 p-10"
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.3 }}
         >
@@ -106,7 +106,6 @@ const {
             />
             {errors.photo && <p className="text-red-500 text-xs mt-1">{errors.photo.message}</p>}
           </div>
-
 
             <label className="label">Password</label>
             <div className="relative mb-4">

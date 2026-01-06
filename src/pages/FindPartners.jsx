@@ -3,10 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import { motion } from "framer-motion";
 import AuthContex from "../Contex/AuthContex";
 import UseAxiosSequre from "../Hook/UseAxiosSequre";
-
 import ProfileCards from "../Componets/ProfileCards";
-import ProfileLoading from "../Componets/ProfileLoading";
-import Loading from "./Loading";
 import FIndSKelaton from "../Componets/FIndSKelaton";
 
 const FindPartners = () => {
@@ -25,7 +22,10 @@ const FindPartners = () => {
   const limit = 8;
   const skip = currentPage * limit;
   const totalPage = Math.ceil(profileCount / limit);
-
+    
+  useEffect(() => {
+      localStorage.setItem("page", currentPage);
+    }, [currentPage]);
   // Typewriter effect for heading
   useEffect(() => {
     const fullText = "Find Your Perfect Study Partner";
@@ -92,14 +92,14 @@ const FindPartners = () => {
 
         {/* Filter & Search */}
         <div className="flex flex-col  justify-between items-center w-full gap-4 mb-12">
-          <form onSubmit={handleSearchText} className="flex w-[640px] bg-linear-to-r  from-green-400 via-cyan-400 to-blue-500 p-[1px]  rounded-full  md:w-auto justify-center">
+          <form onSubmit={handleSearchText} className="flex w-[640px] outline-none bg-linear-to-r  from-green-400 via-cyan-400 to-blue-500 p-[1px]  rounded-full  md:w-auto justify-center">
             <input
               type="search"
               name="searchitem"
               placeholder="Search Name  Subject  SudyMode.."
-              className="input input-border  outline-none rounded-l-full py-6 w-[640px] dark:bg-gray-800 dark:text-gray-200"
+              className="input input-border  outline-none rounded-l-full py-6 w-[640px] bg-base-100"
             />
-            <button className="btn rounded-r-full px-9 py-6 bg-linear-to-r from-green-400 via-cyan-400 to-blue-500 text-white hover:scale-105 transition-transform">
+            <button className="btn outline-none border-none rounded-r-full px-9 py-6 bg-linear-to-r from-green-400 via-cyan-400 to-blue-500 text-white hover:scale-105 transition-transform">
               <FaSearch />
             </button>
           </form>
@@ -130,7 +130,7 @@ const FindPartners = () => {
               className={`btn rounded-full px-6 py-2 text-sm shadow-md shadow-green-600 md:text-base transition-all duration-300 ${
                 active === "Default"
                   ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
-                  : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:shadow-md"
+                  : "bg-base-100 hover:shadow-md"
               }`}
             >
               Default
@@ -145,7 +145,20 @@ const FindPartners = () => {
           profiles.length > 0 ? (
           <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6 w-full bg-base-300  p-8 rounded-2xl shadow-md transition-all">
             {profiles.map((profile) => (
-              <ProfileCards key={profile._id} data={profile} />
+              <motion.div
+                            key={profile._id}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
+                            className="rounded-2xl border border-base-300 shadow-lg hover:shadow-xl transition-all"
+                          >
+                            {/* DaisyUI card style */}
+                            <div className="card border-1  bg-base-100 shadow-md p-4 rounded-2xl">
+                              <ProfileCards data={profile} />
+                            </div>
+                          </motion.div>
             ))}
           </div>
         ) : (
@@ -183,7 +196,7 @@ const FindPartners = () => {
             {currentPage < totalPage - 1 && (
               <button
                 onClick={() => setCurrentPage(currentPage + 1)}
-                className="btn w-10 h-10 bg-base-100 hover:bg-gradient-to-r from-green-400 to-cyan-500 text-white rounded-full"
+                className="btn w-10 h-10 bg-base-100 hover:bg-gradient-to-r from-green-400 to-cyan-500 hover:text-white  translate-0.5 rounded-full"
               >
                 Next
               </button>

@@ -46,7 +46,7 @@ const Login = () => {
     <title>Create Profile</title> 
     <div className="flex items-center justify-center min-h-screen ">
       <motion.div
-        className="flex flex-col my-30 lg:flex-row bg-white rounded-3xl shadow-2xl overflow-hidden max-w-6xl w-full"
+        className="flex flex-col my-30 lg:flex-row bg-base-100 rounded-3xl shadow-2xl overflow-hidden max-w-6xl w-full"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -79,16 +79,16 @@ const Login = () => {
             <h1 className="text-3xl font-bold text-gray-800 text-center lg:hidden">Welcome Back!</h1>
             <p className="text-center text-gray-500 lg:hidden">Login to continue learning and connecting.</p>
 
-            <label className="block text-gray-700 font-medium">Email</label>
+            <label className="block  font-medium">Email</label>
             <input
               type="email"
               name="email"
               required
-              className="w-full border input border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="w-full border bg-base-100 input border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400"
               placeholder="Enter your email"
             />
 
-            <label className="block text-gray-700 font-medium">Password</label>
+            <label className="block  font-medium">Password</label>
             <div className="relative">
               <input
                 type={showPassword ? 'text' : 'password'}
