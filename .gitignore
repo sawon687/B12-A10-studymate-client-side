@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules/
 node_modules_backup
 .env
+# dist folder ignore
 dist/
 
 # Editor directories and files
