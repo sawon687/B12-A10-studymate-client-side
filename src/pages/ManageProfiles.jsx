@@ -43,6 +43,7 @@ const ManageProfiles = () => {
   }
     
 
+
   return (
     <>
       <div className="overflow-x-auto mt-10 bg-base-200 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
@@ -79,7 +80,7 @@ const ManageProfiles = () => {
                 {/* PROFILE */}
                 <td className="px-6 py-4">
                   <img
-                    src={user.profileImages}
+                    src={user.profileImages[0]}
                     alt={user.name}
                     className="w-10 h-10 rounded-full object-cover ring-2 ring-gray-300 dark:ring-gray-600"
                   />

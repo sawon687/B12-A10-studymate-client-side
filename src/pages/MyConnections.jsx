@@ -106,6 +106,7 @@ const MyConnections = () => {
   };
 
   if (isLoading) return <MyConnectionsSkeleton />;
+  console.log('data',data)
 
   return (
     <div className="py-10 w-full max-w-7xl mx-auto transition-colors duration-500">
