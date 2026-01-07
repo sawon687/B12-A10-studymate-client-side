@@ -5,7 +5,7 @@ import {
 import { FaBookOpen, FaUserFriends, FaUserPlus} from "react-icons/fa";
 import { MdManageAccounts } from "react-icons/md";
 
-import { Link, NavLink, Outlet, useNavigate } from "react-router";
+import { Link, Outlet, useNavigate } from "react-router";
 import DarkToggle from "../Componets/DarkToggle";
 import { useContext, useEffect } from "react";
 import AuthContex from "../Contex/AuthContex";
@@ -13,8 +13,12 @@ import Loading from "../pages/Loading";
 import ProfileDropdown from "../Componets/profileDropdown";
 import { useQuery } from "@tanstack/react-query";
 import UseAxiosSequre from "../Hook/UseAxiosSequre";
-import SidebarItem from "../Componets/Sidebaritem";
-;
+import SidebarItem from "../Componets/SidebarItem";
+
+
+
+
+
 const DashboardLayout = () => {
    const { user, loading } = useContext(AuthContex);
   
