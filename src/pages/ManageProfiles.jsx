@@ -79,7 +79,7 @@ const ManageProfiles = () => {
                 {/* PROFILE */}
                 <td className="px-6 py-4">
                   <img
-                    src={user.profileimage}
+                    src={user.profileImages}
                     alt={user.name}
                     className="w-10 h-10 rounded-full object-cover ring-2 ring-gray-300 dark:ring-gray-600"
                   />
