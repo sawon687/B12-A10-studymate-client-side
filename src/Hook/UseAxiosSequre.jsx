@@ -3,7 +3,7 @@ import React from 'react';
 
 const UseAxiosSequre = () => {
     const axiosSequre = axios.create({
-  baseURL: 'https://studymate-api-server-pi.vercel.app',
+  baseURL: 'https://schorship-as11-server-side.vercel.app',
  
 });
     return axiosSequre 
