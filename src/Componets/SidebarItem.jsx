@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SidebarItem = (w{ icon, text, badge,to }) => {
+const SidebarItem = ({ icon, text, badge,to }) => {
     return (
          <li>
      <NavLink to={to}  
