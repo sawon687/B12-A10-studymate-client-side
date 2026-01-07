@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import {
   FaUserFriends,
@@ -6,8 +6,11 @@ import {
   FaBookOpen,
   FaRocket,
 } from "react-icons/fa";
+import AuthContex from "../Contex/AuthContex";
+import Loading from "./Loading";
 
 const Service = () => {
+  const {loading}=useContext(AuthContex)
   const services = [
     {
       icon: <FaUserFriends className="text-6xl mb-4 mx-auto text-indigo-500" />,
@@ -31,8 +34,13 @@ const Service = () => {
     },
   ];
 
+  if(loading)
+{
+   return <Loading></Loading>
+}
+
   return (
-    <section className="relative mx-auto max-w-[1370px] mx-auto px-4 py-24">
+    <section className="relative mx-auto max-w-[1370px] mx-auto   px-4 pt-15 md:pt-54">
       {/* Background Effects */}
      
 

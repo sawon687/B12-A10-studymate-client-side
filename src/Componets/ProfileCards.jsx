@@ -8,12 +8,12 @@ import Fastar from "./Fastar";
 const ProfileCards = ({ data }) => {
   const { _id, profileImages, name, subject, rating } = data || {};
    
-  console.log('id',_id)
+
   return (
     <div>
      <motion.div 
               key={_id}
-              className="relative border-2 border-green-600   bg-base-300  rounded-lg shadow overflow-hidden cursor-pointer"
+              className="relative    bg-base-300  rounded-lg shadow overflow-hidden cursor-pointer"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             > 

@@ -11,10 +11,6 @@ const NavBar = () => {
   
  
 
-if(loading)
-{
-   return <Loading></Loading>
-}
 
   const links = (
     <>

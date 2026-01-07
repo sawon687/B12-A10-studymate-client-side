@@ -67,7 +67,7 @@ const ProfileDropdown = ({showprofile}) => {
                   className="flex items-center gap-2 px-4 py-2 rounded-lg
                   hover:bg-indigo-100 dark:hover:bg-indigo-900 hover:text-white"
                 >
-                  <Home size={18} /> Profile
+                  <Home size={18} /> Home
                 </Link></>
                     }
                 <Link

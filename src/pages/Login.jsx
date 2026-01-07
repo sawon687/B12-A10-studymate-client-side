@@ -7,21 +7,19 @@ import { motion } from 'framer-motion';
 import GoogleLogin from '../Componets/GoogleLogin';
 
 const Login = () => {
-  const {  signInuser } = useContext(AuthContex);
+  const { signInUser } = useContext(AuthContex);
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location?.state?.from?.pathname || '/';
-
+const [loading, setLoading] = useState(false);
   const userLogin = (e) => {
-
-
-    
     e.preventDefault();
-    const Email = e.target.email.value;
-    const Password = e.target.password.value;
+    setLoading(true)
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-    signInuser(Email, Password)
+   signInUser(email, password)
       .then(res => {
         Swal.fire({
           title: "Login successful!",
@@ -32,6 +30,7 @@ const Login = () => {
         navigate(from);
       })
       .catch(error => {
+        setLoading(false)
         Swal.fire({
           title: "Login failed",
           text: error.message,
@@ -92,6 +91,7 @@ const Login = () => {
             <div className="relative">
               <input
                 type={showPassword ? 'text' : 'password'}
+                
                 name="password"
                 required
                 className="w-full input border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400"
@@ -110,8 +110,9 @@ const Login = () => {
               type="submit"
               className="w-full bg-gradient-to-br from-indigo-500 to-purple-600 hover:bg-indigo-600 text-white font-semibold py-3 rounded-lg"
               whileTap={{ scale: 0.95 }}
+                
             >
-              Login
+              {loading?<span class="loading loading-spinner loading-lg"></span>:'Login'}
             </motion.button>
 
             <div className="flex items-center justify-center gap-2 text-gray-400">

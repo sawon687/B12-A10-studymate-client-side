@@ -1,102 +1,99 @@
-import axios from 'axios';
-import { useContext, useEffect, useRef, useState } from 'react';
-import AuthContex from '../Contex/AuthContex';
-import Loading from './Loading';
+import { useContext, useRef, useState } from 'react';
 import { FaTrashAlt, FaEdit, FaUserGraduate } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import Swal from 'sweetalert2';
 import UseAxiosSequre from '../Hook/UseAxiosSequre';
+import AuthContex from '../Contex/AuthContex';
 import { useQuery } from '@tanstack/react-query';
 import MyConnectionsSkeleton from './MyConnectionsSkeleton';
 
 const MyConnections = () => {
-  const { user} = useContext(AuthContex);
-  const [dataUpdate, setDataUpdate] = useState({});
+  const { user } = useContext(AuthContex);
+  const axiosSecure = UseAxiosSequre();
   const updateRef = useRef();
-  const axiosSecure=UseAxiosSequre()
-const {data:requestUser =[],refetch ,isLoading}=useQuery({
-  queryKey:['my-connection'],
-  queryFn:async ()=>{
-     const res=await axiosSecure.get(`/myConnection?email=${user?.email}`)
 
-     return res.data
-  }
-})
+  const [dataUpdate, setDataUpdate] = useState({});
 
- console.log(requestUser)
+  // Fetch connections
+  const { data = [], refetch, isLoading } = useQuery({
+    queryKey: ['my-connection', user?.email],
+    enabled: !!user?.email, // only fetch if user email exists
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/myConnection?email=${user.email}`);
+      return res.data;
+    },
+  });
+
+  // Delete connection
   const handleDelete = (id) => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: "btn btn-success",
-        cancelButton: "btn btn-danger",
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
       },
       buttonsStyling: false,
     });
 
     swalWithBootstrapButtons
       .fire({
-        title: "Are you sure?",
+        title: 'Are you sure?',
         text: "You won't be able to revert this!",
-        icon: "warning",
+        icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel!",
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
         reverseButtons: true,
       })
       .then((result) => {
         if (result.isConfirmed) {
           axiosSecure
             .delete(`/myConnection/${id}`)
-            .then(() => refetch() )
-            .catch((error) => console.log(error));
+            .then(() => refetch())
+            .catch((err) => console.log(err));
 
           swalWithBootstrapButtons.fire(
-            "Deleted!",
-            "Your file has been deleted.",
-            "success"
+            'Deleted!',
+            'Connection has been deleted.',
+            'success'
           );
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           swalWithBootstrapButtons.fire(
-            "Cancelled",
-            "Your imaginary file is safe :)",
-            "error"
+            'Cancelled',
+            'Your connection is safe :)',
+            'error'
           );
         }
       });
   };
 
-  const handleUpdateBtn = (data) => {
-    setDataUpdate(data);
+  // Open update modal
+  const handleUpdateBtn = (item) => {
+    setDataUpdate(item);
     updateRef.current.showModal();
   };
 
+  // Update connection
   const handleUpdate = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
-    const profileimage = e.target.profileImge.value;
+    const profileImages = e.target.profileImge.value;
     const subject = e.target.subject.value;
     const studyMode = dataUpdate.studyMode;
 
     const { _id, ...rest } = dataUpdate;
-    const updateInfo = {
-      ...rest,
-      name,
-      profileimage,
-      subject,
-      studyMode,
-    };
+    const updateInfo = { ...rest, name, profileImages, subject, studyMode };
 
-    
-      axiosSecure.patch(`/myConnection/${_id}`, updateInfo)
+    axiosSecure
+      .patch(`/myConnection/${_id}`, updateInfo)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
-           refetch()
+          refetch();
           updateRef.current.close();
         }
       })
       .catch((err) => {
-        console.log("Patch error:", err.response?.data || err.message);
-        Swal.fire("Error", "Update failed! Check console for details.", "error");
+        console.log('Patch error:', err.response?.data || err.message);
+        Swal.fire('Error', 'Update failed! Check console.', 'error');
       });
   };
 
@@ -108,11 +105,12 @@ const {data:requestUser =[],refetch ,isLoading}=useQuery({
     setDataUpdate({ ...dataUpdate, studyMode: mode });
   };
 
-  if ( isLoading) return <MyConnectionsSkeleton />;
+  if (isLoading) return <MyConnectionsSkeleton />;
 
   return (
-    <div className="py-10 w-7xl   transition-colors duration-500">
-      <title>MyConnection</title>
+    <div className="py-10 w-full max-w-7xl mx-auto transition-colors duration-500">
+      <title>MyConnections</title>
+
       <h1 className="text-3xl font-bold text-center mb-8 flex justify-center items-center gap-2">
         <FaUserGraduate className="text-indigo-500" />
         <span className="bg-gradient-to-br from-indigo-500 to-purple-600 bg-clip-text text-transparent">
@@ -133,7 +131,7 @@ const {data:requestUser =[],refetch ,isLoading}=useQuery({
             </tr>
           </thead>
           <tbody>
-            {requestUser.length === 0 ? (
+            {data.length === 0 ? (
               <tr>
                 <td colSpan="5" className="text-center py-6">
                   No connections found.
@@ -141,10 +139,10 @@ const {data:requestUser =[],refetch ,isLoading}=useQuery({
               </tr>
             ) : (
               <AnimatePresence>
-                {requestUser?.map((data) => (
+                {data.map((item) => (
                   <motion.tr
-                    key={data?._id}
-                    className="hover:bg-blue-50 transition-all duration-300"
+                    key={item._id}
+                    className=" transition-all duration-300"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
@@ -154,8 +152,8 @@ const {data:requestUser =[],refetch ,isLoading}=useQuery({
                         <div className="avatar">
                           <div className="mask mask-squircle h-12 w-12">
                             <img
-                              src={data?.profileimage}
-                              alt={data?.name}
+                              src={item?.profileImages}
+                              alt={item?.name}
                               className="object-cover"
                             />
                           </div>
@@ -163,29 +161,29 @@ const {data:requestUser =[],refetch ,isLoading}=useQuery({
                       </div>
                     </td>
 
-                    <td className=" ">{data?.name}</td>
-                    <td className="">{data?.subject}</td>
+                    <td>{item?.name}</td>
+                    <td>{item?.subject}</td>
                     <td>
                       <span
                         className={`px-3 py-1 rounded-full text-sm font-medium ${
-                          data.studyMode === 'Online'
+                          item.studyMode === 'Online'
                             ? 'bg-green-100 text-green-700 dark:bg-green-700 dark:text-green-100'
                             : 'bg-orange-100 text-orange-700 dark:bg-orange-700 dark:text-orange-100'
                         }`}
                       >
-                        {data?.studyMode}
+                        {item.studyMode}
                       </span>
                     </td>
 
                     <td className="flex gap-2">
                       <button
-                        onClick={() => handleDelete(data._id)}
+                        onClick={() => handleDelete(item._id)}
                         className="btn btn-error btn-sm text-white flex items-center gap-1"
                       >
                         <FaTrashAlt /> Delete
                       </button>
                       <button
-                        onClick={() => handleUpdateBtn(data)}
+                        onClick={() => handleUpdateBtn(item)}
                         className="btn btn-sm text-white bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center gap-1"
                       >
                         <FaEdit /> Update
@@ -202,12 +200,14 @@ const {data:requestUser =[],refetch ,isLoading}=useQuery({
       {/* Mobile Card View */}
       <div className="md:hidden grid grid-cols-1 sm:grid-cols-2 gap-6">
         <AnimatePresence>
-          {requestUser.length === 0 ? (
-            <p className="text-center text-gray-500 dark:text-gray-300 w-full">No connections found.</p>
+          {data.length === 0 ? (
+            <p className="text-center text-gray-500 dark:text-gray-300 w-full">
+              No connections found.
+            </p>
           ) : (
-            requestUser.map((data) => (
+            data.map((item) => (
               <motion.div
-                key={data._id}
+                key={item._id}
                 className="bg-white dark:bg-gray-800 p-5 shadow-md rounded-xl border dark:border-gray-700 hover:shadow-lg transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -215,38 +215,40 @@ const {data:requestUser =[],refetch ,isLoading}=useQuery({
               >
                 <div className="flex items-center gap-4 mb-3">
                   <img
-                    src={data?.profileimage}
-                    alt={data?.name}
+                    src={item?.profileImages}
+                    alt={item?.name}
                     className="w-16 h-16 rounded-full object-cover border"
                   />
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">{data?.name}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-300">{data?.subject}</p>
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                      {item?.name}
+                    </h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-300">{item?.subject}</p>
                   </div>
                 </div>
 
                 <p className="text-sm mb-2">
                   <strong>Study Mode:</strong>{' '}
                   <span
-                    className={`btn ${
-                      data.studyMode === 'Online'
+                    className={`text-sm font-medium ${
+                      item.studyMode === 'Online'
                         ? 'text-green-600 dark:text-green-100'
                         : 'text-orange-600 dark:text-orange-100'
-                    } font-medium`}
+                    }`}
                   >
-                    {data?.studyMode}
+                    {item?.studyMode}
                   </span>
                 </p>
 
                 <div className="flex justify-between mt-4">
                   <button
-                    onClick={() => handleDelete(data._id)}
+                    onClick={() => handleDelete(item._id)}
                     className="btn btn-error btn-sm flex items-center gap-1 text-white"
                   >
                     <FaTrashAlt /> Delete
                   </button>
                   <button
-                    onClick={() => handleUpdateBtn(data)}
+                    onClick={() => handleUpdateBtn(item)}
                     className="btn btn-info btn-sm flex items-center gap-1 text-white"
                   >
                     <FaEdit /> Update
@@ -262,13 +264,13 @@ const {data:requestUser =[],refetch ,isLoading}=useQuery({
       <AnimatePresence>
         <motion.dialog
           ref={updateRef}
-          className="modal modal-bottom sm:modal-middle "
+          className="modal modal-bottom sm:modal-middle"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
         >
           <div className="modal-box">
-            <h3 className="font-bold text-2xl text-center mb-3 bg-gradient-to-br from-indigo-500 to-purple-600 text-transparent bg-clip-text ">
+            <h3 className="font-bold text-2xl text-center mb-3 bg-gradient-to-br from-indigo-500 to-purple-600 text-transparent bg-clip-text">
               Update Partner Info
             </h3>
             <form onSubmit={handleUpdate} className="space-y-4">
@@ -276,9 +278,9 @@ const {data:requestUser =[],refetch ,isLoading}=useQuery({
                 <label className="label">Name</label>
                 <input
                   type="text"
-                  className="input input-bordered w-full dark:bg-gray-700 dark:text-gray-100"
                   name="name"
                   defaultValue={dataUpdate?.name}
+                  className="input input-bordered w-full "
                 />
               </div>
 
@@ -286,9 +288,9 @@ const {data:requestUser =[],refetch ,isLoading}=useQuery({
                 <label className="label">Photo URL</label>
                 <input
                   type="text"
-                  className="input input-bordered w-full dark:bg-gray-700 dark:text-gray-100"
                   name="profileImge"
-                  defaultValue={dataUpdate?.profileimage}
+                  defaultValue={dataUpdate?.profileImages || ''}
+                  className="input input-bordered w-full "
                 />
               </div>
 
@@ -300,10 +302,10 @@ const {data:requestUser =[],refetch ,isLoading}=useQuery({
                       key={mode}
                       type="button"
                       onClick={() => studyModeHandle(mode)}
-                      className={`btn  flex-1 ${
+                      className={`btn flex-1 ${
                         dataUpdate.studyMode === mode
-                          ? ' bg-gradient-to-br from-indigo-500 to-purple-600 '
-                          : 'btn-outline  bg-purple-300  text-gray-700'
+                          ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white'
+                          : 'btn-outline bg-purple-300 text-gray-700'
                       }`}
                     >
                       {mode}
@@ -333,13 +335,16 @@ const {data:requestUser =[],refetch ,isLoading}=useQuery({
 
               <div className="flex justify-end gap-3 pt-4">
                 <button
-                  onClick={() => updateRef.current.close()}
                   type="button"
+                  onClick={() => updateRef.current.close()}
                   className="btn"
                 >
                   Close
                 </button>
-                <button type="submit" className="btn bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
+                <button
+                  type="submit"
+                  className="btn bg-gradient-to-br from-indigo-500 to-purple-600 text-white"
+                >
                   Save Changes
                 </button>
               </div>

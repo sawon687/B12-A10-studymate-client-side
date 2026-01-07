@@ -5,6 +5,7 @@ import AuthContex from "../Contex/AuthContex";
 import UseAxiosSequre from "../Hook/UseAxiosSequre";
 import ProfileCards from "../Componets/ProfileCards";
 import FIndSKelaton from "../Componets/FIndSKelaton";
+import { useForm } from "react-hook-form";
 
 const FindPartners = () => {
   const { loading: authLoading } = useContext(AuthContex);
@@ -14,6 +15,7 @@ const FindPartners = () => {
   const [active, setActive] = useState("Default");
   const [titleText, setTitleText] = useState("");
   const [searchText, setSearchText] = useState("");
+
   const [experience, setExperience] = useState("");
   const [profileCount, setProfileCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -22,10 +24,10 @@ const FindPartners = () => {
   const limit = 8;
   const skip = currentPage * limit;
   const totalPage = Math.ceil(profileCount / limit);
-    
+
   useEffect(() => {
-      localStorage.setItem("page", currentPage);
-    }, [currentPage]);
+    localStorage.setItem("page", currentPage);
+  }, [currentPage]);
   // Typewriter effect for heading
   useEffect(() => {
     const fullText = "Find Your Perfect Study Partner";
@@ -58,18 +60,22 @@ const FindPartners = () => {
     };
     fetchProfiles();
   }, [searchText, experience, currentPage]);
-
+const {
+    register,
+    handleSubmit
+  } = useForm()
   // Handle search
-  const handleSearchText = (e) => {
-    e.preventDefault();
-    setSearchText(e.target.searchitem.value);
+  const handleSearchText = (data) => {
+    
+    setSearchText(data.search);
+    console.log('data',data)
     setCurrentPage(0);
   };
 
   if (authLoading || loadingProfiles) {
     return (
       <div className="flex justify-center mx-auto max-w-[1370px] items-center ">
-         <FIndSKelaton></FIndSKelaton>
+        <FIndSKelaton></FIndSKelaton>
       </div>
     );
   }
@@ -92,18 +98,45 @@ const FindPartners = () => {
 
         {/* Filter & Search */}
         <div className="flex flex-col  justify-between items-center w-full gap-4 mb-12">
-          <form onSubmit={handleSearchText} className="flex md:w-[640px] w-[350px] outline-none bg-linear-to-r  from-green-400 via-cyan-400 to-blue-500 p-[1px]  rounded-full  md:w-auto justify-center">
-            <input
-              type="search"
-              name="searchitem"
-               
-              placeholder="Search Name  Subject  SudyMode.."
-              className="input input-border  outline-none rounded-l-full py-6 md:w-[640px] w-[350px] bg-base-100"
-            />
-            <button className="btn outline-none border-none rounded-r-full px-9 py-6 bg-linear-to-r from-green-400 via-cyan-400 to-blue-500 text-white hover:scale-105 transition-transform">
-              <FaSearch />
-            </button>
-          </form>
+         <div className="p-[2px] rounded-full bg-linear-to-r from-green-400 via-cyan-400 to-blue-500       ">
+  <form
+    onSubmit={handleSubmit(handleSearchText)}
+    className="flex items-center md:w-[640px] w-[350px] 0 bg-base-100 rounded-full overflow-hidden"
+  >
+    <input
+      type="search"
+      {...register("search")}
+      placeholder="Search Name  Subject  StudyMode.."
+      className="
+        flex-1
+        input
+        py-6
+        border-none
+        outline-none
+        bg-transparent
+        appearance-none
+      "
+    />
+
+    <button
+      type="submit"
+      className="
+        px-8
+        py-4
+        bg-linear-to-r
+        from-green-400
+        via-cyan-400
+        to-blue-500
+        text-white
+        rounded-full
+        hover:scale-105
+        transition-transform
+      "
+    >
+      <FaSearch />
+    </button>
+  </form>
+</div>
           <div className="flex flex-wrap gap-2 justify-center">
             {["Beginner", "Intermediate", "Expert"].map((level) => (
               <button
@@ -113,11 +146,10 @@ const FindPartners = () => {
                   setActive(level);
                   setCurrentPage(0);
                 }}
-                className={`btn rounded-full px-6 py-2 text-sm md:text-base shadow-md shadow-green-600 transition-all duration-300 ${
-                  active === level
-                    ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
-                    : "bg-base-100 hover:shadow-md "
-                }`}
+                className={`btn rounded-full border-none px-6 py-2 text-sm md:text-base shadow-md shadow-green-600 transition-all duration-300 ${active === level
+                  ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
+                  : "bg-base-100 hover:shadow-md "
+                  }`}
               >
                 {level}
               </button>
@@ -128,47 +160,46 @@ const FindPartners = () => {
                 setActive("Default");
                 setCurrentPage(0);
               }}
-              className={`btn rounded-full px-6 py-2 text-sm shadow-md shadow-green-600 md:text-base transition-all duration-300 ${
-                active === "Default"
-                  ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
-                  : "bg-base-100 hover:shadow-md"
-              }`}
+              className={`btn rounded-full px-6 py-2 text-sm shadow-md shadow-green-600 md:text-base transition-all duration-300 ${active === "Default"
+                ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
+                : "bg-base-100 hover:shadow-md"
+                }`}
             >
               Default
             </button>
           </div>
 
-          
+
         </div>
 
         {/* Profiles Grid */}
         {
           profiles.length > 0 ? (
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6 w-full bg-base-300  p-8 rounded-2xl shadow-md transition-all">
-            {profiles.map((profile) => (
-              <motion.div
-                            key={profile._id}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.3 }}
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
-                            className="rounded-2xl border border-base-300 shadow-lg hover:shadow-xl transition-all"
-                          >
-                            {/* DaisyUI card style */}
-                            <div className="card border-1  bg-base-100 shadow-md p-4 rounded-2xl">
-                              <ProfileCards data={profile} />
-                            </div>
-                          </motion.div>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-20">
-            <h1 className="text-3xl font-bold text-gray-500 dark:text-gray-400">
-              No Result Found
-            </h1>
-          </div>
-        )}
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6 w-full bg-base-300  p-8 rounded-2xl shadow-md transition-all">
+              {profiles.map((profile) => (
+                <motion.div
+                  key={profile._id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
+                  className="rounded-2xl border border-gray-700 shadow-lg hover:shadow-xl transition-all"
+                >
+                  {/* DaisyUI card style */}
+                  <div className="card border-1  bg-base-100 shadow-md p-4 rounded-2xl">
+                    <ProfileCards data={profile} />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <h1 className="text-3xl font-bold text-gray-500 dark:text-gray-400">
+                No Result Found
+              </h1>
+            </div>
+          )}
 
         {/* Pagination */}
         {totalPage > 1 && (
@@ -185,11 +216,10 @@ const FindPartners = () => {
               <button
                 key={i}
                 onClick={() => setCurrentPage(i)}
-                className={`btn rounded-full px-4 ${
-                  i === currentPage
-                    ? "bg-gradient-to-r from-green-400 to-cyan-500 text-white shadow-lg"
-                    : "bg-white dark:bg-gray-800 text-gray-700  dark:text-gray-200 hover:shadow-md"
-                }`}
+                className={`btn rounded-full px-4 ${i === currentPage
+                  ? "bg-gradient-to-r from-green-400 to-cyan-500 text-white shadow-lg"
+                  : "bg-white dark:bg-gray-800 text-gray-700  dark:text-gray-200 hover:shadow-md"
+                  }`}
               >
                 {i + 1}
               </button>

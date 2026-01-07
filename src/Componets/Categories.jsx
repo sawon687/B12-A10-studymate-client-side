@@ -64,7 +64,7 @@ const Categories = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-4xl md:text-5xl font-extrabold text-center mb-14
+        className="text-4xl md:text-5xl py-3 font-extrabold text-center mb-14
         bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
       >
         Study Categories

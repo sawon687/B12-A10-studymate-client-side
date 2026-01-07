@@ -32,7 +32,7 @@ const Highlights = () => {
   ];
 
   return (
-    <section className="relative max-w-[1370px] mx-auto px-4 py-24">
+    <section className="relative max-w-[1370px] mx-auto px-4 pt-14">
       {/* Background Glow */}
       <div className="absolute -top-28 -left-40 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-28 -right-40 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"></div>

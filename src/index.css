@@ -31,9 +31,19 @@
   border: 1px solid;
   border-image: linear-gradient(90deg, #7c3aed, #06b6d4) 1;
   border-radius: 16;
- 
+   
 }
 
+.secandary-border {
+  border: 2px solid;
+  border-image: linear-gradient(
+    to right,
+    #4ade80,
+    #22d3ee,
+    #3b82f6
+  ) 1;
+  
+}
 
 
 

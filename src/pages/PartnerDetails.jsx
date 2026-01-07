@@ -27,11 +27,24 @@ const PartnerDetails = () => {
   }, [id, refresh]);
 
   const handleRequest = () => {
+  
+  
     axiosSequre
       .post("/myConnection", {
-        ...partner,
-        request_Email: user?.email,
+        
+       name: partner.name,
+        profileImages: partner.profileImages[0],
+        studyMode: partner.studyMode,
+
+        availabilityTime: partner.availabilityTime,
+        location: partner.location,
+        experienceLevel: partner.experienceLevel,
+        rating: partner.rating,
+        patnerCount: partner.patnerCount,
+        email: partner.email,
         partnerId: partner._id,
+        request_Email:user.email
+
       })
       .then((res) => {
         setRefresh(!refresh);
@@ -50,8 +63,8 @@ const PartnerDetails = () => {
     partner?.profileImages && partner.profileImages.length > 0
       ? partner.profileImages
       : partner?.profileImages
-      ? [partner?.profileImages]
-      : [];
+        ? [partner?.profileImages]
+        : [];
 
   const mainSettings = {
     asNavFor: nav2,
